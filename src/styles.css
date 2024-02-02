@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    text-align: center;
+    position: relative;
+}
+
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #002a51;
+}
+
+.ant-tabs-tab:hover {
+    color: #000000;
+}
+
+.menu-sidebar {
+    background-color: rgb(255, 255, 255);
+}
+
+.sidebar-logo {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+
+.app-header {
+    background-color: rgb(10, 10, 10) !important;
+}
+
+
+
+
+
+
+.ant-menu-item a:hover {
+    background-color: rgb(28, 29, 23) !important;
+    color: rgb(255, 252, 252) !important;
+}
+
+.ant-menu-item-selected {
+    color: rgb(17, 17, 17) !important;
+    font-weight: bold;
+}
+
+
+.ant-menu-submenu:hover>.ant-menu-submenu-title>.ant-menu-submenu-expand-icon,
+.ant-menu-submenu:hover>.ant-menu-submenu-title>.ant-menu-submenu-arrow {
+    color: rgb(7, 6, 0);
+    background-color: rgb(196, 196, 196);
+}
+
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after,
+.ant-menu-inline .ant-menu-item::after {
+    border-right: 3px solid #858635 !important;
+    font-weight: bold;
+}
+
+
+
+
+/* .ant-menu-item-selected a,
+.ant-menu-item-selected a:hover {
+    
+} */
+
+
+li.ant-menu-item.ant-menu-item-selected {
+    background-color: rgb(245, 227, 146) !important;
+}
+
+.ant-menu-item:hover {
+    background-color: rgb(245, 227, 146) !important;
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600;
+}
+
+
+.ant-menu-submenu-title {
+    color: rgb(0, 0, 0) !important;
+}
+
+
+.ant-menu-submenu-title:hover {
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600;
+
+}
+
+
+.ant-menu-submenu-selected {
+    color: rgb(199, 201, 98) !important;
+}
+
+
+
+/* CSS */
+
+.button-white {
+  align-items: center;
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  border: 0.5px solid #818181;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-white:hover,
+.button-white:focus { 
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+.button-white:active {
+  background: #f5f5f5;
+  color: rgba(31, 31, 31, 0.7);
+}
+
+.button-white:disabled { 
+  cursor: not-allowed;
+  background: rgba(241, 241, 241, 0.08);
+  color: rgba(7, 7, 7, 0.3);
+}
+
+.button-white span {
+  margin: 0px 9px 0px 0px;
+}
+
+/* Button BLUE */
+
+
+.button-blue {
+  align-items: center;
+  background-color: #0276FF;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  border: 1.0px solid #ffffff;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-blue:hover,
+.button-blue:focus { 
+  background-color: #095ab8;
+  color: #ffffff;
+}
+
+.button-blue:active {
+  background: #0465d4;
+  color: #ffffff;
+}
+
+.button-blue:disabled { 
+  cursor: not-allowed;
+  background-color: rgba(37, 37, 37, 0.1);
+  color: #000000;
+}
+
+.button-blue span {
+  margin: 0px 9px 0px 0px;
+}
+
+/* Button RED */
+
+.button-red {
+  align-items: center;
+  background-color: #ec0000;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-red:hover,
+.button-red:focus { 
+  background-color: #a51935;
+  color: #ffffff;
+}
+
+.button-red:active {
+  background: #c91515;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-red:disabled { 
+  cursor: not-allowed;
+  background: rgba(83, 18, 18, 0.08);
+  color: rgba(0, 0, 0, .3);
+}
+
+.button-red span {
+  margin: 0px 9px 0px 0px;
+}
+
+
+
+  .ant-layout-sider-light .ant-layout-sider-trigger {
+    color: rgb(255 255 255 / 85%);
+    background: #000000;
+  
+  }
+  
+    .ant-switch-checked {
+    background-color: rgb(7, 52, 119) !important;
+  }
+  
+  .ant-switch {
+    background-color: rgb(177, 177, 177) ;
+  }
+
+
+.input-text, input, nz-select-top-control, nz-input-group, nz-date-picker {
+  border-radius: 15px !important;
+  
+}
+

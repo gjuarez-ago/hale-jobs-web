@@ -1,0 +1,106 @@
+
+
+  <nz-page-header  [nzGhost]="true">
+    <nz-page-header-title>Historial de visualización</nz-page-header-title>
+    <nz-page-header-extra>
+      <nz-space>  
+      </nz-space>
+    </nz-page-header-extra>
+    <nz-page-header-content>
+      
+      
+<div class="content">
+    <!-- <div class="statists">
+        <div class="card-s">                    
+          <h2> 
+            <i nz-icon nzType="pie-chart" nzTheme="twotone"></i>
+               400 Prestamos   </h2>
+        </div>
+        <div class="card-s">                    
+          <h2> 
+            <i nz-icon nzType="heart" nzTheme="twotone" [nzTwotoneColor]="'#a31600'"  ></i>
+               3,020 Favoritos </h2>
+        </div>
+           <div class="card-s">                    
+          <h2> 
+            <i nz-icon nzType="alert" nzTheme="twotone"></i>
+               10,020 Reportes </h2>
+        </div>          
+  </div> -->
+
+
+  <!-- <div class="filters">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="one-to-one">
+              <input formControlName="keyword" nz-input placeholder="Buscar oferta por nombre" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+       
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="!searchForm.valid">Realizar búsqueda</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+  </div> -->
+
+
+  <div *ngIf="listOffers.length > 0" >
+    <table id="customers">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Empresa</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOffers">
+            <td>{{ data.title }}</td>
+            <td>{{ data.company.name }}</td>
+            <td>
+              <nz-space>
+                <button  routerLink="/view-job/{{data.id}}"  *nzSpaceItem nz-button nzType="primary" nzShape="circle">
+                  <i nz-icon nzType="eye" nzTheme="outline"></i>
+                </button>
+
+                <button (click)="deleteFavorite(data)" *nzSpaceItem nz-button nzType="primary" nzDanger nzShape="circle">
+                  <i nz-icon nzType="delete" nzTheme="outline"></i>
+                </button>
+
+              </nz-space>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <div class="table">
+    
+  <nz-empty
+  [hidden]="listOffers.length > 0"
+  nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+  [nzNotFoundContent]="contentTpl"
+  [nzNotFoundFooter]="footerTpl"
+  >
+  <ng-template #contentTpl>
+    <span>
+      Aún no tienes historial, 
+      <a routerLink="/search">¿Deseas comenzar a buscar?</a>
+    </span>
+  </ng-template>
+  <ng-template #footerTpl>
+    <button nz-button nzType="primary" routerLink="/search" > Buscar </button>
+  </ng-template>
+ </nz-empty>
+  </div>
+
+
+</div>
+    </nz-page-header-content>
+  </nz-page-header>
+
+  

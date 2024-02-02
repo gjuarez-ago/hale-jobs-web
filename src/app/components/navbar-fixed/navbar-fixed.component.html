@@ -1,0 +1,62 @@
+<nav>
+    <div class="wrapper">
+      <div class="logo"> <a routerLink="/home"> <img class="logo-img" src="assets/images/hale-l.png" alt="ss">  </a></div>
+      
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+        <!-- <li><a href="#">Home</a></li> -->
+        <li><a routerLink="/rh-sells">Soy reclutador</a></li>
+        <li><a href="#">¿Buscas trabajo?</a></li>
+        <li>
+          <a href="#" class="desktop-item">Herramientas</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Chambitas</label>
+          <div class="mega-box">
+            <div class="content">
+              <div class="row">
+                <img src="assets/images/kk.png" alt="">
+              </div>
+              <div class="row">
+                <header>Soy reclutador</header>
+                <ul class="mega-links">
+                  <li><a href="#">Acerca de</a></li>
+                  <li><a href="#">Precios</a></li>
+                  <li><a href="#">Ofertas</a></li>
+                  <li><a href="#">Soporte FAQ</a></li>
+                </ul>
+              </div>
+              <div class="row">
+                <header>Soy empresa</header>
+                <ul class="mega-links">
+                  <li><a href="#">Acerca de</a></li>
+                  <li><a href="#">Precios</a></li>
+                  <li><a href="#">Terminos y condiciones</a></li>
+                  <li><a href="#">Soporte FAQ</a></li>
+                </ul>
+              </div>
+            
+            </div>
+          </div>
+        </li>
+        <li><a class="btn-login" routerLink="/auth/login">Iniciar sesión</a></li>
+        <li><a class="btn-profile" routerLink="/profile/cv">Mi perfil</a></li>
+      </ul>
+
+      
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+
+    <div class="ad">
+      <p> <img src="https://static.vecteezy.com/system/resources/previews/002/450/296/original/illustration-of-mexico-flag-free-vector.jpg" alt="mexico"  width="50px"/> </p>    
+    </div>
+  </nav>
+
+
+
+<router-outlet></router-outlet>
+
+
+<app-footer></app-footer>

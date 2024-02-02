@@ -1,0 +1,133 @@
+.logo {
+  width: 130px;
+  margin: 0px 20px 0px 0px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.logo img {
+  max-width: 100%;
+  
+  height: auto;
+}
+
+.list-ot {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  margin:10px auto 0px auto;
+  width: 95%;
+
+}
+
+.btn-red {
+  margin: 0px 10px 0px 10px;
+  background-color: red;
+  border-color: black;
+  cursor: pointer;
+}
+
+.list-ot .element {
+  padding: 4px;
+  cursor: pointer;
+  margin: 0px 20px;
+}
+
+.list-ot .element p{
+margin: 0px;
+padding: 0px;
+}
+
+.header-menu {
+  background-color: #fff;
+  line-height: 64px;
+}
+
+.dark {
+  color: black !important;
+}
+
+nz-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+
+.inner-layout {
+  min-height: 91vh;
+  padding: 10px 10px 10px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+nz-content {
+  background: #fff;
+  padding: 24px;
+
+  min-height: 280px;
+}
+
+ul li {
+  color: black;
+}
+
+
+.avatar {
+  cursor: pointer;
+  color: black;
+  background-color: rgb(245, 245, 18);
+  font-weight: 500;
+  border: .6px solid rgb(37, 37, 37);
+  margin-left: 15px;
+}
+
+.list {
+  margin: 20px 0px;
+  padding-top: 20px 40px;
+  border-radius: 10px;
+}
+
+nz-list-item {
+  margin: 10px 0px;
+      background-color: rgb(242, 242, 242) !important;
+  padding: 10px 20px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.span-blo {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+nz-empty {
+  padding: 40px 0px;
+}
+
+
+.form-inline-not
+{
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 20px 0px 50px 0px;
+}
+
+

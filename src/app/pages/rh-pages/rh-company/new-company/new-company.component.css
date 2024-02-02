@@ -1,0 +1,156 @@
+
+.proyect-section {
+    width: 80%;
+    margin: 30px auto;
+}
+
+
+.advanced {
+    width: 80%;
+    margin:20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.line-1 {
+    width: 70px;
+    padding: 5px;
+    background-color: rgb(102, 102, 102);
+    margin: 10px 5px;
+}
+
+
+.selected {
+    background-color: rgb(6, 167, 16);
+
+}
+
+.button-super {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input-project {
+    width: 400px;
+}
+
+.text-field-center {
+    text-align: center;
+    
+}
+
+.dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-s {
+    margin-right: 4px;
+    margin-bottom: 17px;
+}
+
+.pd-1 {
+    margin: 20px 0px;
+    padding: 0px 80px;
+}
+
+.form-a {
+    width: 100%;
+    display: flex;
+}
+
+.input-a {
+  width: 85%;
+}
+
+.input-a input {
+    width: 100%;
+}
+
+.button-a {
+    margin: 0px 20px;
+    width: 14%;
+}
+
+      .dynamic-delete-button {
+        cursor: pointer;
+        position: relative;
+        top: 4px;
+        font-size: 24px;
+        color: #999;
+        transition: all 0.3s;
+      }
+
+      .dynamic-delete-button:hover {
+        color: #777;
+      }
+
+      .passenger-input {
+        width: 60%;
+        margin-right: 8px;
+      }
+
+  
+      .add-button {
+        width: 60%;
+      }
+
+      
+  .content-img img {
+    border: 5px dotted #c8c8c8;
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  
+
+.content-img i {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+  }
+  
+  .content-img:hover i {
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+  }
+  
+  .content-img {
+    position: relative;
+    text-align: center;
+  }
+  
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+
+  .content-s {
+    width: 100%;
+    display: flex;
+  }
+
+  .img-left {
+    padding: 10px 20px;
+    width: 20%;
+    margin: 0px 20px 0px 0px;
+  }
+
+  .info {
+    padding: 10px 20px;
+    width: 80%;
+  }
+
+  .flex-title{
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  

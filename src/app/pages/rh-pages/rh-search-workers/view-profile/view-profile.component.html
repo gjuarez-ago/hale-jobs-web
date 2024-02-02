@@ -1,0 +1,505 @@
+<div class="content-profile">
+  <div class="body-content">
+    <div class="content-profile">
+      <div class="img-user-content">
+        <div class="card card-user-edit box">
+          <div class="cover-bg"></div>
+          <br />
+          <div class="content">
+            <label for="file">
+              <div class="content-img">
+                <img [src]="previewImage" alt="" />
+              </div>
+            </label>
+          </div>
+
+          <strong>{{userInformation && userInformation.surnames}}</strong>
+          <p>{{userInformation && userInformation.username}}</p>
+          <p class="p-w">
+            <i nz-icon nzType="aim"></i>
+            <span>  {{userInformation && userInformation.city.valor}},  {{userInformation && userInformation.state.valor}} </span>
+          </p>
+          <p class="p-w">
+            <i nz-icon nzType="phone"></i>
+            <span> {{userInformation && userInformation.numberPhone}} </span>
+          </p>
+          <p class="p-w">
+            <i nz-icon nzType="build"></i>
+              <span> {{userInformation && userInformation.modalidadTrabajo.valor}} </span>
+          </p>
+
+          <!-- <div class="btn">
+                <a href="#"><i class="fa fa-clipboard" aria-hidden="true"></i>Assign</a>
+                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View</a>
+              </div> -->
+
+          <div class="user-bio">
+          
+
+
+            <div class="tags">
+              <nz-space>
+             
+          </nz-space>
+        </div>
+
+              
+          </div>
+        </div>
+      </div>
+
+      <div class="content-information">
+        <!-- <div class="content-information-header card">
+              <div class="buttons-content">
+      
+      
+                <div class="button-element">
+      
+      
+                  <button class="button-22" role="button" routerLink="/profile/cv">
+                    <nz-space>
+                      <i nz-icon nzType="idcard" nzTheme="outline" *nzSpaceItem></i>
+                      <div class="" *nzSpaceItem> CV </div>
+                    </nz-space>
+                  </button>
+                </div>
+      
+      
+                <div class="button-element">
+                  <button class="button-22" role="button" routerLink="/profile/my-postulations">
+                    <nz-space>
+                      <i nz-icon nzType="audit" nzTheme="outline" *nzSpaceItem></i>
+                      <div class="" *nzSpaceItem>Postulaciones </div>
+                    </nz-space>
+      
+                  </button>
+                </div>
+      
+      
+                <div class="button-element">
+                  <button class="button-22" role="button" routerLink="/profile/my-history">
+                    <nz-space>
+                      <i nz-icon nzType="apartment" nzTheme="outline" *nzSpaceItem></i>
+                      <div class="" *nzSpaceItem>Historial </div>
+                    </nz-space>
+                  </button>
+      
+      
+                </div>
+      
+      
+      
+                <div class="button-element">
+                  <button class="button-23" role="button" routerLink="/search">
+                    <nz-space>
+                      <i nz-icon nzType="search" nzTheme="outline" *nzSpaceItem></i>
+                    </nz-space>
+                  </button>
+                </div>
+      
+      
+              </div>   
+            </div> -->
+
+        <div class="content-information-body card">
+          <nz-page-header [nzGhost]="false">
+            <nz-page-header-title> 📑 Curriculum </nz-page-header-title>
+            <nz-page-header-extra>
+              <nz-space>
+                <!-- <app-print-cv></app-print-cv> -->
+                <button class="btn-blue" (click)="printPDF()" *nzSpaceItem nz-button>
+                  <span nz-icon nzType="file-done" nzTheme="outline"></span>
+                  Descargar CV (PDF)
+                </button>
+
+                <button class="btn-green" *nzSpaceItem nz-button>
+                
+           
+
+                    <a href="https://api.whatsapp.com/send?phone={{userInformation.numberPhone}}&text=Hola%21%20{{userInformation.names}}"
+                    class="float" target="_blank">
+                    <span nz-icon nzType="whats-app" nzTheme="outline"></span>
+                    Mensaje
+                  </a>
+                
+
+
+                </button>
+              </nz-space>
+            </nz-page-header-extra>
+            <nz-page-header-content>
+              <div class="header-exp">
+                <div class="title">Información personal</div>
+                <div class="button-add"></div>
+              </div>
+
+              <div class="f">
+                <div class="">
+                  <div class="flex-principal">
+                    <p class="p-s">
+                      <strong> Puesto: </strong>
+                      {{ userInformation && userInformation.jobTitle }}
+                    </p>
+                    <p class="p-s">
+                      <strong> Salario: </strong>
+                      {{ userInformation && userInformation.salary.valor }}
+                    </p>
+                  </div>
+                  <div class="we">
+                    <p class="p-s">
+                      <strong> Acerca de mi: </strong>
+                      {{ userInformation && userInformation.aboutMe }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exp-profesional">
+                <div class="header-exp">
+                  <div class="title">Experiencia profesional</div>
+                </div>
+
+                <div *ngIf="loadingListWorkExperiences">
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                </div>
+
+                <div *ngIf="listWorkExperiences.length > 0">
+                  <div
+                    *ngFor="let experience of listWorkExperiences; index as i"
+                  >
+                    <div class="card-exp">
+                      <div class="title-card">
+                        <p>{{ experience.job }}</p>
+                      </div>
+                      <div class="subtitle-card">
+                        <p>
+                          <b>{{ experience.company }}</b> -
+                          {{ experience.begins | date : "MMM, y" }} -
+                          {{
+                            experience.worked
+                              ? "Actualmente"
+                              : (experience.ends | date : "MMM, y")
+                          }}
+                        </p>
+                      </div>
+
+                      <div class="descripcion">
+                        <p>
+                          {{ experience.description }}
+                        </p>
+                      </div>
+
+                      <div class="tags-tech">
+                        <nz-tag
+                          class="tag-a"
+                          [nzColor]="'magenta'"
+                          *ngFor="let skill of experience.skills"
+                        >
+                          {{ skill }}
+                        </nz-tag>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-edus" *ngIf="listWorkExperiences.length == 0">
+                  <nz-empty></nz-empty>
+                </div>
+              </div>
+
+              <!-- Sección para las principales skills -->
+
+              <div class="skills">
+                <div class="header-exp">
+                  <div class="title">Habilidades</div>
+                  <div class="button-add"></div>
+                </div>
+
+                <div class="description-help">
+                  <p>
+                    En esta sección mostramos las principales habilidades
+                    técnicas y blandas del candidato
+                  </p>
+                </div>
+
+                <div class="skill-list">
+                  <div class="skill-element" *ngFor="let skill of listSkills">
+                    {{ skill }}
+                  </div>
+
+                  <div class="card-eduss" *ngIf="listSkills.length == 0">
+                    <nz-empty></nz-empty>
+                  </div>
+                </div>
+              </div>
+
+              <div class="education">
+                <div class="header-exp">
+                  <div class="title">Educación</div>
+                </div>
+
+                <div *ngIf="listSchools.length > 0">
+                  <div
+                    class="education-content"
+                    *ngFor="let education of listSchools; index as i"
+                  >
+                    <div class="card-edu">
+                      <div class="info">
+                        <div class="title-edu">
+                          <p>
+                            <strong> {{ education.name }} </strong>
+                          </p>
+                        </div>
+                        <div class="title-date">
+                          <span>
+                            {{ education.begins | date : "MMM, y" }} -
+                            {{
+                              education.worked
+                                ? "Cursando"
+                                : (education.ends | date : "MMM,y")
+                            }}
+                          </span>
+                        </div>
+                        <div class="status">
+                          {{ education.schoolName }} - {{ education.type }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-edus" *ngIf="listSchools.length == 0">
+                  <nz-empty></nz-empty>
+                </div>
+              </div>
+
+              <div class="education">
+                <div class="header-exp">
+                  <div class="title">Certificaciones</div>
+                </div>
+
+                <div *ngIf="listCertifications.length > 0">
+                  <div
+                    class="education-content"
+                    *ngFor="let certificate of listCertifications; index as i"
+                  >
+                    <div class="card-edu">
+                      <div class="info">
+                        <div class="title-edu">
+                          <p>
+                            <strong> {{ certificate.name }} </strong>
+                          </p>
+                        </div>
+                        <div class="title-date">
+                          <span>
+                            <a href="{{ certificate.url }}" target="_blank">
+                              Ver certificado
+                            </a>
+                          </span>
+                        </div>
+                        <div class="we">
+                          <p class="descripcion">
+                            {{ certificate.description }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-edus" *ngIf="listCertifications.length == 0">
+                  <nz-empty></nz-empty>
+                </div>
+              </div>
+
+              <!-- </form> -->
+            </nz-page-header-content>
+          </nz-page-header>
+        </div>
+
+  
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pdf">
+  <div class="body">
+    <div id="drag" class="cv instaFade wrap">
+      <div class="mainDetails">
+        <div id="headshot" class="">
+          <!-- <img
+            src="http://localhost:8081/user/image/gjuarez@agoconsultores.com.mx/gjuarez@agoconsultores.com.mx.jpg"
+            title="Hi, I'm Jenny!"
+            alt="Jennifer Mogan"
+          /> -->
+        </div>
+
+        <div id="name">
+          <h1 class="quickFade delayTwo">
+            {{ userInformation && userInformation.surnames }}
+          </h1>
+          <h4 class="quickFade delayThree">
+            <i nz-icon nzType="trophy" nzTheme="outline"></i>
+            {{ userInformation && userInformation.jobTitle }} -
+            <i nz-icon nzType="phone" nzTheme="outline"></i>
+            {{ userInformation && userInformation.numberPhone }} -
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+            {{ userInformation && userInformation.username }}
+          </h4>
+          <h4 class="quickFade delayThree">
+            <i nz-icon nzType="home" nzTheme="outline"></i>
+            {{ userInformation && userInformation.city.valor }},
+            {{ userInformation && userInformation.state.valor }} -
+            {{ userInformation && userInformation.modalidadTrabajo.valor }}
+          </h4>
+        </div>
+
+        <div id="contactDetails" class="quickFade delayFour">
+          <ul>
+            <!-- <li><a href="//linkedin.com/in/jennifermogan" title="LinkedIn"><i class="fa fa-print" aria-hidden="true"></i></a></li>-->
+            <li>
+              <a href="//linkedin.com/in/jennifermogan" title="LinkedIn"
+                ><i class="fa fa-linkedin-square" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="mainArea" class="quickFade delayFive">
+        
+        <section>
+          <article>
+            <div class="sectionTitle">
+              <h1>Pretenciones ecónomicas</h1>
+            </div>
+
+            <div class="sectionContent">
+              <p class="p-s">
+                {{ userInformation && userInformation.salary.valor }}
+              </p>
+            </div>
+          </article>
+          <div class="clear"></div>
+        </section>
+        
+        <section>
+          <article>
+            <div class="sectionTitle">
+              <h1>Acerca de mi</h1>
+            </div>
+
+            <div class="sectionContent">
+              <p class="p-s">
+                {{ userInformation && userInformation.aboutMe }}
+              </p>
+            </div>
+          </article>
+          <div class="clear"></div>
+        </section>
+
+        <section>
+          <article>
+            <div class="sectionTitle">
+              <h1>Experiencia profesional</h1>
+            </div>
+
+            <div class="sectionContent">
+              <article
+                *ngFor="let experience of listWorkExperiences; index as i"
+              >
+                <h2>{{ experience.job }}</h2>
+                <h3>{{ experience.company }}</h3>
+                <p class="subDetails">
+                  {{ experience.begins | date : "MMM, y" }} -
+                  {{
+                    experience.worked
+                      ? "Actualmente"
+                      : (experience.ends | date : "MMM, y")
+                  }}
+                </p>
+                <p class="p-s">
+                  {{ experience.description }}
+                </p>
+              </article>
+            </div>
+          </article>
+          <div class="clear"></div>
+        </section>
+
+        <section>
+          <div class="sectionTitle">
+            <h1>Habilidades</h1>
+          </div>
+
+          <div class="sectionContent">
+            <ul class="keySkills">
+              <li *ngFor="let skill of listSkills">
+                {{ skill }}
+              </li>
+            </ul>
+          </div>
+          <div class="clear"></div>
+        </section>
+
+        <section id="Education">
+          <div class="sectionTitle">
+            <h1>Educación</h1>
+          </div>
+
+          <div class="sectionContent">
+            <article *ngFor="let education of listSchools; index as i">
+              <h2>{{ education.name }}</h2>
+              <h3>{{ education.schoolName }} - {{ education.type }}</h3>
+              <p>
+                {{ education.begins | date : "MMM, y" }} -
+                {{
+                  education.worked
+                    ? "Cursando"
+                    : (education.ends | date : "MMM,y")
+                }}
+              </p>
+
+             
+            </article>
+          </div>
+          <div class="clear"></div>
+        </section>
+
+        <section id="Education">
+          <div class="sectionTitle">
+            <h1>Certificaciones</h1>
+          </div>
+
+          <div class="sectionContent">
+            <article *ngFor="let certificate of listCertifications; index as i">
+              <h2>
+                {{certificate.name}}
+              </h2>
+              <a href="{{ certificate.url }}" target="_blank">
+              <p class="subDetails">
+                  Ver certificado
+              </p>
+              </a>
+              <p class="p-s">{{
+                certificate.description}}
+              </p>
+            </article>
+          </div>
+          <div class="clear"></div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- <div class="logo">
+      <a href="">  <img src="assets/images/logo-b.png" alt="" > </a>
+    </div> -->
+
+  </div>
+</div>

@@ -1,0 +1,379 @@
+<nz-spin [nzSpinning]="isLoadingGeneral">
+  <div class="nav">
+    <p>👨‍💻 Búsqueda de talento</p>
+  </div>
+
+  <form
+    nz-form
+    [nzLayout]="'vertical'"
+    [formGroup]="validateForm"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
+    <div nz-row [nzGutter]="24">
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label nzFor="email"> Puesto de trabajo </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <input
+              
+                type="text"
+                class="input-text"
+                nzSize="large"
+                nz-input
+                placeholder="Escribe el puesto del trabajo"
+                formControlName="jobTitle"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="12" nzFor="email">
+              Modalidad de trabajo
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select
+              nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Selecciona una opción"
+                id="mod"
+                formControlName="mod"
+              >
+                <nz-option
+                  *ngFor="let modality of listModwork"
+                  [nzLabel]="modality.valor"
+                  [nzValue]="modality.clave"
+                ></nz-option
+              ></nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="12" nzFor="email"> Salario </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select 
+              nzSize="large"
+              class="input-text-select"  nzShowSearch nzAllowClear nzPlaceHolder="Rango salarial" formControlName="salary">
+                <nz-option *ngFor="let item of listRangeAmount" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
+              </nz-select> 
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="24" nzFor="email"> Estado </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Selecciona un estado"
+                #idState
+                id="state"
+                formControlName="state"
+                (ngModelChange)="provinceChange($event)"
+                [(ngModel)]="stateSelected"
+              >
+                <nz-option
+                  *ngFor="let state of listStates"
+                  [nzValue]="state.clave"
+                  [nzLabel]="state.valor"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="6" nzFor="surnames">
+              Ciudad
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select
+                nzSize="large"
+                nzShowSearch
+                [(ngModel)]="citySelected"
+                nzAllowClear
+                nzPlaceHolder="Seleccciona el municipio"
+                id="city"
+                formControlName="city"
+                [nzDisabled]="validateForm.get('state')?.value == null"
+              >
+                <nz-option
+                  *ngFor="let city of listCities"
+                  [nzValue]="city.clave"
+                  [nzLabel]="city.valor"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label nzFor="surnames">
+              Abierto a escuchar ofertas
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select 
+              nzSize="large"
+               nzPlaceHolder="Selecciona una opción" id="findJob"
+              formControlName="findJob">
+              <nz-option nzLabel="Busca trabajo de inmediato" nzValue="si"></nz-option>
+              <nz-option nzLabel="No esta buscando trabajo" nzValue="no"></nz-option>
+              <nz-option nzLabel="Tal vez, pronto!" nzValue="maybe"></nz-option>
+            </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8">
+      <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="inner-box">
+          <nz-space>
+            <button
+              *nzSpaceItem
+              type="button"
+              (click)="clenFilters()"
+              nz-button
+              class="button-red"
+            >
+              <i nz-icon nzType="clear"></i>
+              Limpiar filtros
+            </button>
+          </nz-space>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" align="right" [nzSpan]="12">
+        <div class="inner-box">
+          <button type="submit" nz-button class="button-white">
+            <i nz-icon nzType="search"></i>
+            Realizar Búsqueda
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <br />
+
+  <div class="card-content">
+   
+   
+    <div *ngFor="let item of data" class="box">
+      <div class="top-bar"></div>
+
+      <div class="content">
+        <img
+          [src]="getImage(item.profileImageUrl)"
+          alt=""
+        />
+        <strong>{{item.surnames}}</strong>
+        <p>{{item.jobTitle}}</p>
+      </div>
+      <div class="btn">
+        <nz-space>
+          <button
+            *nzSpaceItem
+            type="button"
+            (click)="showModalMessagePostulate(item)"
+            class="success"
+            nz-button
+            nzType="primary"
+            [nzSize]="'default'"
+            nzShape="round"
+          >
+            <i nz-icon nzType="audit"></i>
+            Mensaje
+          </button>
+
+          <button  
+            *nzSpaceItem
+            type="button"
+            nz-button
+            nzType="primary"
+            (click)="navigateViewJob(item)"
+            [nzSize]="'default'"
+            nzShape="round"
+          >
+            <i nz-icon nzType="eye"></i>
+            Ver perfil
+          </button>
+          
+       
+        </nz-space>
+      </div>
+
+      <br />
+
+      <div class="sl"> {{item.username}} </div>
+
+      <div class="sl">Modalidad: {{item.modalidadTrabajo.valor}}</div>
+
+      <div class="sl">Salario: {{item.salary.valor}}</div>
+
+      <div class="sl">Celular: {{item.numberPhone}}</div>
+
+      <div class="p-s sl">
+        <p>
+          {{item.aboutMe}}
+        </p>
+      </div>
+    </div>
+
+
+    <nz-empty
+    [hidden]="data.length > 0"
+    nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+    [nzNotFoundContent]="contentTpl"
+    [nzNotFoundFooter]="footerTpl"
+    >
+    <ng-template #contentTpl>
+      <span>
+        No hemos encontrado ningún usuario.
+      </span>
+    </ng-template>
+    <ng-template #footerTpl>
+      <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
+    </ng-template>
+   </nz-empty>
+  
+    <!-- <nz-table #fixedTable #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th nzRight nzAlign="center" nzWidth="140px">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td nzRight nzAlign="center">
+            <nz-space>
+
+
+              <button nz-button nzShape="circle" nzType="text">
+                <i nz-icon nzTheme="twotone" [nzTwotoneColor]="'#08a000'" nzType="edit"></i>
+              </button>
+
+              <button nz-button nzShape="circle" nzType="text">
+                <i nz-icon nzTheme="twotone" [nzTwotoneColor]="'#a31600'" nzType="delete"></i>
+              </button>
+            </nz-space>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table> -->
+  </div>
+</nz-spin>
+
+
+
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="visiblePsStatusOffer"
+  nzTitle="Envia un mensaje a tu prospecto"
+  (nzOnCancel)="closeModalMessagePostulate()"
+  [nzFooter]="modalFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="mod">
+      <form
+        #f="ngForm"
+        id="ngForm"
+        nz-form
+        [formGroup]="psResponseEmailForm"
+        (ngSubmit)="submitResponsePostulate()"
+        class="login-form"
+        [nzLayout]="'vertical'"
+      >
+        <nz-spin [nzSpinning]="isLoadingResponse">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>¿Qué te gustaria decirle?</nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido - Max: 250 Carácteres">
+                  <textarea
+                    nz-input
+                    formControlName="comments"
+                    placeholder="Dentro de este apartado puedes enviar un meet y horario en caso de haber acordado o bien solicitar mas información."
+                    [nzAutosize]="{ minRows: 4, maxRows: 8 }"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="" nz-row [nzGutter]="8">
+            <div class="" nz-col nzSpan="24">
+
+              <nz-form-item class="input-content">
+                <nz-form-label nzFor="surnames">
+                  Oferta relacionada
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Es necesario seleccionar una opción">
+                  <nz-select 
+                  nzShowSearch nzAllowClear 
+                  nzSize="large"
+                   nzPlaceHolder="Selecciona una oferta" id="offer"
+                  formControlName="offer">
+                  <nz-option *ngFor="let item of listOffers" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+            </div>
+          </div>
+
+    
+          
+        </nz-spin>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter>
+    <button       [nzLoading]="isLoadingResponse"
+    nz-button nzType="default" (click)="closeModalMessagePostulate()">Cerrar</button>
+    <button
+      nz-button
+      nzType="primary"
+      form="ngForm"
+      nz-button
+      [nzLoading]="isLoadingResponse"
+    >
+      Enviar mensaje
+    </button>
+  </ng-template>
+</nz-modal>

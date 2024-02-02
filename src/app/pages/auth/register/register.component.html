@@ -1,0 +1,102 @@
+<nz-spin [nzSpinning]="isSpinning">
+    <form #f="ngForm" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <p class="presentacion-title"><span class="welcome">Bienvenido </span>, Ingresa los datos correspondientes para registrarte: </p>
+      
+      
+     <div class="siw">
+      <nz-switch class="swicth" nzSize="default"  (ngModelChange)="changeRegistration($event)" [ngModelOptions]="{standalone: true}" [ngModel]="isCompany" nzCheckedChildren="Soy Reclutador" nzUnCheckedChildren="Estoy Buscando Trabajo">
+      </nz-switch> <span class="span-small">(Selecciona tu rol)</span>
+     </div>
+     
+      
+      <div>    
+        <div>    
+      <nz-form-item class="input-content">
+        <nz-form-control nzErrorTip="Campo obligatorio">
+          <nz-input-group nzPrefixIcon="idcard">
+            <input type="text"  nz-input formControlName="names" placeholder="Escribe tu nombre (s) " />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+        </div>
+      </div>
+
+
+      <div class="last">
+        <div class="input-last">
+          <nz-form-item class="input-content">
+            <nz-form-control nzErrorTip="Campo obligatorio">
+              <nz-input-group nzPrefixIcon="one-to-one">
+                <input type="text"  nz-input formControlName="fatherLastName" placeholder="Escribe tu apellido paterno" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="input-last">
+          <nz-form-item class="input-content">
+            <nz-form-control nzErrorTip="Campo obligatorio">
+              <nz-input-group nzPrefixIcon="one-to-one">
+                <input type="text"  nz-input formControlName="motherLastName" placeholder="Escribe tu apellido materno" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+      </div>
+
+      
+      <nz-form-item class="input-content">
+        <nz-form-control nzErrorTip="Correo electrónico no válido">
+          <nz-input-group nzPrefixIcon="mail">
+            <input type="email"  nz-input formControlName="username" placeholder="Escribe tu correo electronico"
+              required />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+  
+    
+  
+  
+      <nz-form-item class="input-content">
+        <nz-form-control nzErrorTip="Campo obligatorio">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Escribe tu contraseña" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <div nz-row class="login-form-margin">
+        <div nz-col [nzSpan]="12" class="">
+          <label nz-checkbox formControlName="acceptTerms" class="acceptTerms">
+            Acepto los terminos y condiciones <a routerLink="/terms-and-conditions"> (Visualizar)</a>
+          </label>
+          
+
+        </div>
+        
+        <div nz-col [nzSpan]="12">
+          <a routerLink="/privacy-policies" class="login-form-forgot">Aviso de privacidad</a>
+        </div>
+      </div>
+  
+      <nz-form-item class="input-content">
+        <nz-form-control>
+          <form [formGroup]="validateForm">
+            <ngx-recaptcha2 formControlName="recaptcha" #captchaElem
+              [siteKey]="siteKey"
+              formControlName="recaptcha">
+            </ngx-recaptcha2>
+          </form>
+        </nz-form-control>
+      </nz-form-item>
+  
+  
+  
+  
+      <button class="button-9" role="button">Registrarme</button>
+      <div>
+        <a class="text-in" routerLink="/auth/login"> ¿Ya tienes una cuenta?, inicia sesión </a>
+      </div>
+    </form>
+  </nz-spin>

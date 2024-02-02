@@ -1,0 +1,303 @@
+.nav p{
+    font-size: 1.9em;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0px;
+    font-weight: bold;
+  }
+  
+  
+  .filters {
+    padding: 30px 0px 10px 0px;
+  }
+  
+  nz-empty {
+    padding: 40px 0px;
+    margin: 0 auto;
+  }
+  
+  .add {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0px 0px 0px;
+    align-items: flex-end;
+  }
+  
+  
+  .success {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(25, 128, 7);
+  }
+  
+  .view-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(6, 56, 99);
+  }
+  
+  
+  .edit-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(22, 94, 181);
+  }
+  
+  .delete-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(202, 41, 5);
+  }
+  
+  .audit-btn {
+  
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(5, 202, 113);
+  }
+  
+  .item-list {
+    padding: 20px 20px 20px 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 5px 10px 20px 10px;
+    border-radius: 10px;
+    /* background-color:#333; */
+  
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 0px 5px 0px;
+  
+  }
+  
+  .img-ine {
+    border-radius: 10px;
+  }
+  
+  
+  .empty {
+    margin: 20px auto;
+  }
+  
+  .question {
+    color: rgb(11, 32, 156);
+  }
+  
+  .card-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .card-description{
+    cursor: pointer;
+    text-align: center;
+    width: 30%;
+    margin: 20px 15px;
+    /* background-color: aquamarine; */
+    padding: 30px 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
+    border-left: 5px solid #f5ad40;
+    border-right: 5px solid #f5ad40;
+    border-radius: 10px;
+    /* padding: 500px 0px; */
+  }
+  
+  
+  .card-title h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.9em;
+  }
+  
+  .points-key {
+    padding: 20px 0px 0px 0px;
+  }
+  
+  .points {
+    padding: 0px 0px 0px 10px;
+  }
+  
+  .points li {
+    margin: 0px 10px;
+    text-decoration: none;
+    
+  }
+  
+  .company-and-place  {
+    margin: 5px 0px;
+    display: flex;
+    align-items: flex-start;
+    font-weight: 700;
+  }
+  
+  .tags {
+    margin: 10px 0px 8px 0px
+  }
+  
+  .card-postulate {
+    width: 28%;
+    background-color: azure;
+  }
+  
+  
+  
+  .input-text, input {
+  border-radius: 15px;
+  }
+
+
+  /* Card */
+
+   .sl {
+     text-align: center; 
+     width: 100%;
+     padding: 5px 5px;
+     font-size: 0.9rem;
+     color: #7a7a7a;
+     margin: 4px 0px 10px 0px;
+     cursor: pointer;
+     border: 2px dotted #333;
+   }
+
+   .disponible {
+    /* text-align: center;  */
+    width: 100%;
+    padding: 0px 5px;
+    font-size: 0.9rem;
+    color: #535353;
+    margin: 4px 0px 10px 0px;
+    cursor: pointer;
+   }
+  
+   .box {
+    position: relative;
+    min-width: 350px;
+    max-width: 350px;
+    width: 350px;
+    background-color: #fff;
+    box-shadow: 2px 3px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    position: relative;
+    border-radius: 10px;
+  }
+  
+  
+  .top-bar {
+    width: 50%;
+    height: 4px;
+    background: #507bfc;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .fa-check-circle {
+    color: #17b667;
+  }
+  
+  /* creating heart */
+  .heart {
+    color: rgba(155, 155, 155);
+  }
+  
+  .heart::before {
+    content: '\f004';
+    font-family: fontawesome;
+    line-height: 30px;
+    cursor: pointer;
+    z-index: 1;
+    transition: all 0.3s;
+  }
+  
+  .team-section .container .box .heart-btn:checked~.heart::before {
+    color: #e41934
+  }
+  
+  
+  .heart-btn {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    padding: 1rem;
+    display: none;
+  }
+  
+  
+   .box .content img {
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: top;
+  }
+  
+   .box .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+   .box .content strong {
+    font-weight: 500;
+    color: #141414;
+    margin-top: 10px;
+  }
+  
+   .box .content p {
+    font-size: 0.9rem;
+    color: #7a7a7a;
+    margin: 4px 0px 10px 0px;
+    cursor: pointer;
+  }
+  
+   .box .content p:hover {
+    text-decoration: underline;
+  }
+  
+  
+   .box .btn {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+   .box .btn a i {
+    margin-right: 9px;
+  }
+  
+   .box .btn a {
+    border-radius: 20px;
+    color: #8b8b8b;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+  
+   .box .btn a:hover {
+    color: #fff;
+    box-shadow: 2px 5px 15px rgba(80, 123, 252, 0.05);
+    background-color: #507bfc;
+    transition: all ease 0.5s;
+  }
+  
+  
+ .p-s{
+  overflow-wrap: break-word;
+}

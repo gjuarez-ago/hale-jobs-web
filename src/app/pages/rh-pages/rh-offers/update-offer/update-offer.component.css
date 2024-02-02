@@ -1,0 +1,112 @@
+
+.proyect-section {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.btn-opts {
+    margin: 0px 2px 0px 0px;
+}
+
+.advanced {
+    width: 80%;
+    margin:20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.line-1 {
+    width: 70px;
+    padding: 5px;
+    background-color: rgb(102, 102, 102);
+    margin: 10px 5px;
+}
+
+
+.selected {
+    background-color: rgb(6, 167, 16);
+
+}
+
+.button-super {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input-project {
+    width: 400px;
+}
+
+.text-field-center {
+    text-align: center;
+    
+}
+
+.dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-s {
+    margin-right: 4px;
+    margin-bottom: 17px;
+}
+
+.pd-1 {
+    margin: 20px 0px;
+    padding: 0px 80px;
+}
+
+.form-a {
+    width: 100%;
+    display: flex;
+    align-items: self-start;
+}
+
+.input-a {
+  width: 85%;
+}
+
+ul {
+    padding: 10px 0px 0px 20px;
+}
+
+.input-a input {
+    width: 100%;
+}
+
+.button-a {
+    margin: 0px 20px;
+    width: 14%;
+}
+
+      .dynamic-delete-button {
+        cursor: pointer;
+        position: relative;
+        top: 4px;
+        font-size: 24px;
+        color: #999;
+        transition: all 0.3s;
+      }
+
+      .dynamic-delete-button:hover {
+        color: #777;
+      }
+
+      .passenger-input {
+        width: 60%;
+        margin-right: 8px;
+      }
+
+  
+      .add-button {
+        width: 60%;
+      }
+
+      .list-beneficts {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(214, 214, 214, 0.3) 0px 18px 36px -18px inset;
+        padding: 20px 10px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }

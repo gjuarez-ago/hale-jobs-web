@@ -1,0 +1,121 @@
+<div class="content-element">
+
+
+    <div id="container" class="view-initial">
+        <div id="banner-bkgrd">
+            <div id="banner-overlay" class="expand-vertical">
+                <header id="search-container" class="flex-column flex-center">
+                    <div id="search-heading">
+                        <h1>Búsqueda de empresas</h1>
+                    </div>
+                    <form id="search-form" class="flex-inline" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                        <input id="search-input" type="text" autocomplete="off" tabindex="1" autocapitalize="off" autocorrect="off"  formControlName="name"  placeholder="Escribe el nombre de la empresa" />
+                        <button type="button" class="btn-curve" role="button">Buscar </button>
+                    </form>
+
+                    <div class="labels_content">
+                        <!-- <div class="labels"><a href="#">A</a></div>
+                        <div class="labels"><a href="#">B</a></div>
+                        <div class="labels"><a href="#">C</a></div>
+                        <div class="labels"><a href="#">D</a></div>
+                        <div class="labels"><a href="#">F</a></div>
+                        <div class="labels"><a href="#">G</a></div>
+                        <div class="labels"><a href="#">H</a></div>
+                        <div class="labels"><a href="#">I</a></div>
+                        <div class="labels"><a href="#">J</a></div>
+                        <div class="labels"><a href="#">K</a></div>
+                        <div class="labels"><a href="#">L</a></div>
+                        <div class="labels"><a href="#">M</a></div>
+                        <div class="labels"><a href="#">N</a></div>
+                        <div class="labels"><a href="#">O</a></div>
+                        <div class="labels"><a href="#">P</a></div>
+                        <div class="labels"><a href="#">R</a></div>
+                        <div class="labels"><a href="#">S</a></div>
+                        <div class="labels"><a href="#">T</a></div>
+                        <div class="labels"><a href="#">U</a></div>
+                        <div class="labels"><a href="#">V</a></div>
+                        
+                        <div class="labels"><a href="#">W</a></div>
+                        <div class="labels"><a href="#">X</a></div>
+                        <div class="labels"><a href="#">Y</a></div>
+                        <div class="labels"><a href="#">Z</a></div> -->
+                        <div class="results_num"> {{totalElementByPage}} resultados</div>
+                    </div>
+
+                </header>
+
+                <div id="credits">
+                    <!-- <small>Designed and coded by <a href="https://tommoore.me.uk" target="_blank">Tom Moore</a></small> -->
+                </div>
+            </div> <!--/banner-overlay-->
+        </div> <!--/banner-->
+        <main id="results">
+            <div id="cards" class="flex-row flex-wrap"></div>
+        </main> <!--/results-->
+    </div> <!--/container-->
+    <br>
+
+
+    <div class="list">
+
+    
+        <div class="img-user-content" *ngFor="let item of companies">
+          <a routerLink="/companies/{{item.id}}" routerLinkActive="active" target="_blank">
+          <div class="card card-user-edit box">
+              <div class="content">
+                <div class="content-img">
+                    <img src="{{item.imageURL}}" alt="" />            
+                </div>
+                <strong>{{item.name}}</strong>        
+                <p><nz-rate [nzDisabled]="true"	 [ngModel]="item.qualification"></nz-rate> </p>
+                <i><i nz-icon nzType="fire" nzTheme="outline"></i> {{item.sizeCompany}}</i>
+                <nz-tag class="bade" [nzColor]="'green'">Contratando</nz-tag>
+              </div>
+            </div>
+          </a>
+          </div>
+
+          <nz-empty
+          [hidden]="companies.length > 0"
+          nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+          >
+          <ng-template #contentTpl>
+            <span>
+              No existe ninguna vacante en este momento
+              <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+            </span>
+          </ng-template>
+          <ng-template #footerTpl>
+            <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+          </ng-template>
+         </nz-empty>
+
+
+    </div>
+
+    <div class="form-inline">
+        <div class="pagination-content">
+          <nz-pagination
+            [nzPageSize]="pageSize"
+            [nzPageIndex]="current"
+            [nzTotal]="total"
+            (nzPageSizeChange)="changePageSize($event)"
+            (nzPageIndexChange)="changeCurrentPage($event)"
+            id="demo"
+          ></nz-pagination>
+        </div>
+    
+       
+      </div>
+
+
+
+</div>
+
+
+
+  <div class="search-companies__section">
+    <router-outlet></router-outlet>
+  </div>

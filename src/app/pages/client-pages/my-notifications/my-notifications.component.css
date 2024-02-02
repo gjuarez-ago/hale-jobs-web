@@ -1,0 +1,36 @@
+.list {
+    margin: 20px 0px;
+    padding-top: 20px 40px;
+    border-radius: 10px;
+}
+
+nz-list-item {
+    margin: 10px 0px;
+        background-color: rgb(242, 242, 242) !important;
+    padding: 10px 20px;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+nz-empty {
+    padding: 40px 0px;
+}
+
+
+.form-inline 
+{
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 20px 0px 50px 0px;
+}
+
+
+
+   input {
+    width: 300px;
+  }

@@ -1,0 +1,245 @@
+<div class="body-content">
+  <div class="box inputs-box">
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" class="login-form" (ngSubmit)="filterSubmit()">
+      <div class="search-filter">
+          <div class="one input">
+              <nz-form-item class="input-content">
+                  <nz-form-control nzErrorTip="Correo electrónico no válido">
+                    <nz-input-group nzPrefixIcon="search">
+                      <input [nzSize]="'large'" type="text" [ngModel]="this.key && this.key.title" formControlName="title" nz-input placeholder="¿Qué trabajo estas buscando?"  />
+                    </nz-input-group>
+                  </nz-form-control>
+                </nz-form-item>
+          </div>
+
+          <div class="two input">
+              <nz-form-item class="input-content">
+                  <nz-form-control>
+                    <nz-select class="search" formControlName="state" nzShowSearch nzAllowClear [ngModel]="this.key && this.key.state" nzPlaceHolder="¿En qué estado te gustaría buscar?">
+                      <nz-option *ngFor="let item of listStates" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+          </div>
+
+          <div class="three input">
+            <button type="submit"  nz-button nzType="primary" [nzSize]="'default'" nzBlock nzShape="round">
+              <i nz-icon nzType="search"></i>
+              Realizar búsqueda</button>
+
+          
+          </div>
+      </div>
+
+
+      <div class="more-filters">
+
+        <div class="element">
+          <nz-select class="input-text-select" formControlName="urgency"  nzShowSearch nzAllowClear nzPlaceHolder="Urgencia de contratación" formControlName="urgency">
+            <nz-option nzLabel="Contratación urgente" nzValue="A"></nz-option>
+            <nz-option nzLabel="Moderada" nzValue="B"></nz-option>
+            <nz-option nzLabel="Baja" nzValue="C"></nz-option>
+          </nz-select>    
+        </div>
+
+        
+        <div class="element">
+          <nz-select class="input-text-select" formControlName="typeOfJob" nzShowSearch nzAllowClear nzPlaceHolder="Lugar de trabajo" formControlName="typeOfJob" >
+            <nz-option *ngFor="let item of listTypeOfJob" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
+          </nz-select>   
+
+        </div>
+
+        <div class="element">
+            <nz-select class="input-text-select" nzShowSearch nzAllowClear nzPlaceHolder="Rango salarial" formControlName="rangeAmount">
+              <nz-option *ngFor="let item of listRangeAmount" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
+            </nz-select> 
+        </div>
+
+        <div class="element">
+          <nz-select class="input-text-select"  [nzDisabled]="diabled" formControlName="category" nzShowSearch nzAllowClear nzPlaceHolder="Categoría" [ngModel]="categorySelected"  formControlName="category">
+            <nz-option *ngFor="let item of listCategories" [nzLabel]="item.valor" [nzValue]="item.id"></nz-option>
+          </nz-select>  
+        </div>
+        
+        <div class="element">
+          <nz-select class="input-text-select" formControlName="subcategory" nzShowSearch nzAllowClear nzPlaceHolder="Subcategoría"  [ngModel]="this.key && this.key.subcategory"  formControlName="subcategory">
+            <nz-option *ngFor="let item of listSubcategory" [nzLabel]="item.valor" [nzValue]="item.valor"></nz-option>
+          </nz-select>  
+        </div>
+      
+        <div class="element">
+          <button type="button" (click)="resetFilter()"  nz-button nzType="primary" [nzSize]="'default'" nzShape="round">
+            <i nz-icon nzType="clear"></i>
+            </button>
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+
+
+  </form>
+  </div>
+
+
+  <section class="request-list">
+
+
+      <div class="content-principal">
+
+          <!-- Lista -->
+          <div class="list">
+
+            <div class="stats-filters">
+
+              <div class="total"> {{total}} vacantes encontradas</div>
+
+              <div class="order-by">
+                <!-- <label class="label-s"> Ordenar por </label> -->
+                <nz-select [ngModel]="selectedValue">
+                  <nz-option nzValue="A" nzLabel="Más reciente"></nz-option>
+                  <!-- <nz-option nzValue="B" nzLabel="Már urgentes"></nz-option> -->
+                </nz-select>
+              </div>
+            </div>
+
+            <div class="card" *ngFor="let item of offers" >
+              <a (click)="navigateViewJob(item)">
+              <div class="card-title"> 
+                <h2> <i nz-icon nzType="deployment-unit" nzTheme="outline"></i> {{item.title}} </h2> 
+
+                <nz-tag nzColor="{{getUrgencyColor(item.urgency)}}" >{{getUrgency(item.urgency)}} </nz-tag>
+              
+              </div>
+
+
+               <div class="salary">
+                {{item.rangeAmount.valor}} 
+               </div> 
+
+               <div class="salary">
+                {{item.typeOfJob.valor}} - {{getWorkPlace(item.workPlace)}}
+                </div> 
+
+
+              <div class="tags">
+                <nz-tag nzColor="geekblue">
+                  <span nz-icon nzType="appstore" nzTheme="outline"></span>
+                  <span>{{item.category.valor}}</span>
+                </nz-tag>
+
+                  
+                <nz-tag [nzColor]="'volcano'">{{item.subcategory.valor}}</nz-tag>
+              
+              </div>
+
+              <div class="description">
+
+                <h3> Descripción de la vacante: </h3>
+
+                <p>
+                  {{item.description}}
+                </p>
+                </div>
+
+
+              <div class="company-and-place">
+                 <p> {{item.company.name}} - {{item.state.valor}}, {{item.city.valor}}</p> 
+              </div>
+              <div class="date-published">
+                <p> {{getDays(item.regDateCreated)}}</p>
+              </div>
+
+          
+              <div class="view">
+                <nz-tag [nzColor]="'#87d068'"> 
+                  <i nz-icon nzType="check-circle"></i>
+                  Ya te has postulado </nz-tag>
+              </div>
+
+             
+
+            </a>
+            </div>
+
+
+            <div class="form-inline">
+              <div class="pagination-content">
+                <nz-pagination
+                  [nzPageSize]="pageSize"
+                  [nzPageIndex]="current"
+                  [nzTotal]="total"
+                  (nzPageSizeChange)="changePageSize($event)"
+                  (nzPageIndexChange)="changeCurrentPage($event)"
+                  id="demo"
+                ></nz-pagination>
+              </div>
+            </div>
+         
+
+            <nz-empty
+            [hidden]="offers.length > 0"
+            nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+            [nzNotFoundContent]="contentTpl"
+            [nzNotFoundFooter]="footerTpl"
+            >
+            <ng-template #contentTpl>
+              <span>
+                No hemos encontrado ofertas.
+                <!-- <a routerLink="/search">¿Deseas comenzar a buscar?</a> -->
+              </span>
+            </ng-template>
+            <ng-template #footerTpl>
+              <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
+            </ng-template>
+           </nz-empty>
+
+          </div>
+
+
+          <!-- Sección de promoción -->
+          <div class="ad">
+
+            <nz-card  [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+              <nz-card-meta
+                nzTitle="Card title"
+                nzDescription="This is the description"
+                [nzAvatar]="avatarTemplate"
+              ></nz-card-meta>
+            </nz-card>
+            <ng-template #avatarTemplate>
+              <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+            </ng-template>
+            <ng-template #coverTemplate>
+              <img alt="example" src="http://localhost:4200/assets/images/kk.png" />
+            </ng-template>
+            <ng-template #actionSetting>
+              <i nz-icon nzType="setting"></i>
+            </ng-template>
+            <ng-template #actionEdit>
+              <i nz-icon nzType="edit"></i>
+            </ng-template>
+            <ng-template #actionEllipsis>
+              <i nz-icon nzType="ellipsis"></i>
+            </ng-template>
+          </div>
+
+
+      </div>
+  
+
+
+  </section>
+
+
+  <section class="help-search">
+
+  </section>
+
+</div>

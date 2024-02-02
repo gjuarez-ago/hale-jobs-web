@@ -1,0 +1,212 @@
+
+
+<nz-spin [nzSpinning]="isLoadingGeneral">
+
+    <nz-layout>
+        <nz-header>
+          <div class="logo">
+            <img src="assets/images/logo-b.png" width="110px" />
+          </div>
+    
+          <div class="avatar">
+            <nz-avatar [nzSize]="42" nzText="GJ"></nz-avatar>
+          </div>
+          
+        </nz-header>
+    </nz-layout>
+    
+    <div class="content-principal">
+        <!-- <div class="fade-left">
+            <div class="list">
+                <ul>
+                    <li>
+                        <p [ngClass]="{'selected' : current >= 0}">
+                            Nombre del proyecto
+                        </p>
+                    </li>
+                    <li>
+                        <p [ngClass]="{'selected' : current >= 1}">
+                            Cadena
+                        </p>
+                    </li>
+                    <li>
+                        <p [ngClass]="{'selected' : current >= 2}">
+                            Categoria
+                        </p>
+                    </li>
+                    <li>
+                        <p [ngClass]="{'selected' : current == 3}">
+                            Descripción
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+
+        <div class="content-right">
+
+            <nz-skeleton [nzLoading]="false" [nzActive]="true">
+
+            </nz-skeleton>
+
+
+            <form #f="ngForm" nz-form [formGroup]="createForm" (ngSubmit)="submitForm()" [nzLayout]="'horizontal'">
+                <div class="proyect-section" *ngIf="current == 0">
+                    <div class="project-description">
+                        <h1> Preguntas frecuentes </h1>
+                        <div class="dl"> 
+                            <div class="text">
+                                <p> <span nz-icon nzType="question-circle" nzTheme="outline"></span> Esperamos te puedan servir de ayuda </p>
+                            </div>
+                        </div>
+
+                        <div class="collase">
+                            <div class="ele-colla">
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                      *ngFor="let panel of panels"
+                                      [nzHeader]="panel.name"
+                                      [nzActive]="panel.active"
+                                      [nzDisabled]="panel.disabled"
+                                    >
+                                      <p style="margin:0;">
+                                        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome
+                                        guest in many households across the world.
+                                      </p>
+                                    </nz-collapse-panel>
+                                  </nz-collapse>
+                            </div>
+
+                            
+                            <div class="ele-colla">
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                      *ngFor="let panel of panels"
+                                      [nzHeader]="panel.name"
+                                      [nzActive]="panel.active"
+                                      [nzDisabled]="panel.disabled"
+                                    >
+                                      <p style="margin:0;">
+                                        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome
+                                        guest in many households across the world.
+                                      </p>
+                                    </nz-collapse-panel>
+                                  </nz-collapse>
+                            </div>
+                        </div>
+
+                        
+                        <div class="collase">
+                            <div class="ele-colla">
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                      *ngFor="let panel of panels"
+                                      [nzHeader]="panel.name"
+                                      [nzActive]="panel.active"
+                                      [nzDisabled]="panel.disabled"
+                                    >
+                                      <p style="margin:0;">
+                                        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome
+                                        guest in many households across the world.
+                                      </p>
+                                    </nz-collapse-panel>
+                                  </nz-collapse>
+                            </div>
+
+                            
+                            <div class="ele-colla">
+                                <nz-collapse>
+                                    <nz-collapse-panel
+                                      *ngFor="let panel of panels"
+                                      [nzHeader]="panel.name"
+                                      [nzActive]="panel.active"
+                                      [nzDisabled]="panel.disabled"
+                                    >
+                                      <p style="margin:0;">
+                                        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome
+                                        guest in many households across the world.
+                                      </p>
+                                    </nz-collapse-panel>
+                                  </nz-collapse>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="supermarket-section" *ngIf="current == 1">
+                    <div class="supermarket-description">
+                        <h1> Selecione una cadena </h1>
+
+                        <nz-skeleton [nzLoading]="isLoadingSupers" [nzActive]="isLoadingSupers">
+                            <div class="grid-supers">
+                                
+                            </div>
+                        </nz-skeleton>
+
+                        <div class="button-super">
+                            <nz-space>
+                                
+                                <button *nzSpaceItem class="button-white pd-1" nz-button (click)="pre()">Volver</button>
+                                <button *nzSpaceItem class="button-blue pd-1" nz-button
+                                    (click)="next()">Continuar</button>
+                            </nz-space>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section" *ngIf="current == 2">
+                    <div class="category-description">
+                        <h1> Selecione una categoria </h1>
+                        <nz-skeleton [nzLoading]="isLoadingCategories" [nzActive]="isLoadingCategories">
+                            
+                        </nz-skeleton>
+
+                        <div class="button-super">
+                            <nz-space>
+                                
+                                <button *nzSpaceItem class="button-white pd-1" nz-button (click)="pre()">Volver</button>
+                                <button *nzSpaceItem class="button-blue pd-1" nz-button
+                                    (click)="next()">Continuar</button>
+                            </nz-space>
+                        </div>
+                    </div>
+                </div>
+                <div class="description-section" *ngIf="current == 3">
+                    <div class="project-description">
+                        <h1> Descripción </h1>
+                        <div class="dl">
+                            <div class="text">
+                                <p> Escribe una breve descripción de tu proyecto </p>
+                            </div>
+                        </div>
+                        <nz-form-item nzErrorTip="Please input  your describe.">
+                            <nz-form-control>
+                                <nz-textarea-count [nzMaxCharacterCount]="100">
+                                    <textarea rows="4" nz-input 
+                                        placeholder="Please describe your project"></textarea>
+                                </nz-textarea-count>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <div class="button-super">
+                            <nz-space>
+                                
+                                <button *nzSpaceItem class="button-white pd-1" nz-button (click)="pre()">Volver</button>
+                                <button type="submit" nz-button *nzSpaceItem class="button-blue pd-1">
+                                    Guardar
+                                </button>
+                            </nz-space>
+                        </div>
+
+                        <nz-input-group>
+                            <input type="hidden" nz-input value="" />
+                            <input type="hidden" nz-input value="slsl" />
+                            <input type="hidden" nz-input  value="slsl" />
+                        </nz-input-group>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nz-spin>
+

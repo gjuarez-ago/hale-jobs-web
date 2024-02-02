@@ -1,0 +1,30 @@
+
+.statists {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-s {
+  padding: 10px 10px 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  width: 30%;
+  margin: 0px 0px 30px 0px;
+  border-radius: 10px;
+}
+
+.statists-2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-sp {
+  width: 30%;
+}
+
+.filters {
+  margin: 0px 0px 20px 0px;
+}
+
+ input {
+  width: 400px;
+}

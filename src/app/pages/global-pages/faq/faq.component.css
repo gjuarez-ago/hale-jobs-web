@@ -1,0 +1,265 @@
+.content-principal {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.fade-left {
+    width: 20%;
+    height: 100vh;
+    background-color: rgb(250, 249, 249);
+}
+
+.content-right {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(241, 241, 241);
+}
+
+
+.list {
+    text-align: right;
+    padding: 30px 40px 10px 20px;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+.list ul li p.selected {
+    margin: 5px 0px;
+    padding: 0px 10px 0px 0px;
+    border-right: 5px solid rgb(12, 42, 175);
+    color: rgb(15, 49, 197);
+}
+
+
+.list ul li p{
+    margin: 5px 0px;
+    padding: 0px 10px 0px 0px;
+    border-right: 5px solid rgb(168, 168, 168);
+}
+
+.proyect-section {
+    width: 90%;
+    margin: 60px auto;
+}
+
+.project-description {
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-project {
+    width: 400px;
+}
+
+.dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-s {
+    margin-right: 4px;
+    margin-bottom: 17px;
+}
+
+.pd-1 {
+    margin: 20px 0px;
+    padding: 0px 80px;
+}
+
+
+/* Sección de CSS para la cadena */
+.supermarket-section {
+    /* background-color: aqua; */
+    width: 60%;
+    margin: 60px auto;
+}
+
+.supermarket-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-supers {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.img-super {
+    cursor: pointer;
+    width: 130px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.img-super img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ele {
+    display: flex;
+    flex-direction: column;
+}
+.spaapap {
+    color: rgb(70, 70, 70);
+}
+
+img.preview-img{
+    width: 100%;
+    height: auto;
+}
+
+.ele-img {
+    background-color: rgb(180, 209, 241);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+/* Category Section */
+
+.category-section {
+    width: 85%;
+    margin: 60px auto;
+}
+
+.category-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-categories {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-element {
+    width: 30%;
+    padding: 10px 40px;
+    background-color: rgb(218, 218, 218);
+    margin: 10px 10px;
+    cursor: pointer;
+}
+
+.selected-c {
+    box-shadow: #2544cc29 0px 1px 4px, rgb(24, 37, 173) 0px 0px 0px 3px;
+}
+
+.category-text {
+padding: 0px;
+margin: 0px;
+}
+
+/* Store section */
+
+.store-section {
+    width: 85%;
+    margin: 60px auto;
+}
+
+.store-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-store {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.store-element {
+    width: 30%;
+    padding: 10px 40px;
+    background-color: rgb(218, 218, 218);
+    margin: 10px 10px;
+}
+
+.store-text{
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Description section */
+
+.description-section {
+    width: 60%;
+    margin: 60px auto;
+}
+
+nz-form-item {
+    width:400px;
+}
+
+/*  */
+
+
+.logo {
+    margin: 0px 0px 0px 30px;
+  }
+  
+  nz-avatar {
+    margin-right: 30px;
+    cursor: pointer;
+  }
+  
+  nz-header {
+      background: #fff;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+    
+
+  .collase {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
+  }
+  .ele-colla {
+   margin: 20px 20px;
+
+}

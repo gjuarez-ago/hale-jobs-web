@@ -1,0 +1,188 @@
+.nav p{
+    font-size: 1.9em;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-green {
+    background-color: green !important;
+    border-color: white !important;
+    color: white !important;
+}
+
+
+.form-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+  }
+
+.btn-red {
+    background-color: rgb(241, 5, 1) !important;
+    border-color: white !important;
+    color: white !important;
+}
+
+.filters {
+    padding: 30px 0px 10px 0px;
+}
+
+.pa-st {
+
+    font-weight: bold;
+    font-size: 17px;
+    padding: 0px;
+    margin: 0px;
+}
+.salary {
+    
+    font-weight: 300;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.pagination-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+}
+.text-co {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.add {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0px 0px 0px;
+    align-items: flex-end;
+}
+
+
+.success {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(25, 128, 7);
+}
+
+.view-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(6, 56, 99);
+}
+
+
+.edit-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(22, 94, 181);
+}
+
+.delete-btn {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(202, 41, 5);
+}
+
+.audit-btn {
+
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(5, 202, 113);
+}
+
+.item-list {
+    padding: 20px 20px 20px 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 5px 10px 20px 10px;
+    border-radius: 10px;
+    /* background-color:#333; */
+
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+
+}
+
+.img-ine {
+    border-radius: 10px;
+}
+
+
+.empty {
+    margin: 20px auto;
+}
+
+.question {
+    color: rgb(11, 32, 156);
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.card-description{
+    cursor: pointer;
+    text-align: center;
+    width: 30%;
+    margin: 20px 15px;
+    /* background-color: aquamarine; */
+    padding: 30px 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
+    border-left: 5px solid #f5ad40;
+    border-right: 5px solid #f5ad40;
+    border-radius: 10px;
+    /* padding: 500px 0px; */
+}
+
+
+  .card-title h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.9em;
+  }
+
+  .points-key {
+    padding: 20px 0px 0px 0px;
+  }
+
+  .points {
+    padding: 0px 0px 0px 10px;
+  }
+
+  .points li {
+    margin: 0px 10px;
+    text-decoration: none;
+    
+  }
+
+  .company-and-place  {
+    margin: 5px 0px;
+    display: flex;
+    align-items: flex-start;
+    font-weight: 700;
+  }
+
+  .tags {
+    margin: 10px 0px 8px 0px
+  }
+
+.card-postulate {
+    width: 28%;
+    background-color: azure;
+}
+
+

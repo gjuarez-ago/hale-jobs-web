@@ -1,0 +1,349 @@
+<div nz-row class="p-3 container-principal" [nzGutter]="16">
+  <div nz-col nzSpan="8">
+    <nz-card class="companie">
+      <div >
+        <div class="content-img">
+          <img src="{{currentElement && currentElement.imageURL}}" alt="" />            
+        </div>
+
+        <div >
+          <h1>{{currentElement && currentElement.name}}</h1>
+          <p>
+            {{currentElement && currentElement.description}}
+          </p>
+        </div>
+      </div>
+    </nz-card>
+    <nz-card style="margin-top: .5rem">
+      <div>
+        <div class="comment-header" nz-col nzSpan="24">
+          <h4 class="pd-a">
+            {{currentElement && currentElement.category}}
+          </h4>
+          <p class="pd-a">
+            {{currentElement && currentElement.sizeCompany}}
+          </p>
+        </div>
+
+        <div class="alala">
+          <div class="rate-title">
+            <nz-rate  [nzDisabled]="true" [ngModel]="rating" ></nz-rate>
+          </div>
+
+          <div>
+            <button [disabled]="role == 'ROLE_HR'" (click)="showModalAddModal()" nz-button nzType="dashed" nzDanger>Calificar</button>
+          </div>
+        </div>
+
+      </div>
+
+    </nz-card>
+  </div>
+
+
+  
+  <div nz-col nzSpan="16">
+    <nz-card>
+      <nz-tabset nzType="card">
+        
+        <nz-tab [nzTitle]="tab1">
+        
+          <ng-template #tab1>
+            <i nz-icon [nzType]="'audit'"></i>
+            Empleos
+          </ng-template>
+
+          <div class="offer-content" *ngFor="let item of offers">
+            <a routerLink="/view-job/{{item.id}}" target="_blank">
+           
+            <h3> <i nz-icon nzType="deployment-unit" nzTheme="outline"></i> {{item.title}} </h3>
+            <h4> <i nz-icon nzType="flag" nzTheme="outline"></i> {{item.city.valor}}, {{item.state.valor}} ({{item.typeOfJob.valor}}) -  <i nz-icon nzType="dollar-circle" nzTheme="outline"></i> {{item.rangeAmount.valor}}  </h4>
+  
+            <p>
+              {{item.description}}
+            </p>
+
+            <div class="tags">
+              <nz-tag nzColor="success">
+                <i nz-icon nzType="check-circle"></i>
+                <span>{{item.category.valor}}</span>
+              </nz-tag>
+
+                
+              <nz-tag [nzColor]="'volcano'">{{item.subcategory.valor}}</nz-tag>
+              <nz-tag nzColor="{{getUrgencyColor(item.urgency)}}">{{getUrgency(item.urgency)}} </nz-tag>
+
+            </div>
+
+            </a>
+          </div>
+
+          
+          <nz-empty
+          [hidden]="offers.length > 0"
+          nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+          >
+          <ng-template #contentTpl>
+            <span>
+              No existe ninguna vacante en este momento
+              <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+            </span>
+          </ng-template>
+          <ng-template #footerTpl>
+            <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+          </ng-template>
+         </nz-empty>
+
+          <div class="form-inline">
+            <div class="pagination-content">
+              <nz-pagination
+                [nzPageSize]="pageSizeO"
+                [nzPageIndex]="currentO"
+                [nzTotal]="totalO"
+                (nzPageSizeChange)="changePageSizeO($event)"
+                (nzPageIndexChange)="changeCurrentPageO($event)"
+                id="demo"
+              ></nz-pagination>
+            </div>
+          </div>
+
+          
+        
+
+          
+       
+
+
+        </nz-tab>
+
+
+        
+
+
+        <nz-tab [nzTitle]="tab2">
+        
+          <ng-template #tab2>
+            <i nz-icon [nzType]="'comment'"></i>
+            Comentarios
+          </ng-template>
+
+          <nz-list [nzNoResult]="contentTplp" [nzDataSource]="opinions" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+            <ng-template #item let-item>
+              <nz-comment [nzAuthor]="item.title">
+                <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item"></nz-avatar>
+                <nz-comment-content>
+                  <p>{{ item.opinion }}</p>
+                </nz-comment-content>
+                <nz-comment-action>
+
+                  <div nz-col class="rates" >
+                    <div class="rate">
+                    <span  class="ant-rate-text"> Cultura </span>
+                    <nz-rate  [nzDisabled]="true" [ngModel]="item.culture" ></nz-rate>
+                    </div>
+      
+                    
+                    <div class="rate">
+                      <span  class="ant-rate-text"> Sueldo </span>
+                      <nz-rate [nzDisabled]="true" [ngModel]="item.rangeAmountQ" ></nz-rate>
+                      </div>
+      
+                      
+                    <div class="rate">
+                      <span  class="ant-rate-text"> Oportunidades </span>
+                      <nz-rate [nzDisabled]="true" [ngModel]="item.oportunities" ></nz-rate>
+                      </div>
+      
+                 
+                  </div>
+
+                  
+                </nz-comment-action>
+              </nz-comment>
+            </ng-template>
+          </nz-list>
+
+          <div class="form-inline">
+            <div class="pagination-content">
+              <nz-pagination
+                [nzPageSize]="pageSizeOp"
+                [nzPageIndex]="currentOp"
+                [nzTotal]="totalOp"
+                (nzPageSizeChange)="changePageSizeO($event)"
+                (nzPageIndexChange)="changeCurrentPageO($event)"
+                id="demo"
+              ></nz-pagination>
+            </div>
+          </div>
+
+      
+        </nz-tab>
+        <nz-tab [nzTitle]="tab3">
+        
+          <ng-template #tab3>
+            <i nz-icon [nzType]="'shop'"></i>
+            Acerca de la empresa
+          </ng-template>
+
+          <div class="content-resume">
+               <h2> Resumen </h2>
+               <p>
+                {{currentElement && currentElement.description}}  
+              </p>
+
+               <h3>Sitio web</h3>
+                <a href="{{currentElement && currentElement.urlSite}}" >  {{currentElement && currentElement.urlSite}} </a>
+              
+              <div class="sizebox"></div>
+
+               <h3>Tamaño de la empresa</h3>
+               <p>
+                {{currentElement && currentElement.sizeCompany}}
+               </p>
+
+               <h3> Campo de especialización </h3>
+               <p>
+                {{currentElement && currentElement.category}}
+              </p>
+
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </nz-card>
+  </div>
+</div>
+
+
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleAdd"
+  nzTitle="Calificar empresa"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="modalFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="mod">
+      <form
+        #f="ngForm"
+        id="ngForm"
+        nz-form
+        [formGroup]="validateForm"
+        (ngSubmit)="saveOpinion()"
+        class="login-form"
+        [nzLayout]="'vertical'"
+      >
+        <nz-spin [nzSpinning]="isLoadingReview">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired> Título </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <input
+                    nz-input
+                    formControlName="title"
+                    placeholder="Escribe el titulo"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+        
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>¿Que opinias acerca de la empresa?</nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <textarea
+                    nz-input
+                    formControlName="opinion"
+                    placeholder="¿Que te ha parecido el producto?"
+                    [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>
+                  Oportunidades de crecimiento
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-rate nz-input formControlName="oportunities"></nz-rate>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>
+                  ¿Qué tal el salario?
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-rate nz-input formControlName="rangeAmountQ"></nz-rate>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>
+                  ¿Cómo calificas la cultura de la empresa?
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-rate nz-input formControlName="culture"></nz-rate>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          
+        </nz-spin>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cerrar</button>
+    <button
+      nz-button
+      nzType="primary"
+      form="ngForm"
+      nz-button
+      [nzLoading]="isLoadingReview"
+    >
+      Comentar
+    </button>
+  </ng-template>
+</nz-modal>
+
+
+<ng-template #contentTplp>
+  <nz-empty
+  [hidden]="offers.length > 0"
+  nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+  [nzNotFoundContent]="contentTpl"
+  [nzNotFoundFooter]="footerTpl"
+  >
+  <ng-template #contentTpl1>
+    <span>
+      No existe ningún comentario hasta el momento
+      <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+    </span>
+  </ng-template>
+  <ng-template #footerTpl1>
+    <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+  </ng-template>
+ </nz-empty>
+  
+</ng-template>

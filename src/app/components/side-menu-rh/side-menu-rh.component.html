@@ -1,0 +1,529 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo">
+      <a href="">  <img src="assets/images/logo-b.png" alt="" > </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+      
+      <!-- nzSelected -->
+      <li nz-menu-item  routerLink="/dashboard/my-offers">
+        <i class="dark" nz-icon nzType="folder-open" nzTheme="outline"></i>
+        <span class="dark"> Mis ofertas </span>
+      </li>
+      <li nz-menu-item routerLink="/dashboard/my-company">
+        <i class="dark" nz-icon nzType="appstore-add" nzTheme="outline"></i> 
+        <span class="dark">  Mis empresas </span>
+      </li>
+      <li nz-menu-item routerLink="/dashboard/search-workers">
+        <i class="dark" nz-icon nzType="monitor" nzTheme="outline"></i> 
+        <span class="dark">  Buscar personal </span>
+      </li>
+      <li nz-menu-item routerLink="/dashboard/statisticts" >
+        <span class="dark" nz-icon nzType="bar-chart"> </span> 
+          <span class="dark"> Dashboard </span>
+      </li>
+
+      <nz-avatar class="avatar" [nzSize]="42" nzText="{{initials}}"></nz-avatar>
+      <nz-avatar (click)="info()" class="btn-red" [nzSize]="42" [nzIcon]="'logout'"></nz-avatar>
+
+
+     
+
+    </ul>
+    
+    
+
+  </nz-header>
+
+  
+  <div class="list-ot">
+
+    <div class="element" (click)="showModalAD()">
+      <p> 
+        <span nz-icon nzType="notification" nzTheme="outline"></span>
+        Notificaciones ({{listADNR}}) </p>
+    </div>
+
+    <div class="element" (click)="showModalSettings()">
+      <p> 
+        <span nz-icon nzType="setting" nzTheme="outline"></span>
+        Ajustes </p>
+    </div>
+
+    <div class="element" (click)="showModalHistory()">
+      <p>
+        <span nz-icon nzType="history" nzTheme="outline"></span>
+        Historial </p>
+    </div>
+
+
+  </div>
+
+  <nz-layout>
+    <!-- <nz-sider nzWidth="250px" nzTheme="light" [(nzCollapsed)]="isCollapsed" nzCollapsible>
+      <ul nz-menu nzMode="inline" class="sider-menu">
+
+        <li nz-menu-item routerLink="/dashboard/statisticts" nzSelected>
+          <span nz-icon nzType="bar-chart"> </span> 
+          <span> Dashboard </span>
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/my-offers"  >
+          <i nz-icon nzType="folder-open" nzTheme="outline"></i>
+          <span> Mis ofertas </span>
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/my-company" >
+          <i nz-icon nzType="appstore-add" nzTheme="outline"></i> 
+          <span>  Mis empresas </span>
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/search-workers">
+          <i nz-icon nzType="monitor" nzTheme="outline"></i>
+          <span> Buscar trabajador</span>
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/my-contacts">
+          <i nz-icon nzType="contacts" nzTheme="outline"></i>
+          <span> Mensajes </span>  
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/complaints">
+          <i nz-icon nzType="node-collapse" nzTheme="outline"></i>
+        <span> Gestión de quejas</span>  
+        </li>
+
+        
+        <li nz-menu-item routerLink="/dashboard/my-notifications">
+          <i nz-icon nzType="bell" nzTheme="outline"></i>
+          <span>Notificaciones </span> 
+        </li>
+
+
+        <li nz-menu-item routerLink="/dashboard/history">
+          <i nz-icon nzType="container" nzTheme="outline"></i>
+          <span>Historial de usuarios</span> 
+        </li>
+
+        <li nz-menu-item routerLink="/dashboard/my-profile">
+          <i nz-icon nzType="setting" nzTheme="outline"></i>
+        <span> Mi perfil </span>  
+        </li>
+
+        <li nz-menu-item (click)="info()">
+          <span nz-icon nzType="logout"></span>
+          <span>Cerrar sesión</span>
+        </li>
+
+      </ul>
+    </nz-sider> -->
+    <nz-layout class="inner-layout">
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
+
+
+
+<nz-drawer [nzClosable]="true" [nzVisible]="isVisibleSettings" nzPlacement="right"
+  [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzFooter]="footerTpl1" [nzWidth]="520"       [nzPlacement]="'left'"
+  nzTitle="Ajustes de perfil" (nzOnClose)="closeModalSettings()">
+  <ng-container *nzDrawerContent>
+
+    <form nz-form [nzLayout]="'horizontal'" [formGroup]="validateForm" class="form-personal"
+    (ngSubmit)="saveSettings()">
+
+    <nz-form-item class="personal-form-control">
+      <nz-form-control nzErrorTip="Campo requerido - Minímo 2 carácteres">
+        <nz-form-label>Nombre*</nz-form-label>
+        <input nz-input id="jobTitle" formControlName="names" [ngModel]="userEdit && userEdit.names"  minlength="2" [maxlength]="50" required
+          placeholder="Escribe tu posición de trabajo" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="personal-form-control">
+      <nz-form-control nzErrorTip="Campo requerido - Minímo 2 carácteres">
+        <nz-form-label>Apellido paterno *</nz-form-label>
+        <input nz-input id="jobTitle" formControlName="fatherLastName" [ngModel]="userEdit && userEdit.fatherLastName"  [minlength]="2" [maxlength]="50" required
+          placeholder="Escribe tu posición de trabajo" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="personal-form-control">
+      <nz-form-control nzErrorTip="Campo requerido - Minímo 2 carácteres">
+        <nz-form-label>Apellido materno *</nz-form-label>
+        <input nz-input id="jobTitle" formControlName="motherLastName" [ngModel]="userEdit && userEdit.motherLastName" name="mix" [minlength]="2" [maxlength]="50" required
+          placeholder="Escribe tu posición de trabajo" />
+      </nz-form-control>
+    </nz-form-item>
+
+  
+    <div class="col">
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Por favor selecciona un género!">
+          <nz-form-label>¿Cuál es tu género?</nz-form-label>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona tu género" id="gender"
+            formControlName="gender" [ngModel]="userEdit && userEdit.gender">
+            <nz-option nzLabel="El (Hombre)" nzValue="H"></nz-option>
+            <nz-option nzLabel="Ella (Mujer)" nzValue="M"></nz-option>
+            <nz-option nzLabel="Prefiero no decir" nzValue="NE"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Campo requerido - Minímo 2 carácteres">
+          <nz-form-label>¿Cuál es tu número de teléfono?*</nz-form-label>
+          <nz-input-group nzPrefixIcon="phone" >
+          <input  type="number" nz-input id="numberPhone" [ngModel]="userEdit && userEdit.numberPhone" formControlName="numberPhone" name="mix" (keypress)="validateFormat($event)"
+            [minlength]="10" [maxlength]="10" required placeholder="Escribe tu número de teléfono" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Campo requerido - Minímo 2 carácteres">
+          <nz-form-label>¿Cuál es tu email de contacto?*</nz-form-label>
+          <nz-input-group nzPrefixIcon="mail" >
+          <input  type="email" nz-input id="email" [ngModel]="userEdit && userEdit.email" formControlName="emailContact" 
+            [minlength]="2" [maxlength]="50" required placeholder="Escribe tu email de contacto" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="col">
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Por favor selecciona tu fecha de nacimiento!">
+          <nz-form-label>¿Cuál es tu fecha de nacimiento?*</nz-form-label>
+          <nz-date-picker id="dateOfBirth" formControlName="fechaNacimiento"  [ngModel]="userEdit && userEdit.dateOfBirth" nzFormat="dd-MMM-yyy"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Campo requerido - Minímo 8 carácteres">
+          <nz-form-label>¿Qué puesto ocupas actualmente?*</nz-form-label>
+          <input nz-input id="jobTitle" formControlName="jobTitle" name="mix" [ngModel]="userEdit && userEdit.jobTitle" [minlength]="2" [maxlength]="50" required
+            placeholder="Escribe tu posición de trabajo" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Es necesario seleccionar al menos una opción!">
+        <nz-form-label>¿En qué áreas te encuentras buscando especialistas?*</nz-form-label>
+        <nz-select nzMode="tags" nzPlaceHolder="Selecciona una ó varias opciones" id="areasSpecialidad"
+        formControlName="areasSpecialidad" [ngModel]="prefRH && prefRH.areasSpecialidad">
+        <nz-option *ngFor="let area of listSubcategories" [nzLabel]="area.valor"
+          [nzValue]="area.valor"></nz-option>
+      </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Selecciona una opción">
+        <nz-form-label>¿Qué actitudes blandas buscas en tus candidatos?*</nz-form-label>
+        <nz-select nzMode="tags" nzPlaceHolder="Selecciona una opción" id="actitudesBlandas"
+          formControlName="actitudesBlandas" [ngModel]="prefRH && prefRH.actitudesBlandas">
+          <nz-option *ngFor="let attitud of attitudes" [nzValue]="attitud.attitudeName"
+            [nzLabel]="attitud.attitudeName"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Es necesario seleccionar al menos una opción!">
+        <nz-form-label>¿Qué actitudes técnicas buscas en tus candidatos?*</nz-form-label>
+        <nz-select nzMode="tags" nzPlaceHolder="Selecciona una ó varias opciones" id="actitudesTecnicas"
+          formControlName="actitudesTecnicas" [ngModel]="prefRH && prefRH.actitudesTecnicas">
+          <nz-option *ngFor="let technicalAttitud of technicalAttitudes"
+            [nzLabel]="technicalAttitud.name" [nzValue]="technicalAttitud.name"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+
+  
+  </form> 
+  </ng-container>
+
+    
+  <ng-template #footerTpl1>
+    <nz-space>
+      <button *nzSpaceItem nzDanger  nzType="primary" nzShape="round" nz-button (click)="closeModalSettings()">Cerrar</button>
+      <button *nzSpaceItem nz-button nzType="primary" nzShape="round" (click)="saveSettings()">Actualizar información</button>
+
+    </nz-space>
+  </ng-template>
+   
+
+</nz-drawer>
+
+
+
+<nz-drawer [nzClosable]="true" [nzVisible]="isVisibleAD" nzPlacement="right"
+  [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="750"       [nzPlacement]="'left'"
+  nzTitle="Notificaciones y mensajes" [nzFooter]="footerTpl" (nzOnClose)="closeModalAD()">
+  <ng-container *nzDrawerContent>
+ 
+    <div class="list">
+
+
+      <div *ngIf="listNotications.length > 0" class="filters">
+
+        <div class="search-s">
+          
+          <form nz-form [nzLayout]="'inline'" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-input-group nzPrefixIcon="one-to-one">
+                  <input formControlName="title" nz-input placeholder="Buscar notificaciones por titulo" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+           
+            <nz-form-item>
+              <nz-form-control>
+                <button nz-button nzShape="round" nzType="primary">Realizar búsqueda</button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+    
+        </div>
+    
+    
+    
+    
+    
+      </div>
+
+      
+      
+      <nz-list nzItemLayout="horizontal" [nzLoading]="isLoading">
+        <nz-list-item *ngFor="let item of listNotications">
+          <nz-list-item-meta
+            nzDescription="{{item.title}} - {{item.regDateCreated | date:'medium' }}"
+          >
+            <nz-list-item-meta-title>
+              <a (click)="navigateViewOffer(item.offerId)">{{ item.content }}</a>
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+      
+          <ul nz-list-item-actions>
+              <nz-list-item-action>
+                <nz-space>
+                  <button (click)="navigateViewJob(item.userId)" *nzSpaceItem nz-button  nzType="primary" nzShape="circle">
+                    <i nz-icon nzType="eye" nzTheme="outline"></i>
+                  </button>
+  
+                  <button (click)="deleteNotification(item.id)" *nzSpaceItem nz-button nzType="primary" nzDanger nzShape="circle">
+                    <i nz-icon nzType="delete" nzTheme="outline"></i>
+                  </button>
+  
+                </nz-space>
+              </nz-list-item-action>
+          </ul>
+      
+      
+        </nz-list-item>
+
+        <div class="form-inline-not">
+          <div class="pagination-content">
+            <nz-pagination
+              [nzPageSize]="pageSize"
+              [nzPageIndex]="current"
+              [nzTotal]="total"
+              (nzPageSizeChange)="changePageSize($event)"
+              (nzPageIndexChange)="changeCurrentPage($event)"
+              id="demo"
+            ></nz-pagination>
+          </div>
+        </div>
+
+
+        <nz-empty
+        [hidden]="listNotications.length > 0"
+        nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+        [nzNotFoundContent]="contentTpl"
+        [nzNotFoundFooter]="footerTpl"
+        >
+        <ng-template #contentTpl>
+          <span class="span-blo">
+            No existe ninguna notificación en este momento
+            <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+          </span>
+        </ng-template>
+        <ng-template #footerTpl>
+          <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+        </ng-template>
+       </nz-empty>
+
+      </nz-list>      
+    </div>
+
+  </ng-container>
+
+  <ng-template #footerTpl>
+    <nz-space>
+      <button *nzSpaceItem nzDanger nz-button (click)="closeModalAD()">Cerrar</button>
+    </nz-space>
+  </ng-template>
+</nz-drawer>
+
+
+
+<nz-drawer [nzClosable]="true" [nzVisible]="isVisibleHistory" nzPlacement="right"
+  [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="720"       [nzPlacement]="'left'"
+  nzTitle="Historial de usuarios" (nzOnClose)="closeModalHistory()">
+  <ng-container *nzDrawerContent>
+   
+
+    <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
+      <nz-list-item *ngFor="let item of listHistory">
+        <nz-list-item-meta
+          nzAvatar="{{sanitazerURL(item.profileImageUrl)}}"
+          nzDescription="{{item.surnames}}"
+        >
+          <nz-list-item-meta-title>
+            <div class="flex">
+              <div class="element" (click)="navigateViewJob(item.user)">
+                <a>{{ item.jobTitle }}</a>
+              </div>
+
+              <div class="element">
+                <nz-space>
+                  <div *nzSpaceItem  class="space">
+                    <button (click)="deleteFavorite(item)"  nz-button nzType="primary" nzDanger nzShape="circle">
+                      <i nz-icon nzType="delete" nzTheme="outline"></i>
+                    </button>
+                  </div>
+                  
+                   <div *nzSpaceItem  class="space">
+                    <button (click)="showModalMessagePostulate(item)" nz-button nzType="primary" nzShape="circle">
+                      <span nz-icon nzType="mail" nzTheme="outline"></span>                          
+                    </button>
+                   </div>
+                  
+                
+            
+                </nz-space>
+              </div>
+
+            </div>
+          </nz-list-item-meta-title>
+          
+        </nz-list-item-meta>
+      </nz-list-item>
+
+   
+
+      <br>
+      <br>
+
+      <nz-empty
+      [hidden]="listHistory.length > 0"
+      nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+      >
+      <ng-template #contentTpl>
+        <span class="span-blo">
+          Sin historial
+          <!-- <a routerLink="/search">¿Deseas comenzar a buscar?</a> -->
+        </span>
+      </ng-template>
+      <ng-template #footerTpl>
+        <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
+      </ng-template>
+     </nz-empty>
+
+
+    </nz-list>
+
+
+  </ng-container>
+
+</nz-drawer>
+
+
+
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="visiblePsStatusOffer"
+  nzTitle="Envia un mensaje a tu prospecto"
+  (nzOnCancel)="closeModalMessagePostulate()"
+  [nzFooter]="modalFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="mod">
+      <form
+        #f="ngForm"
+        id="ngForm"
+        nz-form
+        [formGroup]="psResponseEmailForm"
+        (ngSubmit)="submitResponsePostulate()"
+        class="login-form"
+        [nzLayout]="'vertical'"
+      >
+        <nz-spin [nzSpinning]="isLoadingResponse">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>¿Qué te gustaria decirle?</nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido - Max: 250 Carácteres">
+                  <textarea
+                    nz-input
+                    formControlName="comments"
+                    placeholder="Dentro de este apartado puedes enviar un meet y horario en caso de haber acordado o bien solicitar mas información."
+                    [nzAutosize]="{ minRows: 4, maxRows: 8 }"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="" nz-row [nzGutter]="8">
+            <div class="" nz-col nzSpan="24">
+
+              <nz-form-item class="input-content">
+                <nz-form-label nzFor="surnames">
+                  Oferta relacionada
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Es necesario seleccionar una opción">
+                  <nz-select 
+                  nzShowSearch nzAllowClear 
+                  nzSize="large"
+                   nzPlaceHolder="Selecciona una oferta" id="offer"
+                  formControlName="offer">
+                  <nz-option *ngFor="let item of listOffers" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+                </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+
+            </div>
+          </div>
+
+    
+          
+        </nz-spin>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter>
+    <button       [nzLoading]="isLoadingResponse"
+    nz-button nzType="default" (click)="closeModalMessagePostulate()">Cerrar</button>
+    <button
+      nz-button
+      nzType="primary"
+      form="ngForm"
+      nz-button
+      [nzLoading]="isLoadingResponse"
+    >
+      Enviar mensaje
+    </button>
+  </ng-template>
+</nz-modal>

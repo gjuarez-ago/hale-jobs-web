@@ -1,0 +1,393 @@
+.content-principal {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.fade-left {
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    margin: 5% 0px;
+    background-color: rgb(250, 249, 249);
+}
+
+.button-super {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.content-right {
+    margin: 5% 0px 0px 20%;
+    width: 80%;
+    min-height: 90vh;
+    background-color: rgb(241, 241, 241);
+}
+
+
+.list {
+    text-align: right;
+    padding: 30px 40px 10px 20px;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+.list ul li p.selected {
+    margin: 5px 0px;
+    padding: 0px 10px 0px 0px;
+    border-right: 5px solid rgb(12, 42, 175);
+    color: rgb(15, 49, 197);
+}
+
+
+.list ul li p{
+    margin: 5px 0px;
+    padding: 0px 10px 0px 0px;
+    border-right: 5px solid rgb(168, 168, 168);
+}
+
+.proyect-section {
+    width: 60%;
+    margin: 30px auto;
+}
+
+.project-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-project {
+    width: 400px;
+}
+
+.text-field-center {
+    text-align: center;
+    
+}
+
+.dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-s {
+    margin-right: 4px;
+    margin-bottom: 17px;
+}
+
+.pd-1 {
+    margin: 20px 0px;
+    padding: 0px 80px;
+}
+
+
+/* Sección de CSS para la cadena */
+.supermarket-section {
+    /* background-color: aqua; */
+    width: 60%;
+    margin: 30px auto;
+}
+
+.supermarket-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-supers {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.img-super {
+    cursor: pointer;
+    width: 130px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.img-super img {
+    max-width: 100%;
+    height: auto;
+}
+
+.ele {
+    display: flex;
+    flex-direction: column;
+}
+.spaapap {
+    color: rgb(70, 70, 70);
+}
+
+img.preview-img{
+    width: 100%;
+    height: auto;
+}
+
+.ele-img {
+    background-color: rgb(180, 209, 241);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+/* Category Section */
+
+.category-section {
+    width: 95%;
+    margin: 30px auto;
+}
+
+.category-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.experiences-section {
+    width: 95%;
+    margin: 30px auto;
+}
+
+.experiences-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.grid-categories {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-element {
+    width: 30%;
+    padding: 10px 40px;
+    background-color: rgb(218, 218, 218);
+    margin: 10px 10px;
+    cursor: pointer;
+}
+
+.selected-c {
+    box-shadow: #2544cc29 0px 1px 4px, rgb(24, 37, 173) 0px 0px 0px 3px;
+}
+
+.category-text {
+padding: 0px;
+margin: 0px;
+}
+
+/* Store section */
+
+.store-section {
+    width: 85%;
+    margin: 60px auto;
+}
+
+.store-description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-store {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.store-element {
+    width: 30%;
+    padding: 10px 40px;
+    background-color: rgb(218, 218, 218);
+    margin: 10px 10px;
+}
+
+.store-text{
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Description section */
+
+.description-section {
+    width: 60%;
+    margin: 60px auto;
+}
+
+nz-form-item.personal-form-control {
+    width:48%;
+    margin: 10px 10px;
+}
+
+.add-certificate {
+    width:100%;
+    margin: 10px 0px;
+}
+
+nz-form-item.personal-form-control nz-form-control {
+    width: 100%;
+}
+
+nz-date-picker  {
+    width: 100%;
+}
+
+
+/*  */
+
+
+.logo {
+    margin: 0px 0px 0px 30px;
+  }
+  
+  
+.btn-red {
+    margin: 0px 10px 0px 10px;
+    background-color: red;
+    border-color: black;
+    cursor: pointer;
+  }
+
+  nz-avatar {
+    margin-right: 0px;
+    cursor: pointer;
+    background-color: rgb(3, 55, 79);
+  }
+  
+  nz-header {
+      background: #fff;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+
+  .col {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .preffers {
+    margin: 10px auto;
+    width: 100%;
+  }
+
+  .content-exp {
+    margin: 10px auto;
+    width:90%;
+  }
+  .cv-content {
+    margin: 10px auto;
+    width:90%;
+  }
+  .steps-content {
+    margin-top: 16px;
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    background-color: #fafafa;
+    min-height: 200px;
+    padding: 20px 20px;
+
+  }
+
+  .steps-action {
+    margin-top: 24px;
+  }
+
+  button {
+    margin-right: 8px;
+  }
+
+
+  nz-layout  {
+    z-index: 999;
+    width: 100%;
+    position: fixed;
+  }
+
+   .card-edu {
+    
+    margin: 15px 0px;
+    border-radius: 10px;
+    padding: 10px 10px 20px 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+
+  .title-edu p{
+    margin: 0px;
+  }
+
+
+  .card-exp {
+    margin: 15px 0px;
+    border-radius: 10px;
+    padding: 10px 10px 20px 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  }
+
+  .title-card p{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .subtitle-card p{
+    
+    font-size: 13px;
+    font-weight: 300;
+    margin:0px 0px 18px 0px;
+    padding: 0px;
+  }
+
+
+  .size-box {
+    width: 10px;
+  }
+
+
+  .size-box-space {
+    width: 10px;
+  }

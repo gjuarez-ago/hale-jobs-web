@@ -1,0 +1,686 @@
+<div class="content-principal">
+  <div class="advanced">
+    <div class="line-1" [ngClass]="{ selected: currentStep >= 0 }"></div>
+    <div class="line-1" [ngClass]="{ selected: currentStep >= 1 }"></div>
+    <div class="line-1" [ngClass]="{ selected: currentStep == 2 }"></div>
+  </div>
+
+  <div class="proyect-section" *ngIf="currentStep == 0">
+    <div class="project-description">
+      <nz-page-header
+        class="site-page-header"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="Actualización de una oferta (Datos esenciales)"
+      ></nz-page-header>
+
+      <div class="dl">
+        <div class="text">
+          <p>
+            😅 En esta sección podrás crear tus ofertas, nos enfocamos en tomar los datos más importantes y relevantes, así como ciertas configuraciones qué limitarán qué información puede visualizar el usuario final.
+          </p>
+        </div>
+      </div>
+
+      <div class="form">
+        <form
+          nz-form
+          [nzLayout]="'vertical'"
+          [formGroup]="createForm"
+          class="login-form"
+          (ngSubmit)="submitForm()"
+        >
+          <div nz-row [nzGutter]="24">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email">
+                    Título de la oferta
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <input
+                      type="text"
+                      class="input-text"
+                      nzSize="large"
+                      nz-input
+                      [minlength]="5" [maxlength]="100"
+                      placeholder="Escribe el titulo de la oferta"
+                      formControlName="title"
+                      [ngModel]="offer && offer.title"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="surnames">
+                    Subcategoría de la oferta
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Subcategoría"
+                      formControlName="category"
+                      [ngModel]="offer && offer.subcategory.id"
+                    >
+                      <nz-option
+                        *ngFor="let item of listSubcategory"
+                        [nzLabel]="item.valor"
+                        [nzValue]="item.id"
+                      ></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email">
+                    Empresa quien oferta
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Empresa"
+                      formControlName="company"
+                      [ngModel]="offer && offer.company.id"
+                    >
+                      <nz-option
+                        *ngFor="let item of listCompanies"
+                        [nzLabel]="item.name"
+                        [nzValue]="item.id"
+                      ></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="24">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email">
+                    Urgencia de contratación
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Urgencia de contratación"
+                      formControlName="urgency"
+                      [ngModel]="offer && offer.urgency"
+                    >
+                      <nz-option nzLabel="Urgente" nzValue="A"></nz-option>
+                      <nz-option nzLabel="Moderada" nzValue="B"></nz-option>
+                      <nz-option nzLabel="Baja" nzValue="C"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <!-- 
+              <div nz-col class="gutter-row" [nzSpan]="8">
+                <div class="inner-box">
+                  <nz-form-item class="input-content">
+                    <nz-form-label nzFor="email"> Tipo de pago </nz-form-label>
+                    <nz-form-control nzErrorTip="Campo requerido">
+                      <nz-select
+                        nzShowSearch
+                        nzAllowClear
+                        [nzSize]="'large'"
+                        nzPlaceHolder="Selecciona un estado"
+                        formControlName="typeOfPayment">
+                        <nz-option nzLabel="Nómina" nzValue="A"></nz-option>
+                        <nz-option nzLabel="Honorarios" nzValue="B"></nz-option>
+                        <nz-option nzLabel="Esquema mixto" nzValue="C"></nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div>
+              </div> -->
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email"> Salario </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Rango salarial"
+                      formControlName="rangeAmount"
+                      [ngModel]="offer && offer.rangeAmount.id"
+
+                    >
+                      <nz-option
+                        *ngFor="let item of listRangeAmount"
+                        [nzLabel]="item.valor"
+                        [nzValue]="item.id"
+                      ></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email"> Tipo de trabajo </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Tipo de trabajo"
+                      formControlName="typeOfJob"
+                      [ngModel]="offer && offer.workPlace"
+                    >
+                      <nz-option
+                        nzLabel="Jornada completa"
+                        nzValue="A"
+                      ></nz-option>
+                      <nz-option
+                        nzLabel="Media jornada"
+                        nzValue="B"
+                      ></nz-option>
+                      <nz-option nzLabel="Pasantias" nzValue="C"></nz-option>
+                      <nz-option nzLabel="Por proyecto" nzValue="D"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="24">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="surnames">
+                    Nivel de estudios deseado
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Nivel de estudios"
+                      formControlName="levelStudy"
+                      [ngModel]="offer && offer.levelStudy.id"
+                    >
+                      <nz-option
+                        *ngFor="let item of listLevelStudy"
+                        [nzLabel]="item.valor"
+                        [nzValue]="item.id"
+                      ></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email">
+                    Lugar de trabajo
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      class="input-text-select"
+                      nzSize="large"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Lugar de trabajo"
+                      formControlName="workPlace"
+                      [ngModel]="offer && offer.typeOfJob.id"
+                    >
+                      <nz-option
+                        *ngFor="let item of listTypeOfJob"
+                        [nzLabel]="item.valor"
+                        [nzValue]="item.id"
+                      ></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email">
+                    Mostrar información de la empresa
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      [nzSize]="'large'"
+                      nzPlaceHolder="Selecciona un estado"
+                      formControlName="showCompany"
+                      [ngModel]="offer && offer.showCompany ? 'A' : 'B'"
+
+                    >
+                      <nz-option nzLabel="Mostrar" nzValue="A"></nz-option>
+                      <nz-option nzLabel="No mostrar" nzValue="B"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+
+        
+          </div>
+
+          <div nz-row [nzGutter]="24">
+
+
+         
+
+            <div nz-col class="gutter-row" [nzSpan]="8">
+              <div class="inner-box">
+                <nz-form-item class="input-content">
+                  <nz-form-label nzFor="email"> Mostrar salario </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-select
+                      [nzSize]="'large'"
+                      nzPlaceHolder="Selecciona una opcón"
+                      formControlName="showSalary"
+                      [ngModel]="offer && offer.showSalary ? 'A' : 'B'"
+                    >
+                      <nz-option nzLabel="Mostrar" nzValue="A"></nz-option>
+                      <nz-option nzLabel="No mostrar" nzValue="B"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+
+          <div class="" nz-row>
+            <div nz-col class="gutter-row" [nzSpan]="24">
+              <div class="inner-box">
+                <nz-form-item>
+                  <nz-form-label nzFor="email">
+                    Descripción de la oferta
+                  </nz-form-label>
+                  <nz-form-control nzErrorTip="Campo requerido">
+                    <nz-textarea-count [nzMaxCharacterCount]="500">
+                      <textarea
+                        rows="10"
+                        [minlength]="10" [maxlength]="500"
+                        nz-input
+                        [ngModel]="offer && offer.description"
+                        formControlName="description"
+                        placeholder="Describe un poco de lo qué hace la empresa, a qué se dedica o bien un poco de su historia."
+                      ></textarea>
+                    </nz-textarea-count>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="button-super">
+        <nz-space>
+          <button
+            *nzSpaceItem
+            nz-button
+            class="button-blue pd-1"
+            (click)="nextStep()"
+          >
+            Continuar
+          </button>
+        </nz-space>
+      </div>
+    </div>
+  </div>
+
+  <div class="proyect-section" *ngIf="currentStep == 1">
+    <div class="section-form-new">
+      <nz-page-header
+        class="site-page-header"
+        (nzBack)="onBack()"
+        nzBackIcon
+        nzTitle="Creación de oferta (Descripción de funciones)"
+      ></nz-page-header>
+      <div class="dl">
+        <div class="text">
+          <p>
+            😅 Decidimos no volver complejo nuestro registro, mas sin embargo
+            necesitamos que nos ayudes con cierta información tuya para
+            brindarte una mejor experiencia
+          </p>
+        </div>
+      </div>
+
+      <h3>Actividades</h3>
+
+      <form
+        class="form-a"
+        [formGroup]="addFormActivities"
+        (ngSubmit)="submitActivities()"
+      >
+        <div class="input-a">
+          <nz-form-item class="input-content">
+            <nz-form-control nzErrorTip="Longitud mínima 8, Maxima 80">
+              <input
+                formControlName="value"
+                nzSize="large"
+                class="passenger-input"
+                nz-input
+                placeholder="Describe la actividad a realizar"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="button-a">
+          <button nz-button nzType="primary" nzShape="round" [nzSize]="'large'">
+            Agregar actividad
+          </button>
+        </div>
+      </form>
+
+      <div class="list-beneficts">
+        <nz-empty
+          *ngIf="listActivities.length == 0"
+          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+        >
+          <ng-template #contentTpl>
+            <span> Ninguna actividad agregada </span>
+          </ng-template>
+          <ng-template #footerTpl> </ng-template>
+        </nz-empty>
+
+        <ul>
+          <li *ngFor="let element of listActivities">
+            {{ element.value }}
+            <button
+              class="btn-opts"
+              (click)="removeActivity(element)"
+              nzDanger
+              nz-button
+              nzType="dashed"
+              nzShape="circle"
+            >
+              <span nz-icon nzType="close" nzTheme="outline"></span>
+            </button>
+            <button
+              (click)="copy(element.value)"
+              nz-button
+              nzType="dashed"
+              nzShape="circle"
+            >
+              <span nz-icon nzType="copy" nzTheme="outline"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Habilidades</h3>
+
+      <form
+        class="form-a"
+        [formGroup]="addFormHabilities"
+        (ngSubmit)="addHabilities()"
+      >
+        <div class="input-a">
+          <nz-form-item class="input-content">
+            <nz-form-control nzErrorTip="Longitud mínima 8, Maxima 80">
+              <input
+                formControlName="value"
+                nzSize="large"
+                class="passenger-input"
+                nz-input
+                placeholder="Describe la habilidad necesaria para cubrir el puesto"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="button-a">
+          <button nz-button nzType="primary" nzShape="round" [nzSize]="'large'">
+            Agregar Habilidad
+          </button>
+        </div>
+      </form>
+
+      <div class="list-beneficts">
+        <nz-empty
+          *ngIf="listHabilities.length == 0"
+          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+        >
+          <ng-template #contentTpl>
+            <span> Ninguna habilidad agregada </span>
+          </ng-template>
+          <ng-template #footerTpl> </ng-template>
+        </nz-empty>
+
+        <ul>
+          <li *ngFor="let element of listHabilities">
+            {{ element.value }}
+            <button
+              class="btn-opts"
+              (click)="removeHability(element)"
+              nz-button
+              nzType="dashed"
+              nzDanger
+              nzShape="circle"
+            >
+              <span nz-icon nzType="close" nzTheme="outline"></span>
+            </button>
+            <button
+              (click)="copy(element.value)"
+              nz-button
+              nzType="dashed"
+              nzShape="circle"
+            >
+              <span nz-icon nzType="copy" nzTheme="outline"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Beneficios que ofreces</h3>
+
+      <form
+        class="form-a"
+        [formGroup]="addFormBeneficts"
+        (ngSubmit)="addBeneficts()"
+      >
+        <div class="input-a">
+          <nz-form-item class="input-content">
+            <nz-form-control nzErrorTip="Longitud mínima 8, Maxima 80">
+              <input
+                formControlName="value"
+                nzSize="large"
+                class="passenger-input"
+                nz-input
+                placeholder="Describe el beneficio que ofreces"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="button-a">
+          <nz-form-control>
+            <button
+              nz-button
+              nzType="primary"
+              nzShape="round"
+              [nzSize]="'large'"
+            >
+              Agregar beneficio
+            </button>
+          </nz-form-control>
+        </div>
+      </form>
+
+      <div class="list-beneficts">
+        <nz-empty
+          *ngIf="listBeneficts.length == 0"
+          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+        >
+          <ng-template #contentTpl>
+            <span> Ningún beneficio agregado </span>
+          </ng-template>
+          <ng-template #footerTpl> </ng-template>
+        </nz-empty>
+
+        <ul>
+          <li *ngFor="let element of listBeneficts">
+            {{ element.value }}
+            <button
+              class="btn-opts"
+              (click)="removeBenefict(element)"
+              nz-button
+              nzType="dashed"
+              nzDanger
+              nzShape="circle"
+            >
+              <span nz-icon nzType="close" nzTheme="outline"></span>
+            </button>
+            <button
+              (click)="copy(element.value)"
+              nz-button
+              nzType="dashed"
+              nzShape="circle"
+            >
+              <span nz-icon nzType="copy" nzTheme="outline"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="button-super">
+        <nz-space>
+          <button
+            *nzSpaceItem
+            nz-button
+            class="button-red pd-1"
+            (click)="preStep()"
+          >
+            Volver
+          </button>
+          <button
+            *nzSpaceItem
+            nz-button
+            class="button-blue pd-1"
+            (click)="nextStep()"
+          >
+            Continuar
+          </button>
+        </nz-space>
+      </div>
+    </div>
+  </div>
+
+  <div class="proyect-section" *ngIf="currentStep === 2">
+    <div class="project-description">
+      <h1>Creación de oferta (Revisión)</h1>
+
+      <nz-descriptions nzTitle="Resumen de la oferta" nzBordered>
+        <nz-descriptions-item nzTitle="Título de la oferta" [nzSpan]="3">
+          {{ ofertaForm.title }}
+        </nz-descriptions-item>
+
+        <nz-descriptions-item nzTitle="Empresa" [nzSpan]="3">
+          {{ getCompany(ofertaForm.company) }}
+        </nz-descriptions-item>
+
+        <nz-descriptions-item nzTitle="Categoría" [nzSpan]="2">
+          {{ getCategory(ofertaForm.category) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Tipo de trabajo" [nzSpan]="2">
+          {{ getWorkPlace(ofertaForm.typeOfJob) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Lugar de trabajo" [nzSpan]="2">
+          {{ getTypeOfJobS(ofertaForm.workPlace) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Urgencia" [nzSpan]="3">
+          <nz-badge
+            nzStatus="processing"
+            nzText="{{ getUrgency(ofertaForm.urgency) }}"
+          ></nz-badge>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Salario">
+          {{ getRangeAmountS(ofertaForm.rangeAmount) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mostrar salario">
+          {{ showValues(ofertaForm.showSalary) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mostrar empresa">
+          {{ showValues(ofertaForm.showCompany) }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Descripción" [nzSpan]="3">
+          {{ ofertaForm && ofertaForm.description }}
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Beneficios" [nzSpan]="3">
+          <ul>
+            <li *ngFor="let element of listBeneficts">{{ element.value }}</li>
+          </ul>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Actividades" [nzSpan]="3">
+          <ul>
+            <li *ngFor="let element of listActivities">{{ element.value }}</li>
+          </ul>
+        </nz-descriptions-item>
+
+        <nz-descriptions-item nzTitle="Habilidades" [nzSpan]="3">
+          <ul>
+            <li *ngFor="let element of listHabilities">{{ element.value }}</li>
+          </ul>
+        </nz-descriptions-item>
+      </nz-descriptions>
+
+      <div class="button-super">
+        <nz-space>
+          <button
+            *nzSpaceItem
+            nz-button
+            class="button-red pd-1"
+            (click)="preStep()"
+          >
+            Volver
+          </button>
+
+          <button
+            *nzSpaceItem
+            nz-button
+            class="button-blue pd-1"
+            (click)="doneSteps()"
+          >
+            Actualizar oferta
+          </button>
+        </nz-space>
+      </div>
+    </div>
+  </div>
+</div>

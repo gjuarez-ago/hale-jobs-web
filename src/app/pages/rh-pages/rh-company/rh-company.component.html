@@ -1,0 +1,243 @@
+<nz-spin [nzSpinning]="isLoadingGeneral">
+  <div class="nav">
+    <p>🏪 Mis empresas</p>
+  </div>
+
+  <form
+    nz-form
+    [nzLayout]="'vertical'"
+    [formGroup]="validateForm"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
+    <div nz-row [nzGutter]="24">
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label nzFor="email"> Nombre de la empresa </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <input
+                type="text"
+                class="input-text"
+                nzSize="large"
+                nz-input
+                placeholder="¿Cuál es nombre de la empresa?"
+                formControlName="name"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="6" nzFor="surnames"> RFC </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <input
+                type="text"
+                class="input-text"
+                nzSize="large"
+                nz-input
+                placeholder="¿Cuál es el RFC de la empresa?"
+                formControlName="rfc"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="8">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label [nzSpan]="12" nzFor="email">
+              Categoría
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select
+                nzShowSearch
+                nzAllowClear
+                [nzSize]="'large'"
+                nzPlaceHolder="Selecciona una categoría"
+                formControlName="category"
+              >
+                <nz-option
+                  *ngFor="let data of listCategory"
+                  [nzLabel]="data.name"
+                  [nzValue]="data.name"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+      <div nz-col class="gutter-row" [nzSpan]="12">
+        <div class="inner-box">
+          <nz-space>
+            <!-- <button *nzSpaceItem type="button" (click)="generateExcel()" nz-button
+              class="button-red">
+              <i nz-icon nzType="audit"></i>
+              Exportar ofertas
+            </button> -->
+
+            <button *nzSpaceItem type="button" nz-button class="button-blue">
+              <a routerLink="/dashboard/new-company" routerLinkActive="active">
+                <i nz-icon nzType="plus"></i>
+                Crear Empresa
+              </a>
+            </button>
+          </nz-space>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" align="right" [nzSpan]="12">
+        <div class="inner-box">
+          <button type="submit" nz-button class="button-white">
+            <i nz-icon nzType="search"></i>
+            Realizar Búsqueda
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <br />
+
+  <div class="form-inline">
+    <div class="pagination-content">
+      <nz-pagination
+        [nzPageSize]="pageSize"
+        [nzPageIndex]="current"
+        [nzTotal]="total"
+        (nzPageSizeChange)="changePageSize($event)"
+        (nzPageIndexChange)="changeCurrentPage($event)"
+        id="demo"
+      ></nz-pagination>
+    </div>
+
+    <div class="text-co">
+      <span class="mr-md-auto"> {{ totalElementByPage }} coincidencias </span>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <div *ngFor="let item of data" class="card-description">
+      <nz-card class="companie">
+        <div nz-row>
+          <div nz-col nzSpan="10">
+            <img
+              class="logo"
+              [src]="item.imageURL"
+              alt=""
+              width="200px"
+              height="200px"
+            />
+          </div>
+          <div nz-col nzSpan="14">
+            <h1 class="hp-2">{{ item.name }}</h1>
+            <h4 class="hp-2">{{ item.category }}</h4>
+            <p class="text-wrap">{{ item.description }}</p>
+          </div>
+        </div>
+      </nz-card>
+
+      <nz-card style="margin-top: 0.5rem">
+        <nz-space>
+          <button
+            *nzSpaceItem
+            (click)="openViewDrawer(item)"
+            nz-button
+            class="button-blue pd-1"
+          >
+            <i nz-icon nzType="eye" nzTheme="outline"></i>
+          </button>
+          <button
+            routerLink="/dashboard/update-company/{{ item.id }}"
+            *nzSpaceItem
+            nz-button
+            class="button-blue pd-1"
+          >
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </button>
+
+          <button
+            (click)="info(item)"
+            *nzSpaceItem
+            nz-button
+            class="button-red pd-1"
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
+        </nz-space>
+      </nz-card>
+    </div>
+
+    
+    <div class="form-inline">
+    <nz-empty
+    [hidden]="data.length > 0"
+    nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+    [nzNotFoundContent]="contentTpl"
+    [nzNotFoundFooter]="footerTpl"
+    >
+    <ng-template #contentTpl>
+      <span>
+        Aún no has creado ninguna empresa.
+      </span>
+    </ng-template>
+    <ng-template #footerTpl>
+      <button nz-button nzType="primary" (click)="navigateCreate()" > Crear empresa </button>
+    </ng-template>
+   </nz-empty>
+    </div>
+
+
+  </div>
+</nz-spin>
+
+<nz-drawer
+  [nzWidth]="500"
+  [nzClosable]="true"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  nzTitle="Información de la empresa"
+  (nzOnClose)="closeViewDrawer()"
+>
+  <ng-container *nzDrawerContent>
+    <div *ngIf="isLoadingView" class="d">
+      <nz-skeleton></nz-skeleton>
+      <nz-skeleton></nz-skeleton>
+      <nz-skeleton></nz-skeleton>
+      <nz-skeleton></nz-skeleton>
+      <nz-skeleton></nz-skeleton>
+    </div>
+
+    <p> <span class="title"> Nombre:  </span> {{viewCompany && viewCompany.name}} </p>
+    <p> <span class="title"> categoría:  </span> {{viewCompany && viewCompany.category}} </p>
+    <p> <span class="title"> URL del sitio:  </span> {{viewCompany && viewCompany.urlSite}} </p>
+    <p> <span class="title"> URL Linkedin:  </span> {{viewCompany && viewCompany.urlLinkedin}} </p>
+    <p> <span class="title"> Tamaño de la empresa:  </span> {{viewCompany && viewCompany.sizeCompany}} </p>
+    <p> <span class="title"> Regimen Fiscal:  </span> {{viewCompany && viewCompany.regimenFiscal}} </p>
+    <p> <span class="title"> Número de contacto:  </span> {{viewCompany && viewCompany.numberPhone}} </p>
+    <p> <span class="title"> Email de contacto:  </span> {{viewCompany && viewCompany.emailContact}} </p>
+    <p> <span class="title"> Dirección:  </span> {{viewCompany && viewCompany.address}} </p>
+    <p> <span class="title"> Descripción:  </span> {{viewCompany && viewCompany.description}} </p>
+    <p> <span class="title"> RFC:  </span> {{viewCompany && viewCompany.rfc}} </p>
+
+    <!-- <p> <span class="title"> Calificación:  </span> {{viewCompany && viewCompany.qualification}} </p> -->
+    <p> <span class="title"> Visibilidad de la empresa:  </span>  
+      <nz-badge nzColor="green" nzText="Publica" *ngIf="viewCompany && viewCompany.isvisible" >
+      </nz-badge>
+
+      <nz-badge nzColor="green" nzText="Privada" *ngIf="viewCompany && !viewCompany.isvisible" >
+      </nz-badge>
+
+    </p>
+
+
+
+
+  </ng-container>
+</nz-drawer>

@@ -1,0 +1,169 @@
+
+
+  .presentacion-title, .remember {
+    color: rgb(0, 0, 0);
+  }
+
+  .input-content {
+    margin: 15px 10px 10px 0px;
+  }
+
+  input {
+   padding: 10px;
+   margin: 5px 2px;
+  }
+
+  .login-form-margin {
+    margin: 16px 0px;
+  }
+
+  .login-form-forgot {
+    float: right;
+    color: rgb(0, 0, 0);
+  }
+
+  .login-form-button {
+    width: 100%;
+  }
+
+  
+.welcome {
+  font-weight: bold;
+}
+
+
+.content-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px 0px 0px;
+}
+
+
+
+.text-in{
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.text-on {
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recovery-password {
+  font-size: 14px;
+}
+
+
+/* CSS */
+.button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #000000;
+  border-radius: 10px;
+  border-width: 0;
+  /* border: 2px solid #fbd721; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+  color: #ebebeb;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  height: 44px;
+  line-height: 1.15;
+  margin: 0px 0px 10px; 
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+
+.acceptTerms{
+  color: rgb(0, 0, 0);
+}
+
+
+.last {
+  display: flex;
+  justify-content: space-around;
+}
+
+.input-last {
+  width: 50%;
+}
+
+
+.swicth { 
+  margin: 5px 0px 10px 0px;
+}
+
+.or {
+  margin: 5px 0px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+
+.button-10 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #fbd721;
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-sizing: border-box;
+  color: #000000;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  height: 44px;
+  line-height: 1.15;
+  margin: 0px 0px 10px; 
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-10:disabled {
+  cursor: default;
+}
+
+.button-10:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}

@@ -1,0 +1,231 @@
+<div class="content-principal">
+
+    <div class="proyect-section">
+        <div class="project-description">
+          <nz-page-header
+          class="site-page-header"
+          (nzBack)="onBack()"
+          nzBackIcon
+          nzTitle="Creación de una empresa (Datos básicos)"
+        ></nz-page-header>
+          
+         
+            <div class="dl">
+                <div class="text">
+                    <p>😅 En esta sección te permitiremos crear una empresa con la cual estarás relacionando tus ofertas, dicha empresa de igual manera nos ayudará a generar tus facturas por lo cual te sugerimos llenar los datos correctamente.</p>
+                </div>
+            </div>
+
+
+            <div class="content-s">
+
+               <div class="img-left">
+                <label for="file">
+                    <div class="content-img">
+                      <img [src]="previewImage"
+                      alt="" />
+                      <div class="centered">
+                        <i nz-icon nzType="camera" nzTheme="outline"></i>
+                      </div>
+          
+                      
+                    </div>
+                  </label>
+          
+                  <input id="file"
+                  class="absolute w-full h-full"
+                  ref="file"
+                  type="file"
+                  (change)="handleChange($event)"
+                  accept="image/*" style=" visibility: hidden;"/>
+
+                  <p  nz-popover nzPopoverTitle="Permites que tu empresa sea visible en las búsquedas y al visualizar las ofertas relacionadas a esta."  nzPopoverPlacement="topRight">
+                    
+                    Mostrar empresa </p>
+                  <nz-switch [(ngModel)]="switchValue1" nzCheckedChildren="Publica" nzUnCheckedChildren="Privada"></nz-switch>
+
+               </div>
+
+
+
+
+               <div class="info">
+
+                <form nz-form [nzLayout]="'vertical'" [formGroup]="createForm" class="login-form" (ngSubmit)="submitForm()">
+                 
+                    <div nz-row [nzGutter]="24">
+                      <div nz-col class="gutter-row" [nzSpan]="12">
+                        <div class="inner-box">
+                          <nz-form-item class="input-content">
+                            <nz-form-label nzFor="email"> Nombre de la empresa </nz-form-label>
+                            <nz-form-control nzErrorTip="Campo requerido">
+                                 <input type="text" class="input-text" nzSize="large" nz-input
+                                  placeholder="Nombre de la empresa" formControlName="name" />
+                           
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                
+                      <div nz-col class="gutter-row" [nzSpan]="12">
+                        <div class="inner-box">
+                          <nz-form-item class="input-content">
+                            <nz-form-label  nzFor="surnames"> Categoria de la empresa </nz-form-label>
+                            <nz-form-control nzErrorTip="Campo requerido">
+                                <nz-select nzShowSearch nzAllowClear [nzSize]="'large'" nzPlaceHolder="Selecciona una categoría" formControlName="category">
+                                <nz-option *ngFor="let data of listCategory" [nzLabel]="data.name" [nzValue]="data.name"></nz-option>
+                            </nz-select>        
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                
+                    
+                    </div>
+
+                    <div nz-row [nzGutter]="24">
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                          <div class="inner-box">
+                            <nz-form-item class="input-content">
+                              <nz-form-label nzFor="email"> Tamaño de la empresa </nz-form-label>
+                              <nz-form-control nzErrorTip="Campo requerido">
+                                <nz-select nzShowSearch nzAllowClear [nzSize]="'large'" nzPlaceHolder="Número de personas en tu empresa" formControlName="size">
+                                <nz-option *ngFor="let data of listSize" [nzLabel]="data.size" [nzValue]="data.size"></nz-option>
+                            </nz-select>      
+                             
+                              </nz-form-control>
+                            </nz-form-item>
+                          </div>
+                        </div>
+                  
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                            <div class="inner-box">
+                              <nz-form-item class="input-content">
+                                <nz-form-label  nzFor="email">  Regimen fiscal </nz-form-label>
+                                <nz-form-control nzErrorTip="Campo requerido">
+                                <nz-select   formControlName="regimenFiscal" nzShowSearch nzAllowClear [nzSize]="'large'" nzPlaceHolder="Selecciona un estado">
+                                    <nz-option *ngFor="let data of listRegimen" [nzLabel]="data.regimen" [nzValue]="data.regimen"></nz-option>
+                                </nz-select>      
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                          </div>
+                  
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                          <div class="inner-box">
+                            <nz-form-item class="input-content">
+                              <nz-form-label  nzFor="email"> RFC </nz-form-label>
+                              <nz-form-control nzErrorTip="Campo requerido">
+                                <input type="text" class="input-text" nzSize="large" nz-input placeholder="Registro Federal de Contribuyentes"  formControlName="rfc" [minlength]="10" [maxlength]="13" required/>           
+                              </nz-form-control>
+                            </nz-form-item>
+                          </div>
+                        </div>
+
+                        <div nz-col class="gutter-row" [nzSpan]="12">
+                            <div class="inner-box">
+                              <nz-form-item class="input-content">
+                                <nz-form-label  nzFor="email"> Linkedin </nz-form-label>
+                                <nz-form-control nzErrorTip="Campo requerido">
+                                  <input type="text" class="input-text" nzSize="large" nz-input placeholder="URL de Linkedin" [minlength]="20" [maxlength]="150" required  formControlName="urlLinkedin"/>           
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                          </div>
+
+
+                          <div nz-col class="gutter-row" [nzSpan]="12">
+                            <div class="inner-box">
+                              <nz-form-item class="input-content">
+                                <nz-form-label  nzFor="email"> Número de contacto </nz-form-label>
+                                <nz-form-control nzErrorTip="Campo requerido">
+                                  <input type="text"  class="input-text" nzSize="large" nz-input placeholder="Número de contacto"   [minlength]="10" [maxlength]="10" required formControlName="numberPhone"/>           
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                          </div>
+  
+                          <div nz-col class="gutter-row" [nzSpan]="12">
+                              <div class="inner-box">
+                                <nz-form-item class="input-content">
+                                  <nz-form-label  nzFor="email"> E-mail de contacto </nz-form-label>
+                                  <nz-form-control nzErrorTip="Campo requerido">
+                                    <input type="email" class="input-text" nzSize="large" nz-input placeholder="Email de contacto" [minlength]="5" [maxlength]="50" required  formControlName="emailContact"/>           
+                                  </nz-form-control>
+                                </nz-form-item>
+                              </div>
+                          </div>
+
+                          <div nz-col class="gutter-row" [nzSpan]="24">
+                            <div class="inner-box">
+                              <nz-form-item class="input-content">
+                                <nz-form-label  nzFor="email"> Sitio web de la empresa </nz-form-label>
+                                <nz-form-control nzErrorTip="Campo requerido">
+                                    <input type="text" class="input-text" formControlName="urlSite" nzSize="large" nz-input [minlength]="5" [maxlength]="150" required placeholder="Sitio web o página de la empresa" />
+                                </nz-form-control>
+                              </nz-form-item>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="">
+                        <div class="" nz-row >
+                            <div nz-col class="gutter-row" [nzSpan]="24">
+                                <div class="inner-box">
+                                    <nz-form-item nzErrorTip="Campo requerido">
+                                        <nz-form-label  nzFor="email"> Dirección fiscal </nz-form-label>
+                                        <nz-form-control>
+                                            <nz-textarea-count  [nzMaxCharacterCount]="70">
+                                                <textarea  [minlength]="5" [maxlength]="70" formControlName="address" rows="5" nz-input
+                                                    placeholder="Escribe la dirección fiscal o bien la dirección de tu oficina principal"></textarea>
+                                            </nz-textarea-count>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="">
+                        <div class="" nz-row >
+                            <div nz-col class="gutter-row" [nzSpan]="24">
+                                <div class="inner-box">
+                                    <nz-form-item nzErrorTip="Campo requerido">
+                                        <nz-form-label  nzFor="email"> Descripción de empresa </nz-form-label>
+                                        <nz-form-control>
+                                            <nz-textarea-count [nzMaxCharacterCount]="400">
+                                                <textarea  [minlength]="5" [maxlength]="400" formControlName="description" rows="10" nz-input
+                                                    placeholder="Describe un poco de lo qué hace la empresa, a qué se dedica o bien un poco de su historia."></textarea>
+                                            </nz-textarea-count>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+
+                     
+
+                      
+                    <div class="button-super">
+                        <nz-space>
+                            <button *nzSpaceItem nz-button class="button-blue pd-1">Crear empresa</button>
+                        </nz-space>
+                    </div>
+        
+
+                      
+                  </form>
+
+               </div>
+          
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
