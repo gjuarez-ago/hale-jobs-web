@@ -16,7 +16,9 @@
   
     <nz-page-header-extra>
       <nz-space>
-        <button (click)="showModalCopy()" class="btn-green" nzShape="round" *nzSpaceItem nz-button>Copiar oferta</button>
+        <button (click)="showModalCopy()" class="btn-green" nzShape="round" *nzSpaceItem nz-button>Copiar oferta
+          <span nz-icon nzType="copy" nzTheme="outline"></span>
+        </button>
       </nz-space>
     </nz-page-header-extra>
 
@@ -290,7 +292,13 @@
             <div nz-col class="gutter-row" [nzSpan]="8">
               <div class="inner-box">
                 <nz-form-item class="input-content">
-                  <nz-form-label nzFor="email"> Mostrar información de la empresa </nz-form-label>
+                  <nz-form-label 
+                  nzFor="email"> 
+                  <span nzTooltipTitle="Controla la visualización de los datos de contacto, nombre e imagen de la empresa." nzTooltipPlacement="right" nz-tooltip>
+                    Mostrar información de la empresa
+                  </span>
+                  <span class="incons-a"  nz-icon nzType="question-circle" nzTheme="outline"></span>
+                  </nz-form-label>
                   <nz-form-control nzErrorTip="Campo requerido">
                     <nz-select
                       [nzSize]="'large'"
@@ -307,7 +315,12 @@
             <div nz-col class="gutter-row" [nzSpan]="8">
               <div class="inner-box">
                 <nz-form-item class="input-content">
-                  <nz-form-label nzFor="email"> Mostrar salario </nz-form-label>
+                  <nz-form-label nzFor="email"> 
+                    <span nzTooltipTitle="Controla la visualización del salario." nzTooltipPlacement="right" nz-tooltip>
+                      Mostrar salario
+                    </span>
+                    <span class="incons-a"  nz-icon nzType="question-circle" nzTheme="outline"></span>  
+                  </nz-form-label>
                   <nz-form-control nzErrorTip="Campo requerido">
                     <nz-select
                       [nzSize]="'large'"
@@ -380,7 +393,7 @@
       <div class="dl">
         <div class="text">
           <p>
-            😅 En esta sección podrás agregar los principales beneficios, actividades y habilidades necesarios qué mostraremos a nuestros prospectos.
+            😅 En esta sección podrás agregar los principales beneficios, actividades y habilidades necesarios qué mostraremos a nuestros candidatos.
           </p>
         </div>
       </div>

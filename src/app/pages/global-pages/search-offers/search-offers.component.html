@@ -206,28 +206,15 @@
           <!-- Sección de promoción -->
           <div class="ad">
 
-            <nz-card  [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-              <nz-card-meta
-                nzTitle="Card title"
-                nzDescription="This is the description"
-                [nzAvatar]="avatarTemplate"
-              ></nz-card-meta>
+            <nz-card  [nzCover]="coverTemplate" >
+              <button type="submit" class="btn-yellow"  nz-button nzType="primary" [nzSize]="'default'" nzBlock nzShape="round">
+                ¡Me interesa!</button>
             </nz-card>
-            <ng-template #avatarTemplate>
-              <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
-            </ng-template>
+          
             <ng-template #coverTemplate>
-              <img alt="example" src="http://localhost:4200/assets/images/kk.png" />
+              <img alt="example" src="http://localhost:4200/assets/images/banner.png" />
             </ng-template>
-            <ng-template #actionSetting>
-              <i nz-icon nzType="setting"></i>
-            </ng-template>
-            <ng-template #actionEdit>
-              <i nz-icon nzType="edit"></i>
-            </ng-template>
-            <ng-template #actionEllipsis>
-              <i nz-icon nzType="ellipsis"></i>
-            </ng-template>
+          
           </div>
 
 

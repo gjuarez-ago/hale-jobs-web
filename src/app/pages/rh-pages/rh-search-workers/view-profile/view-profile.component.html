@@ -315,6 +315,51 @@
                 </div>
               </div>
 
+              <div class="education">
+                <div class="header-exp">
+                  <div class="title">
+                    Habilidades lingüísticas
+                  </div>
+          
+                 
+                </div>
+          
+                <div *ngIf="listLanguajes.length > 0">
+                  <div
+                    class="education-content"
+                    *ngFor="let education of listLanguajes; index as i"
+                  >
+                    <div class="card-edu">
+                      <div class="info">
+                        <div class="title-edu">
+                          <p>
+                            <strong>
+                              {{ education.name }} - {{ education.level }}
+                            </strong>
+                          </p>
+                        </div>
+                        <div class="status">
+                          {{ education.level }}
+                        </div>
+                      </div>
+          
+                      <div class="icon-edit">
+                        <i
+                          nz-icon
+                          nzType="edit"
+                          class="icon-edit-i"
+                          nzTheme="outline"
+                        ></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="card-edus" *ngIf="listLanguajes.length == 0">
+                  <nz-empty></nz-empty>
+                </div>
+              </div>
+
               <!-- </form> -->
             </nz-page-header-content>
           </nz-page-header>

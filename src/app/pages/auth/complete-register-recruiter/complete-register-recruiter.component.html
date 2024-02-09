@@ -134,7 +134,8 @@
                   >
                   <nz-input-group nzPrefixIcon="phone">
                     <input
-                      type="number"
+                      type="text"
+                      nzPrefixIcon="phone"
                       nz-input
                       id="numberPhone"
                       formControlName="numberPhone"
@@ -152,9 +153,7 @@
 
             <div class="col">
               <nz-form-item class="personal-form-control">
-                <nz-form-control
-                  nzErrorTip="Por favor selecciona tu fecha de nacimiento!"
-                >
+                <nz-form-control nzErrorTip="Debes ser mayor de edad!">
                   <nz-form-label
                     >¿Cuál es tu fecha de nacimiento?*</nz-form-label
                   >
@@ -318,9 +317,7 @@
           >
             <div class="dl">
               <div class="text">
-                <p>
-                  😅 Nos gustaría conocer un poco más de tí
-                </p>
+                <p>😅 Nos gustaría conocer un poco más de tí</p>
 
                 <form
                   nz-form

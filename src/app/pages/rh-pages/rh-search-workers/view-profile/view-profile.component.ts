@@ -31,12 +31,12 @@ export class ViewProfileComponent implements OnInit {
   public listSkills : any = [];
   public listSchools : any = [];
   public listCertifications : any = [];
-  
+  public listLanguajes : any = [];
 
 
   public loadingListWorkExperiences = false;
   styleSheet: string = '';
-
+  public isLoadingLanguaje: boolean = false;
   
   constructor(
     private modalService: NzModalService,
@@ -135,6 +135,22 @@ export class ViewProfileComponent implements OnInit {
     )
   }
 
+  public getLanguajes(userId: any) {
+    this.isLoadingLanguaje = true;
+    this.cvService.getLanguajesAll(userId).subscribe(
+      (response: any) => {
+        this.listLanguajes = response;
+        this.isLoadingLanguaje = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar las experiencias de trabajo'
+        );
+        this.isLoadingLanguaje = false;
+      }
+    );
+  }
   
   getCertificationsByUser(id : any) {
     this.isLoadingGeneral = true;
@@ -165,8 +181,8 @@ export class ViewProfileComponent implements OnInit {
       this.getskillsByUser(response.id);
       this.getSchoolsByUser(response.id);
       this.getCertificationsByUser(response.id);
-      this.title.setTitle(response.surnames)
-
+      this.getLanguajes(response.id);
+      this.title.setTitle(response.surnames);
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create("error", 'Ha ocurrido un error al recuperar los estados');

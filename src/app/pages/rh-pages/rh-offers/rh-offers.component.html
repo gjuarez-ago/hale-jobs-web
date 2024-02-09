@@ -132,14 +132,14 @@
           <nz-space>
 
 
-            <button *nzSpaceItem type="button" (click)="cleanFilters()" nz-button
+            <button *nzSpaceItem type="button"  [disabled]="listCompanies.length == 0" (click)="cleanFilters()" nz-button
               class="button-red">
               <i nz-icon nzType="clear"></i>
               Limpiar filtros
             </button>
 
 
-            <button *nzSpaceItem type="button"  nz-button
+            <button *nzSpaceItem type="button" [disabled]="listCompanies.length == 0"   nz-button
             class="button-white">
             <a routerLink="/dashboard/new-offer" routerLinkActive="active" >
               <i nz-icon nzType="plus"></i>
@@ -156,7 +156,7 @@
       <div nz-col class="gutter-row" align="right" [nzSpan]="12">
         <div class="inner-box">
          
-          <button  type="submit" nz-button
+          <button  [disabled]="listCompanies.length == 0" type="submit" nz-button
           class="button-white">
           <i nz-icon nzType="search"></i>
           Realizar Búsqueda

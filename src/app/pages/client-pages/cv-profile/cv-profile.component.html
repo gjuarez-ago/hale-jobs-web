@@ -2,25 +2,42 @@
   <nz-page-header-title> 📑 MI CV</nz-page-header-title>
   <nz-page-header-extra>
     <nz-space>
-      <button class="btn-red" (click)="printPDF()"  nzShape="round" *nzSpaceItem nz-button>
+      <button
+        class="btn-red"
+        (click)="printPDF()"
+        nzShape="round"
+        *nzSpaceItem
+        nz-button
+      >
         <span nz-icon nzType="file-done" nzTheme="outline"></span>
-        Generar CV (PDF)</button>
+        Generar CV (PDF)
+      </button>
     </nz-space>
 
-    <!-- <nz-space>
-      <button class="btn-green" (click)="printPDF()" nzShape="round" *nzSpaceItem nz-button>
+    <nz-space>
+      <button
+        class="btn-green"
+        (click)="printPDF()"
+        nzShape="round"
+        *nzSpaceItem
+        nz-button
+      >
         <span nz-icon nzType="upload" nzTheme="outline"></span>
-        Subir CV </button>
-    </nz-space> -->
+        Subir CV
+      </button>
+    </nz-space>
 
-    <!-- <nz-space>
-      <button class="btn-yellow" (click)="downLoadCV()" nzShape="round" *nzSpaceItem nz-button>
+    <nz-space>
+      <button
+        class="btn-yellow"
+        (click)="downLoadCV()"
+        nzShape="round"
+        *nzSpaceItem
+        nz-button
+      >
         <span nz-icon nzType="download" nzTheme="outline"></span>
-         </button>
-    </nz-space> -->
-
-
-
+      </button>
+    </nz-space>
   </nz-page-header-extra>
   <nz-page-header-content>
     <div class="header-exp">
@@ -245,7 +262,9 @@
               </div>
               <div class="title-date">
                 <span>
-                  <a href="{{ certificate.url }}" target="_blank"> Ver certificado </a>
+                  <a href="{{ certificate.url }}" target="_blank">
+                    Ver certificado
+                  </a>
                 </span>
               </div>
               <div class="we">
@@ -271,11 +290,11 @@
       </div>
     </div>
 
-
     <div class="education">
       <div class="header-exp">
         <div class="title">
-          Habilidades lingüísticas <span class="span-small"> (presiona para editar) </span>
+          Habilidades lingüísticas
+          <span class="span-small"> (presiona para editar) </span>
         </div>
 
         <div class="button-add">
@@ -294,11 +313,13 @@
             <div class="info">
               <div class="title-edu">
                 <p>
-                  <strong> {{ education.name }} - {{education.level}} </strong>
+                  <strong>
+                    {{ education.name }} - {{ education.level }}
+                  </strong>
                 </p>
               </div>
               <div class="status">
-                {{ education.level }} 
+                {{ education.level }}
               </div>
             </div>
 
@@ -318,7 +339,6 @@
         <nz-empty></nz-empty>
       </div>
     </div>
-
 
     <!-- </form> -->
   </nz-page-header-content>
@@ -441,9 +461,7 @@
         class="form-preferences"
       >
         <nz-form-item>
-          <nz-form-control
-            nzErrorTip="Campo requerido- Minímo 8 carácteres"
-          >
+          <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
             <nz-form-label>Título de trabajo</nz-form-label>
             <input
               class="number-phone"
@@ -509,6 +527,7 @@
                 [nzSize]="'default'"
                 id="begins"
                 formControlName="begins"
+                [nzDisabledDate]="disabledDate"
                 [(ngModel)]="workExperienceEdit && workExperienceEdit.begins"
                 nzFormat="MMM-yyy"
               ></nz-date-picker>
@@ -527,6 +546,7 @@
                 nzMode="month"
                 [nzSize]="'default'"
                 nzFormat="MMM-yyy"
+                [nzDisabledDate]="disabledDate"
                 id="ends"
                 formControlName="ends"
                 [(ngModel)]="workExperienceEdit && workExperienceEdit.ends"
@@ -547,7 +567,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Campo requerido - Minímo 50 carácteres">
             <nz-form-label
-              >Cuéntanos  acerca de tus actividades diarias</nz-form-label
+              >Cuéntanos acerca de tus actividades diarias</nz-form-label
             >
             <nz-textarea-count [nzMaxCharacterCount]="200">
               <textarea
@@ -625,9 +645,7 @@
         class="form-preferences"
       >
         <nz-form-item>
-          <nz-form-control
-            nzErrorTip="Campo requerido- Minímo 8 carácteres"
-          >
+          <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
             <nz-form-label>Título de trabajo</nz-form-label>
             <input
               class="number-phone"
@@ -688,6 +706,7 @@
               <nz-date-picker
                 nzMode="month"
                 [nzSize]="'default'"
+                [nzDisabledDate]="disabledDate"
                 id="begins"
                 formControlName="begins"
                 nzFormat="MMM-yyy"
@@ -704,6 +723,7 @@
                 nzMode="month"
                 [nzSize]="'default'"
                 nzFormat="MMM-yyy"
+                [nzDisabledDate]="disabledDate"
                 id="ends"
                 formControlName="ends"
               ></nz-date-picker>
@@ -720,7 +740,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Campo requerido - Minímo 50 carácteres">
             <nz-form-label
-              >Cuéntanos  acerca de tus actividades diarias</nz-form-label
+              >Cuéntanos acerca de tus actividades diarias</nz-form-label
             >
             <nz-textarea-count [nzMaxCharacterCount]="200">
               <textarea
@@ -902,6 +922,7 @@
             <nz-date-picker
               nzMode="month"
               [nzSize]="'default'"
+              [nzDisabledDate]="disabledDate"
               id="begins"
               formControlName="begins"
               nzFormat="MMM-yyy"
@@ -916,6 +937,7 @@
               nzMode="month"
               [nzSize]="'default'"
               nzFormat="MMM-yyy"
+              [nzDisabledDate]="disabledDate"
               id="ends"
               formControlName="ends"
             ></nz-date-picker>
@@ -1034,6 +1056,7 @@
               nzMode="month"
               [(ngModel)]="schoolEdit && schoolEdit.begins"
               [nzSize]="'default'"
+              [nzDisabledDate]="disabledDate"
               id="begins"
               formControlName="begins"
               nzFormat="MMM-yyy"
@@ -1052,6 +1075,7 @@
               [(ngModel)]="schoolEdit && schoolEdit.ends"
               [nzSize]="'default'"
               nzFormat="MMM-yyy"
+              [nzDisabledDate]="disabledDate"
               id="ends"
               formControlName="ends"
             ></nz-date-picker>
@@ -1194,11 +1218,8 @@
         </button>
       </nz-space>
     </div>
-
   </ng-template>
 </nz-drawer>
-
-
 
 <nz-drawer
   [nzVisible]="visibleEditCertificate"
@@ -1302,8 +1323,6 @@
   </ng-template>
 </nz-drawer>
 
-
-
 <!-- Modal LANGUAJES -->
 
 <nz-drawer
@@ -1321,18 +1340,18 @@
         <nz-form-control nzErrorTip="Campo requerido">
           <nz-form-label>Selecciona un idioma</nz-form-label>
           <nz-select
-          nzShowSearch nzAllowClear 
-          nzPlaceHolder="Selecciona una opción"
-          id="skills"
-          formControlName="name"
-        >
-          <nz-option
-            *ngFor="let skill of languajesSelect"
-            [nzLabel]="skill.name"
-            [nzValue]="skill.name"
-          ></nz-option
-        ></nz-select>
-
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            id="skills"
+            formControlName="name"
+          >
+            <nz-option
+              *ngFor="let skill of languajesSelect"
+              [nzLabel]="skill.name"
+              [nzValue]="skill.name"
+            ></nz-option
+          ></nz-select>
         </nz-form-control>
       </nz-form-item>
 
@@ -1340,26 +1359,24 @@
         <nz-form-control nzErrorTip="Campo requerido">
           <nz-form-label>Nivel de dominio</nz-form-label>
           <nz-select
-          nzShowSearch nzAllowClear 
-          nzPlaceHolder="Selecciona una opción"
-          id="skills"
-          formControlName="level"
-        >
-          <nz-option
-            *ngFor="let skill of levels"
-            [nzLabel]="skill.name"
-            [nzValue]="skill.name"
-          ></nz-option
-        ></nz-select>
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            id="skills"
+            formControlName="level"
+          >
+            <nz-option
+              *ngFor="let skill of levels"
+              [nzLabel]="skill.name"
+              [nzValue]="skill.name"
+            ></nz-option
+          ></nz-select>
         </nz-form-control>
       </nz-form-item>
-
-  
     </form>
   </ng-container>
 
   <ng-template #footerLanguaje>
-  
     <div class="flex-xap">
       <nz-space class="pd-1">
         <button
@@ -1385,7 +1402,6 @@
   </ng-template>
 </nz-drawer>
 
-
 <nz-drawer
   [nzVisible]="visibleEditLanguaje"
   nzPlacement="right"
@@ -1401,19 +1417,19 @@
         <nz-form-control nzErrorTip="Campo requerido">
           <nz-form-label>Selecciona un idioma</nz-form-label>
           <nz-select
-          [ngModel]="languajeEdit && languajeEdit.name"
-          nzShowSearch nzAllowClear 
-          nzPlaceHolder="Selecciona una opción"
-          id="skills"
-          formControlName="name"
-        >
-          <nz-option
-            *ngFor="let skill of languajesSelect"
-            [nzLabel]="skill.name"
-            [nzValue]="skill.name"
-          ></nz-option
-        ></nz-select>
-
+            [ngModel]="languajeEdit && languajeEdit.name"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            id="skills"
+            formControlName="name"
+          >
+            <nz-option
+              *ngFor="let skill of languajesSelect"
+              [nzLabel]="skill.name"
+              [nzValue]="skill.name"
+            ></nz-option
+          ></nz-select>
         </nz-form-control>
       </nz-form-item>
 
@@ -1421,27 +1437,25 @@
         <nz-form-control nzErrorTip="Campo requerido">
           <nz-form-label>Nivel de dominio</nz-form-label>
           <nz-select
-          [ngModel]="languajeEdit && languajeEdit.level"
-          nzShowSearch nzAllowClear 
-          nzPlaceHolder="Selecciona una opción"
-          id="skills"
-          formControlName="level"
-        >
-          <nz-option
-            *ngFor="let skill of levels"
-            [nzLabel]="skill.name"
-            [nzValue]="skill.name"
-          ></nz-option
-        ></nz-select>
+            [ngModel]="languajeEdit && languajeEdit.level"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            id="skills"
+            formControlName="level"
+          >
+            <nz-option
+              *ngFor="let skill of levels"
+              [nzLabel]="skill.name"
+              [nzValue]="skill.name"
+            ></nz-option
+          ></nz-select>
         </nz-form-control>
       </nz-form-item>
-
-  
     </form>
   </ng-container>
 
   <ng-template #footerLanguaje1>
-  
     <div class="flex-xap">
       <nz-space class="pd-1">
         <button
@@ -1462,15 +1476,9 @@
         >
           Guardar
         </button>
-
-
-    
-
-
       </nz-space>
 
-      <div           
-      nz-col class="gutter-row" [nzSpan]="4">
+      <div nz-col class="gutter-row" [nzSpan]="4">
         <button
           nz-button
           nzType="primary"
@@ -1481,16 +1489,11 @@
           <span nz-icon nzType="delete"></span>
         </button>
       </div>
-
     </div>
   </ng-template>
 </nz-drawer>
 
-
 <!-- alalslslsls -->
-
-
-
 
 <div id="pdf-2">
   <div class="body">
@@ -1512,15 +1515,20 @@
             <i nz-icon nzType="trophy" nzTheme="outline"></i>
             {{ userInformationOriginal && userInformationOriginal.jobTitle }} -
             <i nz-icon nzType="phone" nzTheme="outline"></i>
-            {{ userInformationOriginal && userInformationOriginal.numberPhone }} -
+            {{ userInformationOriginal && userInformationOriginal.numberPhone }}
+            -
             <i nz-icon nzType="mail" nzTheme="outline"></i>
             {{ userInformationOriginal && userInformationOriginal.username }}
           </h4>
           <h4 class="quickFade delayThree">
             <i nz-icon nzType="home" nzTheme="outline"></i>
             {{ userInformationOriginal && userInformationOriginal.city.valor }},
-            {{ userInformationOriginal && userInformationOriginal.state.valor }} -
-            {{ userInformationOriginal && userInformationOriginal.modalidadTrabajo.valor }}
+            {{ userInformationOriginal && userInformationOriginal.state.valor }}
+            -
+            {{
+              userInformationOriginal &&
+                userInformationOriginal.modalidadTrabajo.valor
+            }}
           </h4>
         </div>
 
@@ -1538,7 +1546,6 @@
       </div>
 
       <div id="mainArea" class="quickFade delayFive">
-        
         <section>
           <article>
             <div class="sectionTitle">
@@ -1547,13 +1554,16 @@
 
             <div class="sectionContent">
               <p class="p-s">
-                {{ userInformationOriginal && userInformationOriginal.salary.valor }}
+                {{
+                  userInformationOriginal &&
+                    userInformationOriginal.salary.valor
+                }}
               </p>
             </div>
           </article>
           <div class="clear"></div>
         </section>
-        
+
         <section>
           <article>
             <div class="sectionTitle">
@@ -1630,8 +1640,6 @@
                     : (education.ends | date : "MMM,y")
                 }}
               </p>
-
-             
             </article>
           </div>
           <div class="clear"></div>
@@ -1645,27 +1653,21 @@
           <div class="sectionContent">
             <article *ngFor="let certificate of listCertifications; index as i">
               <h2>
-                {{certificate.name}}
+                {{ certificate.name }}
               </h2>
               <a href="{{ certificate.url }}" target="_blank">
-              <p class="subDetails">
-                  Ver certificado
-              </p>
+                <p class="subDetails">Ver certificado</p>
               </a>
-              <p class="p-s">{{
-                certificate.description}}
-              </p>
+              <p class="p-s">{{ certificate.description }}</p>
             </article>
           </div>
           <div class="clear"></div>
         </section>
-
       </div>
     </div>
 
     <!-- <div class="logo">
       <a href="">  <img src="assets/images/logo-b.png" alt="" > </a>
     </div> -->
-
   </div>
 </div>

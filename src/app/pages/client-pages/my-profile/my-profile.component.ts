@@ -10,15 +10,16 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CVUserService } from 'src/app/services/cv-user.service';
 import { GenericService } from 'src/app/services/generic.service';
 
+import { minimumAgeValidator } from 'src/app/utils/custom-form-validators';
+
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.css']
+  styleUrls: ['./my-profile.component.css'],
 })
 export class MyProfileComponent implements OnInit {
- 
   public user: any;
-  public userId : any;
+  public userId: any;
   public isLoadingGeneral = false;
   public subcriptions: Subscription[] = [];
 
@@ -26,47 +27,49 @@ export class MyProfileComponent implements OnInit {
   public switchValue = false;
   public userForm!: FormGroup;
 
+  public listStates: any = [];
+  public listCities: any = [];
+  public listModwork: any = [];
 
-  public listStates : any = [];
-  public listCities : any = [];
-  public listModwork : any = [];
-
-  public userInformation : any;
-
+  public userInformation: any;
 
   public previewVisible: boolean = false;
   public previewImage!: string | ArrayBuffer | null;
   public imgLoad!: File;
   userInformationOriginal: any;
 
-
   constructor(
-    private cvService : CVUserService,
-    private genericService : GenericService,
+    private cvService: CVUserService,
+    private genericService: GenericService,
     private authenticationService: AuthService,
     private fb: FormBuilder,
     private message: NzMessageService,
     private router: Router,
-    private ngxSpinner: NgxSpinnerService 
-  ) { 
-
+    private ngxSpinner: NgxSpinnerService
+  ) {
     this.userForm = this.fb.group({
       city: [null, [Validators.required]],
       state: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.maxLength(50)]],
       gender: [null, [Validators.required]],
       modalidadTrabajo: [null, [Validators.required]],
-      name: [null, [Validators.required,  Validators.maxLength(50)]],      
-      numberPhone: [null, [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
+      name: [null, [Validators.required, Validators.maxLength(50)]],
+      numberPhone: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       relocated: ['', [Validators.required]],
       apellidoPaterno: [null, [Validators.required, Validators.maxLength(50)]],
       apellidoMaterno: [null, [Validators.required, Validators.maxLength(50)]],
-      dateOfBirth: [null, [Validators.required]],
+      dateOfBirth: [null, [Validators.required, minimumAgeValidator(18)]],
     });
   }
 
   ngOnInit(): void {
-
     if (this.authenticationService.isUserLoggedIn()) {
       this.user = this.authenticationService.getUserFromLocalCache();
       this.userId = this.user.id;
@@ -75,17 +78,15 @@ export class MyProfileComponent implements OnInit {
       this.getCurrentUser();
       this.getStates();
       this.getModWorks();
-
     } else {
-      this.router.navigateByUrl("/auth/login");
+      this.router.navigateByUrl('/auth/login');
     }
-
   }
 
   public onLogOut(): void {
     this.authenticationService.logOut();
     this.router.navigate(['auth/login']);
-    this.createMessage("success", "Has cerrado sesión exitosamente 😀");
+    this.createMessage('success', 'Has cerrado sesión exitosamente 😀');
   }
 
   // Servicios API
@@ -93,77 +94,88 @@ export class MyProfileComponent implements OnInit {
     this.isLoadingGeneral = true;
     this.authenticationService.getCurrentUser(this.user?.username).subscribe(
       (response: any) => {
-       this.userInformation = response;
-       this.previewImage = response.profileImageUrl == null ? 'https://thumbs.dreamstime.com/z/no-user-profile-picture-24185395.jpg' : response.profileImageUrl;
-        
-        this.isLoadingGeneral = false;       
+        this.userInformation = response;
+        this.previewImage =
+          response.profileImageUrl == null
+            ? 'https://thumbs.dreamstime.com/z/no-user-profile-picture-24185395.jpg'
+            : response.profileImageUrl;
+
+        this.isLoadingGeneral = false;
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar los estados'
+        );
         this.isLoadingGeneral = false;
       }
-    )
+    );
   }
 
   getUpdateUser() {
     this.isLoadingGeneral = true;
     this.authenticationService.getCurrentUser(this.user?.username).subscribe(
       (response: any) => {
-       this.userInformationOriginal = response;    
-       this.userInformationOriginal.city.id = response.city.id;
-    
-        this.isLoadingGeneral = false;       
+        this.userInformationOriginal = response;
+        this.userInformationOriginal.city.id = response.city.id;
+
+        this.isLoadingGeneral = false;
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar los estados'
+        );
         this.isLoadingGeneral = false;
       }
-    )
+    );
   }
-
 
   getStates() {
     this.isLoadingGeneral = true;
     this.genericService.getAllStates().subscribe(
       (response: any) => {
-      
         this.listStates = response.map((prop: any, key: any) => {
           return {
             ...prop,
             key: key + 1,
           };
-        }); 
-        this.isLoadingGeneral = false;       
+        });
+        this.isLoadingGeneral = false;
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar los estados'
+        );
         this.isLoadingGeneral = false;
       }
-    )
+    );
   }
 
   getModWorks() {
     this.isLoadingGeneral = true;
     this.genericService.getAllTypeOfJobs().subscribe(
       (response: any) => {
-      
         this.listModwork = response.map((prop: any, key: any) => {
           return {
             ...prop,
             key: key + 1,
           };
-        }); 
-        this.isLoadingGeneral = false;       
+        });
+        this.isLoadingGeneral = false;
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar los estados'
+        );
         this.isLoadingGeneral = false;
       }
-    )
+    );
   }
 
-
-  getCities(p : any) {
+  getCities(p: any) {
     this.isLoadingGeneral = true;
     this.genericService.getAllCities(p).subscribe(
       (response: any) => {
@@ -172,20 +184,21 @@ export class MyProfileComponent implements OnInit {
             ...prop,
             key: key + 1,
           };
-        });        
+        });
         this.isLoadingGeneral = false;
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
+        this.message.create(
+          'error',
+          'Ha ocurrido un error al recuperar los estados'
+        );
         this.isLoadingGeneral = false;
       }
-    )
+    );
   }
 
-
-   // Lógica de negocio
-   onSubmitForm() {
-
+  // Lógica de negocio
+  onSubmitForm() {
     for (const i in this.userForm.controls) {
       if (this.userForm.controls.hasOwnProperty(i)) {
         this.userForm.controls[i].markAsDirty();
@@ -202,25 +215,31 @@ export class MyProfileComponent implements OnInit {
     let data = this.userForm.value;
 
     this.isLoadingGeneral = true;
-    this.cvService.updateCVPrincipal({...data, username: this.user?.username}).subscribe(
-      (response: any) => {        
-        this.getCurrentUser();
-        this.message.create("success", 'Información actualizada correctamente!');
-        this.isLoadingGeneral = false;
-        this.close();
-        this.ngxSpinner.hide();
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido un error al recuperar los estados');
-        this.ngxSpinner.hide();
-        this.isLoadingGeneral = false;
-      }
-    )
-   }
+    this.cvService
+      .updateCVPrincipal({ ...data, username: this.user?.username })
+      .subscribe(
+        (response: any) => {
+          this.getCurrentUser();
+          this.message.create(
+            'success',
+            'Información actualizada correctamente!'
+          );
+          this.isLoadingGeneral = false;
+          this.close();
+          this.ngxSpinner.hide();
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.message.create(
+            'error',
+            'Ha ocurrido un error al recuperar los estados'
+          );
+          this.ngxSpinner.hide();
+          this.isLoadingGeneral = false;
+        }
+      );
+  }
 
-
-   getGender(value :any) {
-    
+  getGender(value: any) {
     let arra = [
       { value: 'NE', id: 'S/C' },
       { value: 'Mujer', id: 'M' },
@@ -228,30 +247,30 @@ export class MyProfileComponent implements OnInit {
     ];
     let index: any = arra.find((e: any) => e.id == value);
     return index.value;
-   }
+  }
 
-   
-   
-changePublicProfile(value : any) {
+  changePublicProfile(value: any) {
+    this.isLoadingGeneral = true;
+    this.ngxSpinner.show();
 
-  this.isLoadingGeneral = true;
-  this.ngxSpinner.show();
-
-  this.cvService.changePublicProfile({value: value ,username: this.user?.username}).subscribe(
-    (response: any) => {        
-      this.isLoadingGeneral = false;
-      this.close();
-      this.ngxSpinner.hide();
-    },
-    (errorResponse: HttpErrorResponse) => {
-      this.message.create("error", 'Ha ocurrido al cambiar la visibilidad de tu perfil');
-      this.ngxSpinner.hide();
-      this.isLoadingGeneral = false;
-    }
-  )
-
-}
-
+    this.cvService
+      .changePublicProfile({ value: value, username: this.user?.username })
+      .subscribe(
+        (response: any) => {
+          this.isLoadingGeneral = false;
+          this.close();
+          this.ngxSpinner.hide();
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.message.create(
+            'error',
+            'Ha ocurrido al cambiar la visibilidad de tu perfil'
+          );
+          this.ngxSpinner.hide();
+          this.isLoadingGeneral = false;
+        }
+      );
+  }
 
   public open(): void {
     this.visible = true;
@@ -266,9 +285,8 @@ changePublicProfile(value : any) {
     this.message.create(type, message);
   }
 
-  
   //VALIDACIÓN DE INPUT DE TELEFONO PARA NO ACEPTAR LETRAS
-  validateFormat(event:any) {
+  validateFormat(event: any) {
     let key;
     if (event.type === 'paste') {
       key = event.clipboardData.getData('text/plain');
@@ -277,34 +295,31 @@ changePublicProfile(value : any) {
       key = String.fromCharCode(key);
     }
     const regex = /[0-9]|\./;
-     if (!regex.test(key)) {
+    if (!regex.test(key)) {
       event.returnValue = false;
-       if (event.preventDefault) {
+      if (event.preventDefault) {
         event.preventDefault();
-       }
-     }
-  }
-
-  
-  provinceChange(value:any): void {
-    if(value) {
-      this.getCities(value);
-    }else {
-      this.listCities = [];
-      if(this.userInformation) {
-        this.userInformation.city.id = undefined;
       }
-
     }
   }
 
+  provinceChange(value: any): void {
+    if (value) {
+      this.getCities(value);
+    } else {
+      this.listCities = [];
+      if (this.userInformation) {
+        this.userInformation.city.id = undefined;
+      }
+    }
+  }
 
-  async handleChange(event:any){
+  async handleChange(event: any) {
     this.previewVisible = false;
-    this.previewImage = "";
+    this.previewImage = '';
 
-    const file:File = event.target.files[0];
-    const isImg = file.type === 'image/png' || file.type === 'image/jpeg'
+    const file: File = event.target.files[0];
+    const isImg = file.type === 'image/png' || file.type === 'image/jpeg';
 
     if (!isImg) {
       this.message.error('Disculpa, Solo se aceptan Imagenes Jpg/png ');
@@ -314,29 +329,27 @@ changePublicProfile(value : any) {
 
     this.imgLoad = event.target.files[0];
     const img = event.target.files[0];
-    this.previewImage  = await getBase64(this.imgLoad);
+    this.previewImage = await getBase64(this.imgLoad);
     this.previewVisible = true;
 
     this.cvService.updateImage(this.imgLoad, this.user.username).subscribe(
-      (response: any) => {        
+      (response: any) => {
         this.isLoadingGeneral = false;
         this.ngxSpinner.hide();
       },
       (errorResponse: HttpErrorResponse) => {
-        this.message.create("error", 'Ha ocurrido al cambiar la imagen de perfil');
+        this.message.create(
+          'error',
+          'Ha ocurrido al cambiar la imagen de perfil'
+        );
         this.ngxSpinner.hide();
         this.isLoadingGeneral = false;
       }
-    )
-    
-
-
-
-
+    );
   }
 
   redirect(data: any) {
-    if(data.profileCompleted) {
+    if (data.profileCompleted) {
       switch (data.role) {
         case 'ROLE_USER':
           this.router.navigateByUrl('/profile/cv');
@@ -366,28 +379,14 @@ changePublicProfile(value : any) {
           // alert("El usuario no tiene un rol en estos momentos")
           break;
       }
-
     }
-
-
-
- 
   }
-
-
-
-
-  
-
-
-
 }
 
-
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
-new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });

@@ -13,6 +13,8 @@ import { GenericService } from 'src/app/services/generic.service';
 import { HistoryService } from 'src/app/services/history.service';
 import { OfferService } from 'src/app/services/offer.service';
 
+import { minimumAgeValidator } from 'src/app/utils/custom-form-validators';
+
 @Component({
   selector: 'side-menu-rh',
   templateUrl: './side-menu-rh.component.html',
@@ -74,6 +76,12 @@ export class SideMenuRh implements OnInit {
           Validators.maxLength(250),
           Validators.minLength(10),
         ],
+      ], 
+      offer: [
+        '',
+        [
+          Validators.required
+        ],
       ],
     });
 
@@ -83,7 +91,7 @@ export class SideMenuRh implements OnInit {
       areasSpecialidad: [[], [Validators.required]],
       emailContact: ['', [Validators.required, Validators.email]],
       fatherLastName: ['', [Validators.required]],
-      fechaNacimiento: ['', [Validators.required]],
+      fechaNacimiento: ['', [Validators.required, minimumAgeValidator(18)]],
       gender: ['', [Validators.required]],
       motherLastName: ['', [Validators.required]],
       jobTitle: ['', [Validators.required]],
@@ -248,7 +256,9 @@ export class SideMenuRh implements OnInit {
           this.isLoading = false;
           this.ngxSpinner.hide();
 
-          this.listADNR = this.listNotications.filter((e : any) => e.status == 0).length;
+          this.listADNR = this.listNotications.filter(
+            (e: any) => e.status == 0
+          ).length;
           this.isLoadingGeneral = false;
         },
         (errorResponse: HttpErrorResponse) => {
@@ -362,7 +372,6 @@ export class SideMenuRh implements OnInit {
     console.log(item);
     this.visiblePsStatusOffer = true;
     this.postulateP = item;
-
   }
 
   public closeModalMessagePostulate() {
@@ -390,9 +399,9 @@ export class SideMenuRh implements OnInit {
       this.offerService
         .messageUSerPostulate({
           ...form,
-          offerId: this.postulateP.offer.id,
+          offerId: form.offer,
           status: 0,
-          userId: this.postulateP.user.id,
+          userId: this.postulateP.id,
         })
         .subscribe(
           (response: any) => {
@@ -400,7 +409,7 @@ export class SideMenuRh implements OnInit {
             this.ngxSpinner.hide();
             this.closeModalMessagePostulate();
             this.createMessage('success', 'Mensaje enviado :)');
-
+            this.psResponseEmailForm.reset();
             this.isLoadingGeneral = false;
           },
           (errorResponse: HttpErrorResponse) => {

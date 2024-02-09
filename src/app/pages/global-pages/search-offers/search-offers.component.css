@@ -240,6 +240,14 @@ p {
    margin: 10px 0px;
 }
 
+.btn-yellow {
+  background-color: rgb(240, 198, 13) !important;
+  border-color: white !important;
+  color: white !important;
+}
+
+
+
 .company-and-place  {
   margin: 0px 0px;
   padding: 0px;

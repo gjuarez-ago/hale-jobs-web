@@ -20,7 +20,9 @@ import { Color, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Sing
   styleUrls: ['./rh-dashboard.component.css']
 })
 export class RhDashboardComponent implements OnInit {
-
+  userId: any;
+  user: any;
+  
   constructor(
     private companyService: CompanyService,
     private genericService: GenericService,
@@ -36,6 +38,16 @@ export class RhDashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.user = this.authenticationService.getUserFromLocalCache();
+      this.userId = this.user.id;
+    } 
+    
+    this.ngxSpinner.show();
+
+    setTimeout(() => {
+      this.ngxSpinner.hide();
+    }, 2000);
     
 
 

@@ -83,11 +83,17 @@ img {
   font-weight: 700;
 }
 
+.sls {
+  width: 100%;
+  overflow-wrap: break-word !important;
+}
+
 .company-and-placea{
   margin: 5px 0px;
   display: flex;
   align-items: flex-start;
   font-weight: 500;
+  overflow-wrap: break-word !important;
 }
 
 .tags {

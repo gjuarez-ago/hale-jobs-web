@@ -269,7 +269,10 @@
               <div class="inner-box">
                 <nz-form-item class="input-content">
                   <nz-form-label nzFor="email">
-                    Mostrar información de la empresa
+                    <span nzTooltipTitle="Controla la visualización de los datos de contacto, nombre e imagen de la empresa." nzTooltipPlacement="right" nz-tooltip>
+                      Mostrar información de la empresa
+                    </span>
+                    <span class="incons-a"  nz-icon nzType="question-circle" nzTheme="outline"></span>
                   </nz-form-label>
                   <nz-form-control nzErrorTip="Campo requerido">
                     <nz-select
@@ -298,7 +301,12 @@
             <div nz-col class="gutter-row" [nzSpan]="8">
               <div class="inner-box">
                 <nz-form-item class="input-content">
-                  <nz-form-label nzFor="email"> Mostrar salario </nz-form-label>
+                  <nz-form-label nzFor="email"> 
+                    <span nzTooltipTitle="Controla la visualización del salario." nzTooltipPlacement="right" nz-tooltip>
+                      Mostrar salario
+                    </span>
+                    <span class="incons-a"  nz-icon nzType="question-circle" nzTheme="outline"></span>    
+                  </nz-form-label>
                   <nz-form-control nzErrorTip="Campo requerido">
                     <nz-select
                       [nzSize]="'large'"

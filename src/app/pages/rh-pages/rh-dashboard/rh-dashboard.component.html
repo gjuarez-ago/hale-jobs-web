@@ -3,7 +3,7 @@
 
   <div class="container-welcome">
   
-    <h2> <strong class="welcome">  Bienvenido  </strong> <span> Gabriel Juarez 😃 </span> </h2>
+    <h2> <strong class="welcome">  Bienvenido  </strong> <span> {{ user && user.names}} 😃 </span> </h2>
 
    <div class="contact">
     <nz-tag nzColor="#55acee">
@@ -32,19 +32,19 @@
           <h2> 
             <!-- <i nz-icon nzType="alert" nzTheme="twotone"></i> -->
             <i nz-icon nzType="pie-chart" nzTheme="twotone"></i>
-               400 Prestamos registrados  </h2>
+               400 Ofertas  </h2>
                <p> Actualizado: 2021/03/20  </p>       
         </div>
         <div class="card-s">                    
           <h2> 
             <i nz-icon nzType="heart" nzTheme="twotone" [nzTwotoneColor]="'#a31600'"  ></i>
-               3,020 Favoritos </h2>
+               3,020 Candidatos </h2>
                <p> Actualizado: 2021/03/20  </p>
         </div>
            <div class="card-s">                    
           <h2> 
             <i nz-icon nzType="alert" nzTheme="twotone"></i>
-               10,020 Reportes </h2>
+               10,020 Quejas </h2>
                <p> Actualizado: 2021/03/20  </p>
         </div>          
   </div>

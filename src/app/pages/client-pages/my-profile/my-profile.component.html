@@ -1,16 +1,25 @@
 <nav>
   <div class="wrapper">
-    <div class="logo"> <a routerLink="/home"> <img class="logo-img" src="assets/images/hale-l.png" alt="ss">  </a></div>
+    <div class="logo">
+      <a routerLink="/home">
+        <img class="logo-img" src="assets/images/hale-l.png" alt="ss" />
+      </a>
+    </div>
 
-    <input type="radio" name="slider" id="menu-btn">
-    <input type="radio" name="slider" id="close-btn">
+    <input type="radio" name="slider" id="menu-btn" />
+    <input type="radio" name="slider" id="close-btn" />
 
     <ul class="nav-links">
-      <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+      <label for="close-btn" class="btn close-btn"
+        ><i class="fas fa-times"></i
+      ></label>
       <!-- <li><a href="#">Home</a></li> -->
-      <li><a class="btn-gray" routerLink="/companies">                
-         <!-- <i nz-icon nzType="search" nzTheme="outline" ></i> -->
-         Empresas</a></li>
+      <li>
+        <a class="btn-gray" routerLink="/companies">
+          <!-- <i nz-icon nzType="search" nzTheme="outline" ></i> -->
+          Empresas</a
+        >
+      </li>
       <!-- <li>
         <a href="#" class="desktop-item">Dudas</a>
         <input type="checkbox" id="showDrop">
@@ -21,23 +30,28 @@
           <li><a href="#">T&C</a></li>
         </ul>
       </li> -->
-  
-      <li><a class="btn-login" routerLink="/search">         
-                <!-- <i nz-icon nzType="search" nzTheme="outline" ></i> -->
-        Buscar ofertas</a></li>
-        <li><a class="btn-profile" (click)="onLogOut()">
+
+      <li>
+        <a class="btn-login" routerLink="/search">
+          <!-- <i nz-icon nzType="search" nzTheme="outline" ></i> -->
+          Buscar ofertas</a
+        >
+      </li>
+      <li>
+        <a class="btn-profile" (click)="onLogOut()">
           <i nz-icon nzType="logout" nzTheme="outline"></i>
-        </a></li>
-      
+        </a>
+      </li>
     </ul>
 
-    <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    <label for="menu-btn" class="btn menu-btn"
+      ><i class="fas fa-bars"></i
+    ></label>
   </div>
 
   <div class="ad">
-
     <div class="flex">
-        <!-- <img
+      <!-- <img
       src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg"
       alt="colombia" width="50px" /> -->
       <!-- <div class="element">
@@ -53,63 +67,53 @@
         </p>
       </div> -->
     </div>
-    
   </div>
-
-
-
 </nav>
 
-
 <div class="body-content">
-
   <div class="content-profile">
-  
-  
-    <div class="img-user-content" >
-
+    <div class="img-user-content">
       <div class="card card-user-edit box">
         <div class="cover-bg"></div>
-        <br>
+        <br />
         <div class="content">
           <label for="file">
-        
             <div class="content-img">
-            <img
-            [src]="previewImage"
-            alt="" />
-            <div class="centered">
-              <i nz-icon nzType="camera" nzTheme="outline"></i>
+              <img [src]="previewImage" alt="" />
+              <div class="centered">
+                <i nz-icon nzType="camera" nzTheme="outline"></i>
+              </div>
             </div>
+          </label>
 
-            
-          </div>
-        </label>
-
-        <input id="file"
-        class="absolute w-full h-full"
-        ref="file"
-        type="file"
-        (change)="handleChange($event)"
-        accept="image/*" style=" visibility: hidden;"/>
-        
+          <input
+            id="file"
+            class="absolute w-full h-full"
+            ref="file"
+            type="file"
+            (change)="handleChange($event)"
+            accept="image/*"
+            style="visibility: hidden"
+          />
         </div>
 
-        <strong>{{userInformation && userInformation.surnames}}</strong>
-        <p>{{userInformation && userInformation.modalidadTrabajo.valor}}</p>
+        <strong>{{ userInformation && userInformation.surnames }}</strong>
+        <p>{{ userInformation && userInformation.modalidadTrabajo.valor }}</p>
 
-     
         <!-- <div class="btn">
           <a href="#"><i class="fa fa-clipboard" aria-hidden="true"></i>Assign</a>
           <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View</a>
         </div> -->
 
-        <div class="user-bio"  >
+        <div class="user-bio">
           <div class="tags">
             <nz-space>
               <nz-tag class="ap" *nzSpaceItem nzColor="#55acee">
                 <i nz-icon nzType="aim"></i>
-                <span>{{userInformation && userInformation.city.valor}}, {{userInformation && userInformation.state.valor}}</span>
+                <span
+                  >{{ userInformation && userInformation.city.valor }},
+                  {{ userInformation && userInformation.state.valor }}</span
+                >
               </nz-tag>
               <!-- <nz-tag class="ap" *nzSpaceItem nzColor="#093b85">
                 <i nz-icon nzType="team"></i>
@@ -119,180 +123,203 @@
               <nz-tag class="ap ap-edit" *nzSpaceItem (click)="open()">
                 <i nz-icon nzType="edit"></i>
               </nz-tag>
-
-              
-
             </nz-space>
           </div>
 
-          <br>
-          <p> <i>
-              "No tienes que ser grande para empezar. Pero tienes que empezar para poder ser grande"
+          <br />
+          <p>
+            <i>
+              "No tienes que ser grande para empezar. Pero tienes que empezar
+              para poder ser grande"
             </i>
           </p>
 
           <div class="social">
             <div class="social-icons">
-              <a href="" class="fa">
-                Perfil publico
-              </a>
-
+              <a href="" class="fa"> Perfil publico </a>
             </div>
 
             <div class="message">
               <a href="" class="fa">
-                <nz-switch [(ngModel)]="userInformation && userInformation.publicProfile" (ngModelChange)="changePublicProfile($event)"></nz-switch>
+                <nz-switch
+                  [(ngModel)]="userInformation && userInformation.publicProfile"
+                  (ngModelChange)="changePublicProfile($event)"
+                ></nz-switch>
               </a>
             </div>
           </div>
         </div>
-
-
       </div>
-      
 
       <div class="more-information-user card">
-     
-
         <div class="buttons-verification">
-        
-          <button class="button-v" role="button" routerLink="/profile/notifications"> 
+          <button
+            class="button-v"
+            role="button"
+            routerLink="/profile/notifications"
+          >
             <nz-space>
-              <i nz-icon nzType="notification" nzTheme="outline" *nzSpaceItem></i>
-              <div class="" *nzSpaceItem>Mis notificaciones </div>
+              <i
+                nz-icon
+                nzType="notification"
+                nzTheme="outline"
+                *nzSpaceItem
+              ></i>
+              <div class="" *nzSpaceItem>Mis notificaciones</div>
             </nz-space>
-             </button>
-          <button class="button-v" role="button" routerLink="/profile/settings-profile"> 
+          </button>
+          <button
+            class="button-v"
+            role="button"
+            routerLink="/profile/settings-profile"
+          >
             <nz-space>
               <i nz-icon nzType="setting" nzTheme="outline" *nzSpaceItem></i>
-              <div class="" *nzSpaceItem>Ajustes </div>
+              <div class="" *nzSpaceItem>Ajustes</div>
             </nz-space>
-  
           </button>
         </div>
       </div>
-
     </div>
 
-
     <div class="content-information">
-
       <div class="content-information-header card">
-
         <div class="buttons-content">
-
-
           <div class="button-element">
-
-
             <button class="button-22" role="button" routerLink="/profile/cv">
               <nz-space>
                 <i nz-icon nzType="idcard" nzTheme="outline" *nzSpaceItem></i>
-                <div class="" *nzSpaceItem> CV </div>
+                <div class="" *nzSpaceItem>CV</div>
               </nz-space>
             </button>
           </div>
 
-
           <div class="button-element">
-            <button class="button-22" role="button" routerLink="/profile/my-postulations">
+            <button
+              class="button-22"
+              role="button"
+              routerLink="/profile/my-postulations"
+            >
               <nz-space>
                 <i nz-icon nzType="audit" nzTheme="outline" *nzSpaceItem></i>
-                <div class="" *nzSpaceItem>Postulaciones </div>
+                <div class="" *nzSpaceItem>Postulaciones</div>
               </nz-space>
-
             </button>
           </div>
-
 
           <div class="button-element">
-            <button class="button-22" role="button" routerLink="/profile/my-history">
+            <button
+              class="button-22"
+              role="button"
+              routerLink="/profile/my-history"
+            >
               <nz-space>
-                <i nz-icon nzType="apartment" nzTheme="outline" *nzSpaceItem></i>
-                <div class="" *nzSpaceItem>Historial </div>
+                <i
+                  nz-icon
+                  nzType="apartment"
+                  nzTheme="outline"
+                  *nzSpaceItem
+                ></i>
+                <div class="" *nzSpaceItem>Historial</div>
               </nz-space>
             </button>
-
-
           </div>
-
-
-
-
         </div>
-
       </div>
 
-
       <div class="content-information-body card">
-
         <router-outlet></router-outlet>
-
       </div>
 
       <div class="content-information-footer card">
-
-        <p> Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el
-          texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se
-          dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un
-          libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en
-          documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación
-          de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de
-          autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.F </p>
-
+        <p>
+          Lorem Ipsum es simplemente el texto de relleno de las imprentas y
+          archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de
+          las industrias desde el año 1500, cuando un impresor (N. del T.
+          persona que se dedica a la imprenta) desconocido usó una galería de
+          textos y los mezcló de tal manera que logró hacer un libro de textos
+          especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como
+          texto de relleno en documentos electrónicos, quedando esencialmente
+          igual al original. Fue popularizado en los 60s con la creación de las
+          hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más
+          recientemente con software de autoedición, como por ejemplo Aldus
+          PageMaker, el cual incluye versiones de Lorem Ipsum.F
+        </p>
       </div>
-
-
-
-
-
-
     </div>
-
-
   </div>
-
-
-
 </div>
-
 
 <!-- View Profile -->
 
- <nz-drawer
-[nzClosable]="false"
-[nzVisible]="visible"
-nzPlacement="right"
-[nzWidth]="500"
-nzTitle="Mi información principal"
-(nzOnClose)="close()"
-[nzFooter]="footerTpl"
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="right"
+  [nzWidth]="500"
+  nzTitle="Mi información principal"
+  (nzOnClose)="close()"
+  [nzFooter]="footerTpl"
 >
-<ng-container *nzDrawerContent>
-
-    <form       [nzLayout]="'vertical'" nz-form [formGroup]="userForm" class="login-form" (ngSubmit)="onSubmitForm()">
-    
+  <ng-container *nzDrawerContent>
+    <form
+      [nzLayout]="'vertical'"
+      nz-form
+      [formGroup]="userForm"
+      class="login-form"
+      (ngSubmit)="onSubmitForm()"
+    >
       <nz-form-item>
         <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
           <nz-form-label>Mi nombre (s)</nz-form-label>
-          <input class="number-phone" type="text" nz-input id="name" formControlName="name" [(ngModel)]="userInformationOriginal && userInformationOriginal.names"
-            placeholder="Ejemplo: Ing. De Software" maxlength="50"/>
+          <input
+            class="number-phone"
+            type="text"
+            nz-input
+            id="name"
+            formControlName="name"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.names
+            "
+            placeholder="Ejemplo: Ing. De Software"
+            maxlength="50"
+          />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
           <nz-form-label>Apellido paterno</nz-form-label>
-          <input class="number-phone" type="text" nz-input id="job" formControlName="apellidoPaterno" [(ngModel)]="userInformationOriginal && userInformationOriginal.fatherLastName"
-            placeholder="Ejemplo: Ing. De Software" maxlength="50"/>
+          <input
+            class="number-phone"
+            type="text"
+            nz-input
+            id="job"
+            formControlName="apellidoPaterno"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.fatherLastName
+            "
+            placeholder="Ejemplo: Ing. De Software"
+            maxlength="50"
+          />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
           <nz-form-label>Apellido materno</nz-form-label>
-          <input class="number-phone" type="text" nz-input id="job" formControlName="apellidoMaterno"  [(ngModel)]="userInformationOriginal && userInformationOriginal.motherLastName"
-            placeholder="Ejemplo: Ing. De Software" maxlength="50"/>
+          <input
+            class="number-phone"
+            type="text"
+            nz-input
+            id="job"
+            formControlName="apellidoMaterno"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.motherLastName
+            "
+            placeholder="Ejemplo: Ing. De Software"
+            maxlength="50"
+          />
         </nz-form-control>
       </nz-form-item>
 
@@ -300,27 +327,56 @@ nzTitle="Mi información principal"
         <nz-form-control nzErrorTip="Campo requerido - Minímo 10 carácteres">
           <nz-form-label>¿Cuál es tu número de teléfono?</nz-form-label>
           <nz-input-group nzPrefixIcon="phone">
-            <input nzPrefixIcon="phone" nz-input id="numberPhone" formControlName="numberPhone" name="mix" [(ngModel)]="userInformationOriginal && userInformationOriginal.numberPhone"
-              (keypress)="validateFormat($event)" minlength="10" maxlength="10" required
-              placeholder="Escribe tu número de teléfono" />
+            <input
+              nzPrefixIcon="phone"
+              nz-input
+              id="numberPhone"
+              formControlName="numberPhone"
+              name="mix"
+              [(ngModel)]="
+                userInformationOriginal && userInformationOriginal.numberPhone
+              "
+              (keypress)="validateFormat($event)"
+              minlength="10"
+              maxlength="10"
+              required
+              placeholder="Escribe tu número de teléfono"
+            />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
 
-
       <nz-form-item>
         <nz-form-control nzErrorTip="Campo requerido- Minímo 8 carácteres">
           <nz-form-label>Correo de contacto</nz-form-label>
-          <input class="number-phone" type="text" nz-input id="email" formControlName="email" [(ngModel)]="userInformationOriginal && userInformationOriginal.email"
-            placeholder="Ejemplo: Ing. De Software" maxlength="50"/>
+          <input
+            class="number-phone"
+            type="text"
+            nz-input
+            id="email"
+            formControlName="email"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.email
+            "
+            placeholder="Ejemplo: Ing. De Software"
+            maxlength="50"
+          />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="personal-form-control">
         <nz-form-control nzErrorTip="Por favor selecciona un género!">
           <nz-form-label>¿Cuál es tu género?</nz-form-label>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona tu género" id="gender" [(ngModel)]="userInformationOriginal && userInformationOriginal.gender"
-            formControlName="gender">
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona tu género"
+            id="gender"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.gender
+            "
+            formControlName="gender"
+          >
             <nz-option nzLabel="El (Hombre)" nzValue="H"></nz-option>
             <nz-option nzLabel="Ella (Mujer)" nzValue="M"></nz-option>
             <nz-option nzLabel="Prefiero no decir" nzValue="NE"></nz-option>
@@ -329,76 +385,132 @@ nzTitle="Mi información principal"
       </nz-form-item>
 
       <nz-form-item class="personal-form-control">
-        <nz-form-control nzErrorTip="Por favor selecciona tu fecha de nacimiento!">
-          <label>¿Cuál es tu fecha de nacimiento?</label><br>
-          <nz-date-picker id="dateOfBirth" formControlName="dateOfBirth"   [(ngModel)]="userInformationOriginal && userInformationOriginal.dateOfBirth" nzFormat="dd-MMM-yyy"></nz-date-picker>
+        <nz-form-control nzErrorTip="Debes ser mayor de edad!">
+          <label>¿Cuál es tu fecha de nacimiento?</label><br />
+          <nz-date-picker
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.dateOfBirth
+            "
+            nzFormat="dd-MMM-yyy"
+          ></nz-date-picker>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item class="personal-form-control">
-      <nz-form-control nzErrorTip="Por favor selecciona un estado!">
-        <nz-form-label>¿En qué estado de México vives?*</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona un estado" #idState id="state"
-          formControlName="state" (ngModelChange)="provinceChange($event)" 
-          [(ngModel)]="userInformationOriginal && userInformationOriginal.state.clave"
+        <nz-form-control nzErrorTip="Por favor selecciona un estado!">
+          <nz-form-label>¿En qué estado de México vives?*</nz-form-label>
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona un estado"
+            #idState
+            id="state"
+            formControlName="state"
+            (ngModelChange)="provinceChange($event)"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.state.clave
+            "
           >
-          <nz-option *ngFor="let state of listStates" [nzValue]="state.clave"
-            [nzLabel]="state.valor"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
+            <nz-option
+              *ngFor="let state of listStates"
+              [nzValue]="state.clave"
+              [nzLabel]="state.valor"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item class="personal-form-control">
-      <nz-form-control nzErrorTip="Por favor selecciona un municipio!">
-        <nz-form-label>¿En qué ciudad de tu estado vives?*</nz-form-label>
-    
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Por favor selecciona un municipio!">
+          <nz-form-label>¿En qué ciudad de tu estado vives?*</nz-form-label>
 
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Seleccciona el municipio" id="city"
-        formControlName="city"  [(ngModel)]="userInformationOriginal && userInformationOriginal.city.id" [nzDisabled]="userForm.get('state')?.value == null">
-        <nz-option *ngFor="let city of listCities" [nzValue]="city.id"
-          [nzLabel]="city.valor"></nz-option>
-      </nz-select>
-      
-      </nz-form-control>
-    </nz-form-item>
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Seleccciona el municipio"
+            id="city"
+            formControlName="city"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.city.id
+            "
+            [nzDisabled]="userForm.get('state')?.value == null"
+          >
+            <nz-option
+              *ngFor="let city of listCities"
+              [nzValue]="city.id"
+              [nzLabel]="city.valor"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item class="personal-form-control">
-      <nz-form-control nzErrorTip="Campo requerido">
-        <nz-form-label>¿Tienes la posibilidad de reubicarte?</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona una opción" id="relocated"
-          formControlName="relocated"  [(ngModel)]="userInformationOriginal && userInformationOriginal.relocated">
-          <nz-option nzLabel="Si" nzValue="si"></nz-option>
-          <nz-option nzLabel="No" nzValue="no"></nz-option>
-          <nz-option nzLabel="Depende del salario, ubicación o prestaciones" nzValue="maybe"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Campo requerido">
+          <nz-form-label>¿Tienes la posibilidad de reubicarte?</nz-form-label>
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            id="relocated"
+            formControlName="relocated"
+            [(ngModel)]="
+              userInformationOriginal && userInformationOriginal.relocated
+            "
+          >
+            <nz-option nzLabel="Si" nzValue="si"></nz-option>
+            <nz-option nzLabel="No" nzValue="no"></nz-option>
+            <nz-option
+              nzLabel="Depende del salario, ubicación o prestaciones"
+              nzValue="maybe"
+            ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
 
-    <nz-form-item class="personal-form-control">
-      <nz-form-control nzErrorTip="Campo requerido">
-        <nz-form-label>¿Qué modalidad de trabajo te gustaría tener?</nz-form-label>
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona una opción"   formControlName="modalidadTrabajo" id="modalidadTrabajo" [(ngModel)]="userInformationOriginal && userInformationOriginal.modalidadTrabajo.id"
->
-          <nz-option *ngFor="let modality of listModwork" [nzLabel]="modality.valor" [nzValue]="modality.id" ></nz-option></nz-select>
-      </nz-form-control>
-    </nz-form-item>
-
+      <nz-form-item class="personal-form-control">
+        <nz-form-control nzErrorTip="Campo requerido">
+          <nz-form-label
+            >¿Qué modalidad de trabajo te gustaría tener?</nz-form-label
+          >
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Selecciona una opción"
+            formControlName="modalidadTrabajo"
+            id="modalidadTrabajo"
+            [(ngModel)]="
+              userInformationOriginal &&
+              userInformationOriginal.modalidadTrabajo.id
+            "
+          >
+            <nz-option
+              *ngFor="let modality of listModwork"
+              [nzLabel]="modality.valor"
+              [nzValue]="modality.id"
+            ></nz-option
+          ></nz-select>
+        </nz-form-control>
+      </nz-form-item>
     </form>
+  </ng-container>
 
-
-
-
-
-</ng-container>
-
-<ng-template #footerTpl>
-  <nz-space>
-    <button *nzSpaceItem class="button-red pd-1" nz-button (click)="close()">Cerrar</button>
-    <button *nzSpaceItem class="button-blue pd-1" nz-button (click)="onSubmitForm()">Guardar</button>
-  </nz-space>
-</ng-template>
-
+  <ng-template #footerTpl>
+    <nz-space>
+      <button *nzSpaceItem class="button-red pd-1" nz-button (click)="close()">
+        Cerrar
+      </button>
+      <button
+        *nzSpaceItem
+        class="button-blue pd-1"
+        nz-button
+        (click)="onSubmitForm()"
+      >
+        Guardar
+      </button>
+    </nz-space>
+  </ng-template>
 </nz-drawer>
-
 
 <app-footer></app-footer>
