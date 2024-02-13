@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://187.188.105.90:8352/hale",
+  apiUrl: "https://hale-jobs-414205.ue.r.appspot.com",
   siteKey: "6Le4ykYbAAAAAKH9QLPRmgCvuaZmuOFzYSyX9IW3",
 };
 
