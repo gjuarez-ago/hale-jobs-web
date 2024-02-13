@@ -32,6 +32,7 @@ export class MyPostulationsComponent implements OnInit {
   public listPostulations: any;
 
   submitForm(): void {
+    
     let form = this.searchForm.value;
 
     this.isLoadingGeneral = true;
