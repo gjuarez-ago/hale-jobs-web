@@ -69,7 +69,7 @@
      
 
     <div class="list">
-      <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+      <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingGeneral">
         <nz-list-item *ngFor="let item of data">
           <nz-list-item-meta
             nzDescription="{{item.title}}"

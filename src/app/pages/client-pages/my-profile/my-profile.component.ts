@@ -37,6 +37,8 @@ export class MyProfileComponent implements OnInit {
   public previewImage!: string | ArrayBuffer | null;
   public imgLoad!: File;
   userInformationOriginal: any;
+  isLoadingGetCurrentUser: boolean = false;
+  isLoadingGetAction: boolean = false;
 
   constructor(
     private cvService: CVUserService,
@@ -74,7 +76,6 @@ export class MyProfileComponent implements OnInit {
       this.user = this.authenticationService.getUserFromLocalCache();
       this.userId = this.user.id;
       this.redirect(this.user);
-
       this.getCurrentUser();
       this.getStates();
       this.getModWorks();
@@ -91,42 +92,43 @@ export class MyProfileComponent implements OnInit {
 
   // Servicios API
   getCurrentUser() {
-    this.isLoadingGeneral = true;
+    this.isLoadingGetCurrentUser = true;
     this.authenticationService.getCurrentUser(this.user?.username).subscribe(
       (response: any) => {
         this.userInformation = response;
-        this.previewImage =
-          response.profileImageUrl == null
-            ? 'https://thumbs.dreamstime.com/z/no-user-profile-picture-24185395.jpg'
-            : response.profileImageUrl;
+        // this.previewImage =
+        //   response.profileImageUrl == null
+        //     ? 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg'
+        //     : response.profileImageUrl;
 
-        this.isLoadingGeneral = false;
+        this.previewImage = 'https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg';
+        this.isLoadingGetCurrentUser = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar los estados'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingGetCurrentUser = false;
       }
     );
   }
 
   getUpdateUser() {
-    this.isLoadingGeneral = true;
+    this.isLoadingGetAction = true;
     this.authenticationService.getCurrentUser(this.user?.username).subscribe(
       (response: any) => {
         this.userInformationOriginal = response;
         this.userInformationOriginal.city.id = response.city.id;
 
-        this.isLoadingGeneral = false;
+        this.isLoadingGetAction = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar los estados'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingGetAction = false;
       }
     );
   }
@@ -214,7 +216,7 @@ export class MyProfileComponent implements OnInit {
     this.ngxSpinner.show();
     let data = this.userForm.value;
 
-    this.isLoadingGeneral = true;
+    this.isLoadingGetAction = true;
     this.cvService
       .updateCVPrincipal({ ...data, username: this.user?.username })
       .subscribe(
@@ -224,7 +226,7 @@ export class MyProfileComponent implements OnInit {
             'success',
             'Información actualizada correctamente!'
           );
-          this.isLoadingGeneral = false;
+          this.isLoadingGetAction = false;
           this.close();
           this.ngxSpinner.hide();
         },
@@ -234,7 +236,7 @@ export class MyProfileComponent implements OnInit {
             'Ha ocurrido un error al recuperar los estados'
           );
           this.ngxSpinner.hide();
-          this.isLoadingGeneral = false;
+          this.isLoadingGetAction = false;
         }
       );
   }

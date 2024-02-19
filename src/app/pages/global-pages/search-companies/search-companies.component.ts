@@ -84,10 +84,8 @@ export class SearchCompaniesComponent implements OnInit  {
       }
     }
   
-    if (!this.validateForm.valid) {
-      this.createNotification('warning', 'Es necesario llenar todos los campos!');
-      return;
-    }
+    this.companies = [];
+    this.total = 0;
   
 
     this.ngxSpinner.show();
@@ -99,7 +97,7 @@ export class SearchCompaniesComponent implements OnInit  {
         {
           pageNo: this.current - 1,
           pageSize: this.pageSize,
-          name: form.name,
+          name: form.name ? form.name : '',
         }
       ).subscribe(
         (response: any) => {

@@ -1,5 +1,4 @@
-
-.body-content{
+.body-content {
   /* position: absolute; */
   padding: 10px 10px 50px 10px;
 }
@@ -14,9 +13,7 @@ p {
   padding: 0px;
 }
 
-
-.card-body{
-
+.card-body {
   /* background-color: antiquewhite; */
   /* padding: 500px 0px; */
   width: 100%;
@@ -32,11 +29,25 @@ p {
   overflow-wrap: break-word !important;
 }
 
-.card-description{
+.offer-status-card {
+  width: 70%;
+  /* background-color: aquamarine; */
+  padding: 15px 40px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
+  border-left: 5px solid #f5ad40;
+  border-top: 5px solid #f5ad40;
+
+  border-radius: 10px;
+  /* padding: 500px 0px; */
+}
+
+.card-description {
   width: 70%;
   /* background-color: aquamarine; */
   padding: 30px 40px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
   border-left: 5px solid #f5ad40;
   border-top: 5px solid #f5ad40;
 
@@ -48,7 +59,6 @@ img {
   border-radius: 20px;
   padding: 10px;
 }
-
 
 .card-title {
   display: flex;
@@ -69,14 +79,18 @@ img {
 .points {
   padding: 0px 0px 0px 10px;
 }
+.content-skel {
+  width: 80%;
+  padding: 40px;
+  margin: 0 auto;
+}
 
 .points li {
   margin: 0px 10px;
   text-decoration: none;
-  
 }
 
-.company-and-place  {
+.company-and-place {
   margin: 5px 0px;
   display: flex;
   align-items: flex-start;
@@ -88,7 +102,7 @@ img {
   overflow-wrap: break-word !important;
 }
 
-.company-and-placea{
+.company-and-placea {
   margin: 5px 0px;
   display: flex;
   align-items: flex-start;
@@ -97,13 +111,11 @@ img {
 }
 
 .tags {
-  margin: 0px 0px 8px 0px
+  margin: 0px 0px 8px 0px;
 }
 
-
-
 .card-postulate {
-  width: 28%;  
+  width: 28%;
   border-radius: 20px !important;
 }
 
@@ -112,15 +124,18 @@ img {
 }
 .card-footer {
   border-radius: 20px !important;
-
 }
 
 nz-card {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 2px 5px -1px;
   border-right: 5px solid #f5ad40;
   border-top: 5px solid #f5ad40;
   border-radius: 20px !important;
-
 }
 
-
+.view {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0px;
+}

@@ -956,6 +956,8 @@ nz-form-label {
   padding: 0px 40px 0px 0px;
   font-size: 1.0em;
   overflow-wrap: break-word !important;
+  white-space-collapse: preserve-breaks;
+
 }
 
 .btn-red {
@@ -1009,6 +1011,7 @@ i.icon-edit-i {
 }
 
 .we {
+  max-width: 100%;
   width: 100%;
 }
 

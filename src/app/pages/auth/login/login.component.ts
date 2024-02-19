@@ -19,10 +19,9 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   public validateForm!: FormGroup;
   public subcriptions: Subscription[] = [];
   public siteKey = environment.siteKey;
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private message: NzMessageService,
-    private ngxSpinner :  NgxSpinnerService
+    private ngxSpinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +81,6 @@ export class LoginComponent implements OnInit {
           this.redirect(response.body);
         },
         (errorResponse: HttpErrorResponse) => {
-          
           this.ngxSpinner.hide();
           this.isSpinning = false;
           this.createMessage('error', errorResponse.error.message);
@@ -96,7 +94,7 @@ export class LoginComponent implements OnInit {
   }
 
   redirect(data: any) {
-    if(data.profileCompleted) {
+    if (data.profileCompleted) {
       switch (data.role) {
         case 'ROLE_USER':
           this.router.navigateByUrl('/profile/cv');
@@ -126,13 +124,6 @@ export class LoginComponent implements OnInit {
           // alert("El usuario no tiene un rol en estos momentos")
           break;
       }
-
     }
-
-
-
- 
   }
-
-
 }

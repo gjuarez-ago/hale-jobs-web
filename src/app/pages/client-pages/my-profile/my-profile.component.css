@@ -334,6 +334,10 @@ nav .wrapper{
 }
 
 
+.names {
+  text-align: center;
+}
+
 
 .nav-links li a.btn-profile:hover{
   background: #3A3B3C;

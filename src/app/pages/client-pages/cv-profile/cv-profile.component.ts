@@ -40,7 +40,6 @@ export class CvProfileComponent implements OnInit {
   //VARIABLES DE INFORMACIÓN DE USUARIO ------------------------------------------
 
   public visibleInfoPersonal = false;
-  public isLoadinginfoPersonal = false;
 
   public visibleAddExperience = false;
   public visibleEditExperience = false;
@@ -65,7 +64,7 @@ export class CvProfileComponent implements OnInit {
   public listCertifications: any = [];
   public certificationEdit: any;
   public schoolEdit: any;
-  public isLoadingSchoolEdit = false;
+  public isLoadingSchoolAction = false;
 
   public listLanguajes: any = [];
   public languajeEdit: any;
@@ -87,7 +86,7 @@ export class CvProfileComponent implements OnInit {
       Validators.required,
       Validators.maxLength(50),
     ]),
-    aboutMe: new FormControl(null, Validators.required),
+    aboutMe: new FormControl(null,[ Validators.required, Validators.minLength(30), Validators.maxLength(2500)]),
   });
 
   //VARIABLES EXPERIENCIA USUARIO ------------------------------------------------------
@@ -106,6 +105,7 @@ export class CvProfileComponent implements OnInit {
     description: new FormControl(null, [
       Validators.required,
       Validators.minLength(50),
+      Validators.maxLength(200),
     ]),
   });
 
@@ -136,7 +136,7 @@ export class CvProfileComponent implements OnInit {
   //VARIABLES CERTIFICACIÓN DE USUARIO ----------------------------------------------------------
   public visibleAddCertificate = false;
   public visibleEditCertificate = false;
-  public isLoadingCertificate = false;
+  public isLoadingCertificateAction = false;
 
   certificateUserForm = new FormGroup({
     name: new FormControl(null, [
@@ -150,6 +150,13 @@ export class CvProfileComponent implements OnInit {
   public listRangeAmount: any = [];
   styleSheet: string = '';
   visibleEditLanguaje: boolean = false;
+  isLoadingUserInformacion: boolean = false;
+  isLoadingSkills: boolean = false;
+  isLoadingGetSchool: boolean = false;
+  isLoadingGetCertifications: boolean = false;
+  isLoadingActionLanguaje: boolean = false; 
+  isLoadingEditUser: boolean = false;
+  isLoadingActionExp: boolean = false;
 
   constructor(
     private modalService: NzModalService,
@@ -191,12 +198,11 @@ export class CvProfileComponent implements OnInit {
   // Servicios API
   getCurrentUser(user: any) {
     this.ngxSpinner.show();
-    this.isLoadingGeneral = true;
+    this.isLoadingUserInformacion = true;
     this.authenticationService.getCurrentUser(user.username).subscribe(
       (response: any) => {
         this.userInformationOriginal = response;
-
-        this.isLoadingGeneral = false;
+        this.isLoadingUserInformacion = false;
         this.ngxSpinner.hide();
       },
       (errorResponse: HttpErrorResponse) => {
@@ -204,7 +210,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar los estados'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingUserInformacion = false;
         this.ngxSpinner.hide();
       }
     );
@@ -212,11 +218,11 @@ export class CvProfileComponent implements OnInit {
 
   getUpdateUser() {
     this.ngxSpinner.show();
-    this.isLoadingGeneral = true;
+    this.isLoadingEditUser = true;
     this.authenticationService.getCurrentUser(this.user?.username).subscribe(
       (response: any) => {
         this.userInformation = response;
-        this.isLoadingGeneral = false;
+        this.isLoadingEditUser = false;
         this.ngxSpinner.hide();
       },
       (errorResponse: HttpErrorResponse) => {
@@ -224,7 +230,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar los estados'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingEditUser = false;
         this.ngxSpinner.hide();
       }
     );
@@ -268,7 +274,7 @@ export class CvProfileComponent implements OnInit {
   }
 
   getWorkExperienceById(id: any) {
-    this.isLoadingWorkExperience = true;
+    this.isLoadingActionExp = true;
     this.cvService.workExperiencesById(id).subscribe(
       (response: any) => {
         if (response.worked) {
@@ -277,14 +283,14 @@ export class CvProfileComponent implements OnInit {
 
         this.workExperienceEdit = response;
 
-        this.isLoadingWorkExperience = false;
+        this.isLoadingActionExp = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingWorkExperience = false;
+        this.isLoadingActionExp = false;
       }
     );
   }
@@ -306,7 +312,7 @@ export class CvProfileComponent implements OnInit {
   }
 
   getskillsByUser() {
-    this.isLoadingGeneral = true;
+    this.isLoadingSkills = true;
     this.cvService.getSkillsByUser(this.userId).subscribe(
       (response: any) => {
         this.listSkills = [];
@@ -315,31 +321,31 @@ export class CvProfileComponent implements OnInit {
           this.listSkills.push(prop.value);
         });
 
-        this.isLoadingGeneral = false;
+        this.isLoadingSkills = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las skills'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingSkills = false;
       }
     );
   }
 
   getSchoolsByUser() {
-    this.isLoadingGeneral = true;
+    this.isLoadingGetSchool = true;
     this.cvService.getSchoolsByUser(this.userId).subscribe(
       (response: any) => {
         this.listSchools = response;
-        this.isLoadingGeneral = false;
+        this.isLoadingGetSchool = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las escuelas'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingGetSchool = false;
       }
     );
   }
@@ -362,35 +368,35 @@ export class CvProfileComponent implements OnInit {
   }
 
   getCertificationsByUser() {
-    this.isLoadingGeneral = true;
+    this.isLoadingGetCertifications = true;
     this.cvService.getCertificationsByUser(this.userId).subscribe(
       (response: any) => {
         this.listCertifications = response;
-        this.isLoadingGeneral = false;
+        this.isLoadingGetCertifications = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las certificaciones'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingGetCertifications = false;
       }
     );
   }
 
   getCertificationById(id: any) {
-    this.isLoadingGeneral = true;
+    this.isLoadingCertificateAction = true;
     this.cvService.getCertificationById(id).subscribe(
       (response: any) => {
         this.certificationEdit = response;
-        this.isLoadingGeneral = false;
+        this.isLoadingCertificateAction = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar la certificación'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingCertificateAction = false;
       }
     );
   }
@@ -517,16 +523,18 @@ export class CvProfileComponent implements OnInit {
       return;
     }
 
+    this.isLoadingEditUser = true;
     let data = this.userInfoPersonalForm.value;
     this.ngxSpinner.show();
+    this.userInformationOriginal = undefined;
 
     this.cvService
       .updateCVBasic({ ...data, username: this.user?.username })
       .subscribe(
         (response: any) => {
-          this.getCurrentUser(this.user);
           this.visibleInfoPersonal = false;
-          this.isLoadingGeneral = false;
+          this.getCurrentUser(this.user);
+          this.isLoadingEditUser = true;
           this.ngxSpinner.hide();
         },
         (errorResponse: HttpErrorResponse) => {
@@ -534,7 +542,7 @@ export class CvProfileComponent implements OnInit {
             'error',
             'Ha ocurrido un error al actualizar la información'
           );
-          this.isLoadingGeneral = false;
+          this.isLoadingEditUser = true;
           this.ngxSpinner.hide();
         }
       );
@@ -584,10 +592,12 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
+    this.isLoadingActionExp = true;
+
     this.cvService.addWorkExperience(data).subscribe(
       (response: any) => {
         this.getWorkExperiencesByUser();
-        this.isLoadingWorkExperience = false;
+        this.isLoadingActionExp = false;
         this.visibleAddExperience = false;
         this.registerRecruiterExperienceProfessionalForm.reset();
       },
@@ -596,7 +606,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingWorkExperience = false;
+        this.isLoadingActionExp = false;
       }
     );
   }
@@ -648,14 +658,14 @@ export class CvProfileComponent implements OnInit {
 
     console.log(data);
 
-    this.isLoadingWorkExperience = true;
+    this.isLoadingActionExp = true;
 
     this.cvService
       .updateExperienceByUser(this.workExperienceEdit.id, data)
       .subscribe(
         (response: any) => {
           this.getWorkExperiencesByUser();
-          this.isLoadingWorkExperience = false;
+          this.isLoadingActionExp = false;
           this.visibleEditExperience = false;
         },
         (errorResponse: HttpErrorResponse) => {
@@ -663,7 +673,7 @@ export class CvProfileComponent implements OnInit {
             'error',
             'Ha ocurrido un error al recuperar las experiencias de trabajo'
           );
-          this.isLoadingWorkExperience = false;
+          this.isLoadingActionExp = false;
         }
       );
 
@@ -769,24 +779,22 @@ export class CvProfileComponent implements OnInit {
   }
 
   getSkillsByUserEdit() {
-    this.isLoadingGeneral = true;
+    this.isLoadingSkillsSave = true;
     this.cvService.getSkillsByUser(this.userId).subscribe(
       (response: any) => {
         this.listSkillsEdit = [];
         response.forEach((prop: any, key: any) => {
           this.listSkillsEdit.push(prop.value);
         });
-        this.isLoadingGeneral = false;
+        this.isLoadingSkillsSave = false;
         this.visibleAddSkills = true;
-
-        console.log(this.listSkillsEdit);
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las skills'
         );
-        this.isLoadingGeneral = false;
+        this.isLoadingSkillsSave = false;
       }
     );
   }
@@ -872,12 +880,12 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
-    this.isLoadingSchoolEdit = true;
+    this.isLoadingSchoolAction = true;
 
     this.cvService.addSchoolExperience(data).subscribe(
       (response: any) => {
         this.getSchoolsByUser();
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
         this.visibleAddEducation = false;
         this.educationUserForm.reset();
       },
@@ -886,7 +894,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
       }
     );
   }
@@ -937,12 +945,12 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
-    this.isLoadingSchoolEdit = true;
+    this.isLoadingSchoolAction = true;
 
     this.cvService.updateEducationById(this.schoolEdit.id, data).subscribe(
       (response: any) => {
         this.getSchoolsByUser();
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
         this.visibleEditEducation = false;
         this.educationUserForm.reset();
       },
@@ -951,13 +959,13 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
       }
     );
   }
 
   public getEducationById(id: any) {
-    this.isLoadingSchoolEdit = true;
+    this.isLoadingSchoolAction = true;
     this.cvService.getSchoolsById(id).subscribe(
       (response: any) => {
         this.schoolEdit = response;
@@ -965,14 +973,15 @@ export class CvProfileComponent implements OnInit {
         if (response.worked) {
           response.ends = undefined;
         }
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
+
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingSchoolEdit = false;
+        this.isLoadingSchoolAction = false;
       }
     );
   }
@@ -1016,23 +1025,24 @@ export class CvProfileComponent implements OnInit {
   }
 
   public getLanguajeById(id: any) {
-    this.isLoadingGeneral = true;
+    this.isLoadingActionLanguaje = true;
     this.cvService.getLanguajeById(id).subscribe(
       (response: any) => {
         this.languajeEdit = response;
-        this.isLoadingLanguaje = false;
+        this.isLoadingActionLanguaje = false;
       },
       (errorResponse: HttpErrorResponse) => {
         this.message.create(
           'error',
           'Ha ocurrido un error al recuperar el lenguaje'
         );
-        this.isLoadingLanguaje = false;
+        this.isLoadingActionLanguaje = false;
       }
     );
   }
 
   public saveLanguaje() {
+
     if (!this.languajeForm.valid) {
       Object.values(this.languajeForm.controls).forEach((control) => {
         if (control.invalid) {
@@ -1051,13 +1061,13 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
-    this.isLoadingLanguaje = true;
+    this.isLoadingActionLanguaje = true;
     this.ngxSpinner.show();
 
     this.cvService.addLanguage(data).subscribe(
       (response: any) => {
         this.getLanguajes();
-        this.isLoadingLanguaje = false;
+        this.isLoadingActionLanguaje = false;
         this.visibleAddLanguaje = false;
         this.languajeForm.reset();
         this.ngxSpinner.hide();
@@ -1067,7 +1077,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al guardar el idioma'
         );
-        this.isLoadingLanguaje = false;
+        this.isLoadingActionLanguaje = false;
       }
     );
   }
@@ -1084,12 +1094,13 @@ export class CvProfileComponent implements OnInit {
     }
 
     let data = this.languajeForm.value;
+    this.isLoadingActionLanguaje = true;
     this.ngxSpinner.show();
 
     this.cvService.updateLanguaje(this.languajeEdit.id, data).subscribe(
       (response: any) => {
+        this.isLoadingActionLanguaje = false;
         this.getLanguajes();
-        this.isLoadingLanguaje = false;
         this.visibleEditLanguaje = false;
         this.languajeForm.reset();
         this.ngxSpinner.hide();
@@ -1099,7 +1110,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al editar la sección de idiomas'
         );
-        this.isLoadingLanguaje = false;
+        this.isLoadingActionLanguaje = false;
       }
     );
   }
@@ -1113,11 +1124,10 @@ export class CvProfileComponent implements OnInit {
       nzCancelText: 'Cerrar',
       nzOnOk: () => {
         this.isLoadingWorkExperience = true;
-
         this.cvService.deleteCertification(this.certificationEdit.id).subscribe(
           (response: any) => {
-            this.getCertificationsByUser();
             this.isLoadingWorkExperience = false;
+            this.getCertificationsByUser();
             this.visibleEditExperience = false;
           },
           (errorResponse: HttpErrorResponse) => {
@@ -1152,12 +1162,12 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
-    this.isLoadingCertificate = true;
+    this.isLoadingCertificateAction = true;
 
     this.cvService.addCertification(data).subscribe(
       (response: any) => {
         this.getCertificationsByUser();
-        this.isLoadingCertificate = false;
+        this.isLoadingCertificateAction = false;
         this.visibleAddCertificate = false;
         this.certificateUserForm.reset();
       },
@@ -1166,7 +1176,7 @@ export class CvProfileComponent implements OnInit {
           'error',
           'Ha ocurrido un error al recuperar las experiencias de trabajo'
         );
-        this.isLoadingCertificate = false;
+        this.isLoadingCertificateAction = false;
       }
     );
   }
@@ -1191,14 +1201,14 @@ export class CvProfileComponent implements OnInit {
       userId: this.userId,
     };
 
-    this.isLoadingCertificate = true;
+    this.isLoadingCertificateAction = true;
 
     this.cvService
       .updateCertification(this.certificationEdit.id, data)
       .subscribe(
         (response: any) => {
           this.getCertificationsByUser();
-          this.isLoadingCertificate = false;
+          this.isLoadingCertificateAction = false;
           this.visibleEditCertificate = false;
           this.certificateUserForm.reset();
         },
@@ -1207,7 +1217,7 @@ export class CvProfileComponent implements OnInit {
             'error',
             'Ha ocurrido un error al recuperar las experiencias de trabajo'
           );
-          this.isLoadingCertificate = false;
+          this.isLoadingCertificateAction = false;
         }
       );
   }
@@ -1395,6 +1405,14 @@ export class CvProfileComponent implements OnInit {
       key: 'ITAL',
     },
   ];
+
+  onActivate() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
 
   public levels = [
     {

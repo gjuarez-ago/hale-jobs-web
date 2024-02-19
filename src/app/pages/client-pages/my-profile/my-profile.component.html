@@ -70,85 +70,101 @@
   </div>
 </nav>
 
+
+
 <div class="body-content">
+
+
   <div class="content-profile">
     <div class="img-user-content">
+        
+
       <div class="card card-user-edit box">
+
         <div class="cover-bg"></div>
+        <br>
+        <nz-skeleton *ngIf="isLoadingGetCurrentUser && !userInformation" ></nz-skeleton>
+        <nz-skeleton *ngIf="isLoadingGetCurrentUser && !userInformation" ></nz-skeleton>
+        <nz-skeleton *ngIf="isLoadingGetCurrentUser && !userInformation" ></nz-skeleton>
+
+        
         <br />
-        <div class="content">
-          <label for="file">
-            <div class="content-img">
-              <img [src]="previewImage" alt="" />
-              <div class="centered">
-                <i nz-icon nzType="camera" nzTheme="outline"></i>
+        
+        <div *ngIf="!isLoadingGetCurrentUser && userInformation" class="d">
+          <div class="content">
+            <label for="file">
+              <div class="content-img">
+                <img [src]="previewImage" alt="" />
+                <div class="centered">
+                  <!-- <i nz-icon nzType="camera" nzTheme="outline"></i> -->
+                </div>
+              </div>
+            </label>
+  
+            <input
+              id="file"
+              class="absolute w-full h-full"
+              ref="file"
+              type="file"
+              (change)="handleChange($event)"
+              accept="image/*"
+              style="visibility: hidden"
+            />
+          </div>
+  
+   
+          <div class="names">
+            <strong>{{ userInformation && userInformation.surnames }}</strong>
+            <p>{{ userInformation && userInformation.modalidadTrabajo.valor }}</p> 
+          </div>
+ 
+      
+          <div class="user-bio">
+            <div class="tags">
+              <nz-space>
+                <nz-tag class="ap" *nzSpaceItem nzColor="#55acee">
+                  <i nz-icon nzType="aim"></i>
+                  <span
+                    >{{ userInformation && userInformation.city.valor }},
+                    {{ userInformation && userInformation.state.valor }}</span
+                  >
+                </nz-tag>
+                <!-- <nz-tag class="ap" *nzSpaceItem nzColor="#093b85">
+                  <i nz-icon nzType="team"></i>
+                  <span>{{userInformation && getGender(userInformation.gender)}}</span>
+                </nz-tag> -->
+  
+                <nz-tag class="ap ap-edit" *nzSpaceItem (click)="open()">
+                  <i nz-icon nzType="edit"></i>
+                </nz-tag>
+              </nz-space>
+            </div>
+  
+            <br />
+            <p>
+              <i>
+                "No tienes que ser grande para empezar. Pero tienes que empezar para poder ser grande"
+              </i>
+            </p>
+  
+            <div class="social">
+              <div class="social-icons">
+                <a href="" class="fa"> Perfil publico </a>
+              </div>
+  
+              <div class="message">
+                <a href="" class="fa">
+                  <nz-switch
+                    [(ngModel)]="userInformation && userInformation.publicProfile"
+                    (ngModelChange)="changePublicProfile($event)"
+                  ></nz-switch>
+                </a>
               </div>
             </div>
-          </label>
-
-          <input
-            id="file"
-            class="absolute w-full h-full"
-            ref="file"
-            type="file"
-            (change)="handleChange($event)"
-            accept="image/*"
-            style="visibility: hidden"
-          />
+          </div>
+  
         </div>
 
-        <strong>{{ userInformation && userInformation.surnames }}</strong>
-        <p>{{ userInformation && userInformation.modalidadTrabajo.valor }}</p>
-
-        <!-- <div class="btn">
-          <a href="#"><i class="fa fa-clipboard" aria-hidden="true"></i>Assign</a>
-          <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View</a>
-        </div> -->
-
-        <div class="user-bio">
-          <div class="tags">
-            <nz-space>
-              <nz-tag class="ap" *nzSpaceItem nzColor="#55acee">
-                <i nz-icon nzType="aim"></i>
-                <span
-                  >{{ userInformation && userInformation.city.valor }},
-                  {{ userInformation && userInformation.state.valor }}</span
-                >
-              </nz-tag>
-              <!-- <nz-tag class="ap" *nzSpaceItem nzColor="#093b85">
-                <i nz-icon nzType="team"></i>
-                <span>{{userInformation && getGender(userInformation.gender)}}</span>
-              </nz-tag> -->
-
-              <nz-tag class="ap ap-edit" *nzSpaceItem (click)="open()">
-                <i nz-icon nzType="edit"></i>
-              </nz-tag>
-            </nz-space>
-          </div>
-
-          <br />
-          <p>
-            <i>
-              "No tienes que ser grande para empezar. Pero tienes que empezar
-              para poder ser grande"
-            </i>
-          </p>
-
-          <div class="social">
-            <div class="social-icons">
-              <a href="" class="fa"> Perfil publico </a>
-            </div>
-
-            <div class="message">
-              <a href="" class="fa">
-                <nz-switch
-                  [(ngModel)]="userInformation && userInformation.publicProfile"
-                  (ngModelChange)="changePublicProfile($event)"
-                ></nz-switch>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="more-information-user card">
@@ -262,7 +278,8 @@
   [nzFooter]="footerTpl"
 >
   <ng-container *nzDrawerContent>
-    <form
+    <nz-spin [nzSpinning]="isLoadingGetAction">
+      <form
       [nzLayout]="'vertical'"
       nz-form
       [formGroup]="userForm"
@@ -494,6 +511,7 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+    </nz-spin>
   </ng-container>
 
   <ng-template #footerTpl>

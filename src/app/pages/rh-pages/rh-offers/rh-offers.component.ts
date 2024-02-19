@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/core/user.model';
@@ -12,12 +13,17 @@ import { CompanyService } from 'src/app/services/company.service';
 import { GenericService } from 'src/app/services/generic.service';
 import { OfferService } from 'src/app/services/offer.service';
 
+import { getEndDate } from 'src/app/utils/end-date-resume';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-rh-offers',
   templateUrl: './rh-offers.component.html',
   styleUrls: ['./rh-offers.component.css'],
 })
 export class RhOffersComponent implements OnInit {
+  private readonly url: string = `${environment.appUrl}`;
+
   confirmDeleteModal?: NzModalRef; // For testing by now
 
   public selectedValue: any;
@@ -28,7 +34,7 @@ export class RhOffersComponent implements OnInit {
   public subscriptions: Subscription[] = [];
   public total: number = 0;
   public totalElementByPage = 0;
-  public data: any[] = [];
+  public offers: any[] = [];
 
   public pageSizePs: number = 10;
   public currentPs: number = 1;
@@ -96,7 +102,8 @@ export class RhOffersComponent implements OnInit {
     private modal: NzModalService,
     private message: NzMessageService,
     private router: Router,
-    private ngxSpinner: NgxSpinnerService
+    private ngxSpinner: NgxSpinnerService,
+    private notificationService: NzNotificationService
   ) {
     this.isLoadingGeneral = false;
 
@@ -138,7 +145,6 @@ export class RhOffersComponent implements OnInit {
     if (this.authenticationService.isUserLoggedIn()) {
       this.user = this.authenticationService.getUserFromLocalCache();
       this.userId = this.user.id;
-      this.getOffers();
       this.getLevelStudy();
       this.getRangeAmount();
       this.getTypeOfJob();
@@ -172,13 +178,13 @@ export class RhOffersComponent implements OnInit {
     }, 800);
   }
 
-  public navigateViewJob(element : any) {    
+  public navigateViewJob(element: any) {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([`/dashboard/view-worker/${element.username}`]));
-       window.open('#' + url, '_blank');        
+      this.router.createUrlTree([`/dashboard/view-worker/${element.username}`])
+    );
+    window.open('#' + url, '_blank');
   }
 
-  
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(i)) {
@@ -194,6 +200,9 @@ export class RhOffersComponent implements OnInit {
 
     this.ngxSpinner.show();
     let form = this.validateForm.value;
+
+    this.offers = [];
+    this.total = 0;
 
     this.isLoadingTable = true;
     this.isLoadingGeneral = true;
@@ -214,7 +223,7 @@ export class RhOffersComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
-            this.data = response.content;
+            this.offers = response.content;
             this.total = response.totalElements;
             this.totalElementByPage = response.numberOfElements;
 
@@ -243,13 +252,11 @@ export class RhOffersComponent implements OnInit {
   }
 
   public navigateCreate() {
-    
-    if(this.listCompanies.length == 0 && this.data.length == 0) {
+    if (this.listCompanies.length == 0 && this.offers.length == 0) {
       this.router.navigateByUrl('/dashboard/new-company');
-    }else {
+    } else {
       this.router.navigateByUrl('/dashboard/new-offer');
     }
-
   }
 
   getPostulatesByOffer(): void {
@@ -299,15 +306,15 @@ export class RhOffersComponent implements OnInit {
     this.getPostulatesByOffer();
   }
 
-  
   public getCompaniesByUser(ele: any) {
-  
     this.isLoadingGeneral = true;
+    this.ngxSpinner.show();
     this.subscriptions.push(
       this.companyService.getCompaniesByOwnerWP(ele).subscribe(
         (response: any) => {
           this.listCompanies = response;
           this.isLoadingGeneral = false;
+          this.getOffers();
         },
         (errorResponse: HttpErrorResponse) => {
           this.isLoadingGeneral = false;
@@ -370,6 +377,20 @@ export class RhOffersComponent implements OnInit {
   openViewModal(item: any) {
     this.getOfferById(item.id);
     this.visibleModal = true;
+  }
+
+  shareOffer(item: any) {
+    const areaTmp = document.createElement('textarea');
+    areaTmp.value = `${this.url}/view-job/${item.id}`;
+    document.body.appendChild(areaTmp);
+    areaTmp.select();
+    document.execCommand('copy');
+    document.body.removeChild(areaTmp);
+    this.notificationService.blank(
+      'Compartir',
+      'Se ha copiado el link en el portapapeles.',
+      { nzPlacement: 'topLeft' }
+    );
   }
 
   public sanitazerURL(value: any) {
@@ -529,16 +550,19 @@ export class RhOffersComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
-            this.data = response.content;
+            this.offers = response.content;
             this.total = response.totalElements;
             this.totalElementByPage = response.numberOfElements;
 
             this.isLoadingTable = false;
             this.isLoadingGeneral = false;
+            this.ngxSpinner.hide();
           },
           (errorResponse: HttpErrorResponse) => {
             this.isLoadingTable = false;
             this.isLoadingGeneral = false;
+            this.ngxSpinner.hide();
+
             this.message.create('error', errorResponse.error.message);
           }
         )
@@ -615,22 +639,29 @@ export class RhOffersComponent implements OnInit {
 
     this.ngxSpinner.show();
     this.subscriptions.push(
-      this.offerService.messageUSerPostulate({ ...form, offerId: this.postulateP.offer.id, status: 0, userId: this.postulateP.user.id }).subscribe(
-        (response: any) => {
-          this.getPostulatesByOffer();
-          this.getComplaintsByOffer();
-          this.ngxSpinner.hide();
-          this.closeModalMessagePostulate();
-          this.createMessage('success', 'Mensaje enviado :)');
+      this.offerService
+        .messageUSerPostulate({
+          ...form,
+          offerId: this.postulateP.offer.id,
+          status: 0,
+          userId: this.postulateP.user.id,
+        })
+        .subscribe(
+          (response: any) => {
+            this.getPostulatesByOffer();
+            this.getComplaintsByOffer();
+            this.ngxSpinner.hide();
+            this.closeModalMessagePostulate();
+            this.createMessage('success', 'Mensaje enviado :)');
 
-          this.isLoadingResponse = false;
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.ngxSpinner.hide();
-          this.isLoadingResponse = false;
-          this.message.create('error', errorResponse.error.message);
-        }
-      )
+            this.isLoadingResponse = false;
+          },
+          (errorResponse: HttpErrorResponse) => {
+            this.ngxSpinner.hide();
+            this.isLoadingResponse = false;
+            this.message.create('error', errorResponse.error.message);
+          }
+        )
     );
   }
 
@@ -717,6 +748,8 @@ export class RhOffersComponent implements OnInit {
     let index: any = urgency.find((e: any) => e.id == item);
     return index.value;
   }
+
+  public getEndDateFunction = (date: any) => getEndDate(date);
 }
 
 interface Person {

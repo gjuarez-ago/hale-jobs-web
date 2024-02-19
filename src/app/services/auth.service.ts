@@ -6,22 +6,22 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/core/user.model';
 import { CustomHttpRespone } from '../models/CustomHttpResponse';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   public host = environment.apiUrl;
   private token: any;
-  public loggedInUsername : any = {};
-  private jwtHelper = new JwtHelperService;
+  public loggedInUsername: any = {};
+  private jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Login Global
   public login(user: any): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+    return this.http.post<User>(`${this.host}/user/login`, user, {
+      observe: 'response',
+    });
   }
 
   // Register Client
@@ -31,53 +31,65 @@ export class AuthService {
 
   // * Recovery password
   public recoveryPassword(form: FormData): Observable<CustomHttpRespone> {
-    return this.http.post<CustomHttpRespone>(`${this.host}/user/recovery-password`, form);
+    return this.http.post<CustomHttpRespone>(
+      `${this.host}/user/recovery-password`,
+      form
+    );
   }
 
   // * Reset password
   public resetPassword(form: FormData): Observable<CustomHttpRespone> {
-    return this.http.post<CustomHttpRespone>(`${this.host}/user/reset-password`, form);
+    return this.http.post<CustomHttpRespone>(
+      `${this.host}/user/reset-password`,
+      form
+    );
   }
 
-  
   // * Reset password
   public desactivateProfile(username: any): Observable<CustomHttpRespone> {
-    return this.http.delete<CustomHttpRespone>(`${this.host}/user/desactivate-profile/${username}`);
+    return this.http.delete<CustomHttpRespone>(
+      `${this.host}/user/desactivate-profile/${username}`
+    );
   }
 
   // Register Recruiter
-  public registerCompany(data : any): Observable<User> {
+  public registerCompany(data: any): Observable<User> {
     return this.http.post<User>(`${this.host}/user/create-cv-company`, data);
   }
 
   // Register User
-  public registerUser(data : any): Observable<User> {
+  public registerUser(data: any): Observable<User> {
     return this.http.post<User>(`${this.host}/user/create-cv-user-out`, data);
   }
 
-  public getCurrentUser(username : any) : Observable<User> {
+  public getCurrentUser(username: any): Observable<User> {
     return this.http.get<User>(`${this.host}/user/find/${username}`);
   }
 
-  public getCurrentUserById(username : any) : Observable<User> {
+  public getCurrentUserById(username: any): Observable<User> {
     return this.http.get<User>(`${this.host}/user/find-by-id/${username}`);
   }
 
   public logOut(): void {
     this.token = null;
     this.loggedInUsername = null;
-    localStorage.removeItem("user_hale");
-    localStorage.removeItem("token_hale");
-    localStorage.removeItem("users");
+    this.deleteLocalStorageVariables();
+  }
+
+  private deleteLocalStorageVariables() {
+    localStorage.removeItem('user_hale');
+    localStorage.removeItem('token_hale');
+    localStorage.removeItem('userApplications');
+    localStorage.removeItem('_grecaptcha');
   }
 
   public saveToken(token: string): void {
     this.token = token;
-    localStorage.setItem("token_hale", token);
+    localStorage.setItem('token_hale', token);
   }
 
   public loadToken(): void {
-    this.token = localStorage.getItem("token_hale");
+    this.token = localStorage.getItem('token_hale');
   }
 
   public addUserToLocalCache(user: User) {
@@ -87,17 +99,12 @@ export class AuthService {
   public getUserFromLocalCache(): User {
     return JSON.parse(localStorage.getItem('user_hale') || '{}');
   }
-
-
-
-
   public getToken(): string {
     return this.token;
   }
 
   public isUserLoggedIn(): boolean {
     this.loadToken();
-
 
     if (this.token != null && this.token !== '') {
       if (this.jwtHelper.decodeToken(this.token).sub != null) {
@@ -115,8 +122,4 @@ export class AuthService {
     }
     return false;
   }
-
-
-
-
 }

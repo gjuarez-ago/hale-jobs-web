@@ -99,7 +99,6 @@ export class MyNotificationsComponent implements OnInit {
           this.data = response.content;
           this.total = response.totalElements;
           this.totalElementByPage = response.numberOfElements;
-          this.isLoadingTable = false;
           this.ngxSpinner.hide();
 
           console.log(this.data);
@@ -150,7 +149,6 @@ export class MyNotificationsComponent implements OnInit {
           this.data = response.content;
           this.total = response.totalElements;
           this.totalElementByPage = response.numberOfElements;
-          this.isLoadingTable = false;
           this.ngxSpinner.hide();
 
           console.log(this.data);

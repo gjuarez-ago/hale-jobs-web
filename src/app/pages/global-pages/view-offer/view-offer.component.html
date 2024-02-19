@@ -1,151 +1,227 @@
-<div class="body-content">
 
-  <div class="content">
+
+<div class="content-skel" *ngIf="isLoadingGetCurrentElement && currentElement == null" > 
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+<nz-skeleton *ngIf="isLoadingGetCurrentElement && currentElement == null" ></nz-skeleton>
+</div>
+<div class="body-content" >
+
+
+  
+  <div class="content" *ngIf="currentElement">   
+    <div class="offer-status-card" *ngIf="!isLoadingGetCurrentElement">
+      <span
+        nz-icon
+        nzType="warning"
+        nzTheme="fill"
+        *ngIf="offerStatusMessage === 'La oferta ha expirado'"
+      ></span>
+      <span
+        nz-icon
+        nzType="calendar"
+        nzTheme="fill"
+        *ngIf="offerStatusMessage !== 'La oferta ha expirado'"
+      ></span>
+      <strong>
+        {{ offerStatusMessage }}
+      </strong>
+    </div>
+    
+    <div class="card-body" >
+      
+
 
       
-      <div class="card-body">
+      <div class="card-description">
+        <div class="card-title">
+          <h2>{{ currentElement && currentElement.title }}</h2>
+          <nz-tag [nzColor]="'magenta'">
+            {{ currentElement && getUrgency(currentElement.urgency) }}
+          </nz-tag>
+        </div>
 
-        
-       <div class="card-description">
-           <div class="card-title"> 
-               <h2> {{currentElement && currentElement.title}} </h2> 
-               <nz-tag [nzColor]="'magenta'"> {{currentElement && getUrgency(currentElement.urgency)}} </nz-tag>
-             </div>
+        <div class="salary" *ngIf="currentElement.showSalary">
+          {{ currentElement && currentElement.rangeAmount.valor }}
+        </div>
 
+        <div class="salary" *ngIf="!currentElement.showSalary">
+          Salario no mostrado
+        </div>
 
-              <div class="salary">
-                {{currentElement && currentElement.rangeAmount.valor}}
-              </div> 
+        <div class="salary">
+          {{ currentElement && currentElement.typeOfJob.valor }} -
+          {{ currentElement && getWorkPlace(currentElement.workPlace) }}
+        </div>
 
-              <div class="salary">
-                {{currentElement && currentElement.typeOfJob.valor}} - {{currentElement && getWorkPlace(currentElement.workPlace)}}
+        <br />
 
-               </div> 
+        <div class="tags">
+          <nz-tag nzColor="success">
+            <i nz-icon nzType="check-circle"></i>
+            <span> {{ currentElement && currentElement.category.valor }}</span>
+          </nz-tag>
 
-               <br>
-        
-             <div class="tags">
-               <nz-tag nzColor="success">
-                 <i nz-icon nzType="check-circle"></i>
-                 <span>                 {{currentElement && currentElement.category.valor}}</span>
-               </nz-tag>
+          <nz-tag [nzColor]="'volcano'">
+            {{ currentElement && currentElement.subcategory.valor }}
+          </nz-tag>
+        </div>
 
-                 
-               <nz-tag [nzColor]="'volcano'">
-                {{currentElement && currentElement.subcategory.valor}}
+        <div class="description">
+          <h3>Descripción de la vacante:</h3>
 
-               </nz-tag>
-             
-             </div>
+          <p>
+            {{ currentElement && currentElement.description }}
+          </p>
+        </div>
 
-             <div class="description">
+        <br />
 
-               <h3> Descripción de la vacante: </h3>
+        <div class="points-key">
+          <h3>Te ofrece:</h3>
 
-               <p>
-                {{currentElement && currentElement.description}}
+          <ul class="points">
+            <li *ngFor="let e of currentElement.benefits">{{ e }}</li>
+          </ul>
+        </div>
 
-               </p>
+        <div class="points-key">
+          <h3>Requisitos a cumplir:</h3>
 
-             </div>
+          <ul class="points">
+            <li *ngFor="let e of currentElement.skills">{{ e }}</li>
+          </ul>
+        </div>
 
-             <br>
+        <div class="points-key">
+          <h3>Funciones principales:</h3>
 
-             <div class="points-key">
+          <ul class="points">
+            <li *ngFor="let e of currentElement.mainActivities">{{ e }}</li>
+          </ul>
+        </div>
 
-              <h3> Te ofrece: </h3>
+        <br />
 
-              <ul class="points">
-                <li *ngFor="let e of currentElement.benefits" > {{e}}  </li>
-              </ul>
-            </div>
+        <div *ngIf="currentElement.showCompany">
+          <div class="company-and-place">
+            <p>{{ currentElement && currentElement.company.name }}</p>
+          </div>
 
+          <div class="company-and-placea">
+            <p class="sls">
+              {{ currentElement && currentElement.company.description }}
+            </p>
+          </div>
+        </div>
 
-            <div class="points-key">
+        <div *ngIf="!currentElement.showCompany">
+          <div class="company-and-place">
+            <p>Empresa confidencial</p>
+          </div>
+        </div>
 
-              <h3> Requisitos a cumplir: </h3>
+        <div class="category">
+          {{ currentElement && currentElement.city.valor }} -
+          {{ currentElement && currentElement.state.valor }}
+        </div>
 
-              <ul class="points">
-                <li *ngFor="let e of currentElement.skills" > {{e}}  </li>
-              </ul>
-            </div>
+        <div class="date-published">
+          <p>{{ getDays(currentElement.regDateCreated) }}</p>
+        </div>
 
-            <div class="points-key">
+        <div class="view">
+          <nz-tag [nzColor]="'#87d068'" *ngIf="currentElement.isPostulated">
+            <i nz-icon nzType="check-circle"></i>
+            Ya te has postulado
+          </nz-tag>
+        </div>
+      </div>
 
-              <h3> Funciones principales: </h3>
+      <div class="card-postulate">
+        <nz-card
+          [nzCover]="coverTemplate"
+          [nzActions]="[actionSetting, actionEllipsis]"
+        >
+          <nz-card-meta
+            *ngIf="currentElement.showCompany"
+            nzTitle="{{ currentElement && currentElement.company.name }}"
+            nzDescription="{{
+              currentElement && currentElement.company.emailContact
+            }}"
+            [nzAvatar]="avatarTemplate"
+          ></nz-card-meta>
 
-              <ul class="points">
-                <li *ngFor="let e of currentElement.mainActivities"> {{e}} </li>
-              </ul>
-            </div>
-
-            <br>
-
-             <div class="company-and-place">
-                <p> {{ currentElement && currentElement.company.name }}</p> 
-             </div>
-
-             <div class="company-and-placea">
-              <p class="sls"> {{ currentElement && currentElement.company.description }}</p> 
-           </div>
-
-             <div class="category">
-              {{currentElement && currentElement.city.valor}} - {{currentElement && currentElement.state.valor}}
-             </div>
-
-
-
-             <div class="date-published">
-              <p> {{getDays(currentElement.regDateCreated)}}</p>
-            </div>
-
-
-             
-
-
-       </div>
-
-       <div class="card-postulate">
-         <nz-card  [nzCover]="coverTemplate" [nzActions]="[actionSetting,  actionEllipsis]">
-           <nz-card-meta
-             nzTitle="{{currentElement && currentElement.company.name}}"
-             nzDescription="{{currentElement && currentElement.description}}"
-             [nzAvatar]="avatarTemplate"
-           ></nz-card-meta>
-         </nz-card>
-         <div class="card-footer">
+          <nz-card-meta
+            *ngIf="!currentElement.showCompany"
+            nzTitle="Empresa confidencial"
+            [nzAvatar]="avatarTemplate"
+          ></nz-card-meta>
+        </nz-card>
+        <div class="card-footer">
           <ng-template #avatarTemplate>
             <!-- <nz-avatar nzSrc="{{currentElement && currentElement.company.imageURL}}"></nz-avatar> -->
           </ng-template>
           <ng-template #coverTemplate>
-            <img alt="example" src="{{currentElement && currentElement.company.imageURL}}" />
+            <img
+              *ngIf="currentElement.showCompany"
+              alt="example"
+              src="{{ currentElement && currentElement.company.imageURL }}"
+            />
+            <img
+              *ngIf="!currentElement.showCompany"
+              alt="confidential-company"
+              src="https://w7.pngwing.com/pngs/132/496/png-transparent-postage-stamps-paper-label-college-confidential-text-logo-sticker.png"
+            />
           </ng-template>
           <ng-template #actionSetting>
-            <button [disabled]="role == 'ROLE_HR'"  (click)="showModalOffer()" nz-button nzType="default" class="button-blue btn-wi">
-              <i  nz-icon nzType="appstore-add" nzTheme="outline"></i> 
+            <button
+              [disabled]="
+                role == 'ROLE_HR' ||
+                currentElement.isPostulated ||
+                isOfferExpired
+              "
+              (click)="showModalOffer()"
+              nz-button
+              nzType="default"
+              class="button-blue btn-wi"
+              nzTooltipTitle="Postularse"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+            >
+              <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
             </button>
-         </ng-template>
-       
+          </ng-template>
+
           <ng-template #actionEllipsis>
-            
-            <button [disabled]="role == 'ROLE_HR'" (click)="showModalComplaint()" nz-button nzType="default" class="button-red btn-wi">
-              <i  nz-icon nzType="warning" nzTheme="outline"></i>
+            <button
+              [disabled]="
+                role == 'ROLE_HR' ||
+                currentElement.isPostulated ||
+                isOfferExpired
+              "
+              (click)="showModalComplaint()"
+              nz-button
+              nzType="default"
+              class="button-red btn-wi"
+              nzTooltipTitle="Reportar"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+            >
+              <i nz-icon nzType="warning" nzTheme="outline"></i>
             </button>
-         </ng-template>
-         </div>
-
-       </div>
-
-
-
+          </ng-template>
+        </div>
       </div>
+
+    </div>
 
 
   </div>
 </div>
-
-
-
 
 <nz-modal
   [nzStyle]="{ top: '20px' }"
@@ -181,11 +257,12 @@
             </div>
           </div>
 
-        
           <div nz-row [nzGutter]="8">
             <div nz-col nzSpan="24">
               <nz-form-item>
-                <nz-form-label nzRequired>¿Cuál incoveniente encontraste en esta oferta?</nz-form-label>
+                <nz-form-label nzRequired
+                  >¿Cuál incoveniente encontraste en esta oferta?</nz-form-label
+                >
                 <nz-form-control nzErrorTip="Campo requerido">
                   <textarea
                     nz-input
@@ -197,18 +274,15 @@
               </nz-form-item>
             </div>
           </div>
-
-          
-
-        
-          
         </nz-spin>
       </form>
     </div>
   </ng-container>
 
   <ng-template #modalFooter>
-    <button nz-button nzType="default" (click)="closeComplaintModal()">Cerrar</button>
+    <button nz-button nzType="default" (click)="closeComplaintModal()">
+      Cerrar
+    </button>
     <button
       nz-button
       nzType="primary"
@@ -221,12 +295,10 @@
   </ng-template>
 </nz-modal>
 
-
-
 <nz-modal
   [nzStyle]="{ top: '20px' }"
   [(nzVisible)]="isVisibleAddPostulate"
-  nzTitle="Postulate a la siguiente oferta"
+  nzTitle="Postularme a la siguiente oferta"
   (nzOnCancel)="closeOfferPostulate()"
   [nzFooter]="modalFooter1"
 >
@@ -242,11 +314,13 @@
         [nzLayout]="'vertical'"
       >
         <nz-spin [nzSpinning]="isLoadingReview">
-       
           <div nz-row [nzGutter]="8">
             <div nz-col nzSpan="24">
               <nz-form-item>
-                <nz-form-label nzRequired>¿En qué horario y día nos podemos comunicar contigo?</nz-form-label>
+                <nz-form-label nzRequired
+                  >¿En qué horario y día nos podemos comunicar
+                  contigo?</nz-form-label
+                >
                 <nz-form-control nzErrorTip="Campo requerido">
                   <textarea
                     nz-input
@@ -258,18 +332,15 @@
               </nz-form-item>
             </div>
           </div>
-
-          
-
-        
-          
         </nz-spin>
       </form>
     </div>
   </ng-container>
 
   <ng-template #modalFooter1>
-    <button nz-button nzType="default" (click)="closeOfferPostulate()">Cerrar</button>
+    <button nz-button nzType="default" (click)="closeOfferPostulate()">
+      Cerrar
+    </button>
     <button
       nz-button
       nzType="primary"
@@ -277,7 +348,32 @@
       nz-button
       [nzLoading]="isLoadingReview"
     >
-      Comentar
+      Postularme
+    </button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleLoginRequired"
+  nzTitle="No has iniciado sesión."
+  (nzOnCancel)="isVisibleLoginRequired = false"
+  [nzFooter]="modalFooter3"
+>
+  <ng-container *nzModalContent>
+    <div class="mod">
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">Para continuar debes ingresar a tu cuenta.</div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter3>
+    <button nz-button nzType="default" (click)="isVisibleLoginRequired = false">
+      Cerrar
+    </button>
+    <button nz-button nzType="primary" nz-button (click)="goToLogin()">
+      Iniciar sesión
     </button>
   </ng-template>
 </nz-modal>

@@ -32,10 +32,9 @@ export class MyPostulationsComponent implements OnInit {
   public listPostulations: any;
 
   submitForm(): void {
-    
     let form = this.searchForm.value;
 
-    this.isLoadingGeneral = true;
+    this.isLoadingTable = true;
     this.cvService
       .getPostulationsByUser({
         userId: this.userId,
@@ -90,7 +89,7 @@ export class MyPostulationsComponent implements OnInit {
   }
 
   getPostulations() {
-    this.isLoadingGeneral = true;
+    this.isLoadingTable = true;
     this.cvService
       .getPostulationsByUser({
         userId: this.userId,
@@ -108,7 +107,7 @@ export class MyPostulationsComponent implements OnInit {
 
           console.log(this.listPostulations);
 
-          this.isLoadingGeneral = false;
+          this.isLoadingTable = false;
         },
         (errorResponse: HttpErrorResponse) => {
           this.ngxSpinner.hide();
@@ -116,7 +115,7 @@ export class MyPostulationsComponent implements OnInit {
             'error',
             'Ha ocurrido un error al recuperar las postulaciones'
           );
-          this.isLoadingGeneral = false;
+          this.isLoadingTable = false;
         }
       );
   }

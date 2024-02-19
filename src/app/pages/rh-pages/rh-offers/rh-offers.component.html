@@ -1,36 +1,29 @@
 <nz-spin [nzSpinning]="isLoadingGeneral">
-
-
   <div class="nav">
-    <p> 📕 Mis ofertas</p>
+    <p>📕 Mis ofertas</p>
   </div>
 
-
-
-  <form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <form
+    nz-form
+    [nzLayout]="'vertical'"
+    [formGroup]="validateForm"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
     <div nz-row [nzGutter]="24">
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
             <nz-form-label nzFor="email"> Título de la oferta </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-                 <input type="text" class="input-text" nzSize="large" nz-input formControlName="title"
-                  placeholder="Título de la oferta" />
-           
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-
-      
-      <div nz-col class="gutter-row" [nzSpan]="6">
-        <div class="inner-box">
-          <nz-form-item class="input-content">
-            <nz-form-label  nzFor="surnames"> Salario </nz-form-label>
-            <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Rango salarial" formControlName="rangeAmount">
-                <nz-option *ngFor="let item of listRangeAmount" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
-              </nz-select>                      
+              <input
+                type="text"
+                class="input-text"
+                nzSize="large"
+                nz-input
+                formControlName="title"
+                placeholder="Título de la oferta"
+              />
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -39,11 +32,22 @@
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
-            <nz-form-label  nzFor="surnames"> Subcategoría de la oferta </nz-form-label>
+            <nz-form-label nzFor="surnames"> Salario </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Subcategoría"  formControlName="subcategory">
-                <nz-option *ngFor="let item of listSubcategory" [nzLabel]="item.valor" [nzValue]="item.valor"></nz-option>
-              </nz-select>                 
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Rango salarial"
+                formControlName="rangeAmount"
+              >
+                <nz-option
+                  *ngFor="let item of listRangeAmount"
+                  [nzLabel]="item.valor"
+                  [nzValue]="item.clave"
+                ></nz-option>
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -52,13 +56,49 @@
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
-            <nz-form-label  nzFor="email"> Urgencia </nz-form-label>
+            <nz-form-label nzFor="surnames">
+              Subcategoría de la oferta
+            </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Urgencia de contratación" formControlName="urgency">
-                <nz-option nzLabel="Contratación urgente" nzValue="A"></nz-option>
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Subcategoría"
+                formControlName="subcategory"
+              >
+                <nz-option
+                  *ngFor="let item of listSubcategory"
+                  [nzLabel]="item.valor"
+                  [nzValue]="item.valor"
+                ></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="inner-box">
+          <nz-form-item class="input-content">
+            <nz-form-label nzFor="email"> Urgencia </nz-form-label>
+            <nz-form-control nzErrorTip="Campo requerido">
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Urgencia de contratación"
+                formControlName="urgency"
+              >
+                <nz-option
+                  nzLabel="Contratación urgente"
+                  nzValue="A"
+                ></nz-option>
                 <nz-option nzLabel="Moderada" nzValue="B"></nz-option>
                 <nz-option nzLabel="Baja" nzValue="C"></nz-option>
-              </nz-select>        
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -71,9 +111,20 @@
           <nz-form-item class="input-content">
             <nz-form-label nzFor="email"> Nivel de estudios </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Nivel de estudios" formControlName="levelStudy">
-                <nz-option *ngFor="let item of listLevelStudy" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
-              </nz-select>        
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Nivel de estudios"
+                formControlName="levelStudy"
+              >
+                <nz-option
+                  *ngFor="let item of listLevelStudy"
+                  [nzLabel]="item.valor"
+                  [nzValue]="item.clave"
+                ></nz-option>
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -82,14 +133,21 @@
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
-            <nz-form-label  nzFor="surnames"> Tipo de trabajo </nz-form-label>
+            <nz-form-label nzFor="surnames"> Tipo de trabajo </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Tipo de trabajo" formControlName="workPlace" >
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Tipo de trabajo"
+                formControlName="workPlace"
+              >
                 <nz-option nzLabel="Jornada completa" nzValue="A"></nz-option>
                 <nz-option nzLabel="Media jornada" nzValue="B"></nz-option>
                 <nz-option nzLabel="Pasantias" nzValue="C"></nz-option>
                 <nz-option nzLabel="Por proyecto" nzValue="D"></nz-option>
-              </nz-select>        
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -98,28 +156,43 @@
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
-            <nz-form-label  nzFor="surnames"> Lugar de trabajo </nz-form-label>
+            <nz-form-label nzFor="surnames"> Lugar de trabajo </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzShowSearch nzAllowClear nzPlaceHolder="Lugar de trabajo" formControlName="typeOfJob" >
-                <nz-option *ngFor="let item of listTypeOfJob" [nzLabel]="item.valor" [nzValue]="item.clave"></nz-option>                
-              </nz-select>        
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Lugar de trabajo"
+                formControlName="typeOfJob"
+              >
+                <nz-option
+                  *ngFor="let item of listTypeOfJob"
+                  [nzLabel]="item.valor"
+                  [nzValue]="item.clave"
+                ></nz-option>
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
 
-      
-
       <div nz-col class="gutter-row" [nzSpan]="6">
         <div class="inner-box">
           <nz-form-item class="input-content">
-            <nz-form-label  nzFor="email"> Estatus de la oferta </nz-form-label>
+            <nz-form-label nzFor="email"> Estatus de la oferta </nz-form-label>
             <nz-form-control nzErrorTip="Campo requerido">
-              <nz-select class="input-text-select" nzSize="large" nzPlaceHolder="Estatus de la oferta" [ngModel]="statusOffer" formControlName="status">
+              <nz-select
+                class="input-text-select"
+                nzSize="large"
+                nzPlaceHolder="Estatus de la oferta"
+                [ngModel]="statusOffer"
+                formControlName="status"
+              >
                 <nz-option nzLabel="Vigente" nzValue="0"></nz-option>
                 <nz-option nzLabel="Cerrada" nzValue="1"></nz-option>
                 <nz-option nzLabel="Bloqueada" nzValue="2"></nz-option>
-              </nz-select>        
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -130,44 +203,52 @@
       <div nz-col class="gutter-row" [nzSpan]="12">
         <div class="inner-box">
           <nz-space>
-
-
-            <button *nzSpaceItem type="button"  [disabled]="listCompanies.length == 0" (click)="cleanFilters()" nz-button
-              class="button-red">
+            <button
+              *nzSpaceItem
+              type="button"
+              [disabled]="listCompanies.length == 0"
+              (click)="cleanFilters()"
+              nz-button
+              class="button-red"
+            >
               <i nz-icon nzType="clear"></i>
               Limpiar filtros
             </button>
 
-
-            <button *nzSpaceItem type="button" [disabled]="listCompanies.length == 0"   nz-button
-            class="button-white">
-            <a routerLink="/dashboard/new-offer" routerLinkActive="active" >
-              <i nz-icon nzType="plus"></i>
-              Nueva oferta
-            </a>
-          </button>
-
-
-
+            <button
+              *nzSpaceItem
+              type="button"
+              [disabled]="listCompanies.length == 0"
+              nz-button
+              class="button-white"
+            >
+              <a routerLink="/dashboard/new-offer" routerLinkActive="active">
+                <i nz-icon nzType="plus"></i>
+                Nueva oferta
+              </a>
+            </button>
           </nz-space>
         </div>
       </div>
 
       <div nz-col class="gutter-row" align="right" [nzSpan]="12">
         <div class="inner-box">
-         
-          <button  [disabled]="listCompanies.length == 0" type="submit" nz-button
-          class="button-white">
-          <i nz-icon nzType="search"></i>
-          Realizar Búsqueda
-        </button>
+          <button
+            [disabled]="listCompanies.length == 0"
+            type="submit"
+            nz-button
+            class="button-white"
+          >
+            <i nz-icon nzType="search"></i>
+            Realizar Búsqueda
+          </button>
         </div>
       </div>
     </div>
   </form>
   <br />
 
-  <div class="form-inline">
+  <div class="form-inline" *ngIf="!isLoadingTable">
     <div class="pagination-content">
       <nz-pagination
         [nzPageSize]="pageSize"
@@ -180,18 +261,23 @@
     </div>
 
     <div class="text-co">
-      <span class="mr-md-auto"> {{ totalElementByPage }} coincidencias </span>
+      <span class="mr-md-auto"> {{ total }} coincidencias </span>
     </div>
   </div>
 
+        
+  <nz-skeleton *ngIf="isLoadingTable && offers.length == 0" ></nz-skeleton>
+  <nz-skeleton *ngIf="isLoadingTable && offers.length == 0" ></nz-skeleton>
+  <nz-skeleton *ngIf="isLoadingTable && offers.length == 0" ></nz-skeleton>
+
 
   <div class="card-content">
-    <div *ngFor="let item of data" class="card-description">
+    <div *ngFor="let item of offers" class="card-description">
       <div class="card-title">
-        <p class="pa-st"> {{item.title}}</p>
+        <p class="pa-st">{{ item.title }}</p>
       </div>
       <div class="salary">
-        <b> 
+        <b>
           {{ item.rangeAmount.valor }}
         </b>
       </div>
@@ -201,243 +287,319 @@
       </div>
 
       <div class="tags">
-        <nz-tag nzColor="{{getUrgencyColor(item.urgency)}}">
+        <nz-tag nzColor="{{ getUrgencyColor(item.urgency) }}">
           <i nz-icon nzType="check-circle"></i>
-          <span>{{getUrgency(item.urgency)}}</span>
+          <span>{{ getUrgency(item.urgency) }}</span>
         </nz-tag>
       </div>
 
-     
       <div class="salary">
-          <b> {{item.subcategory.valor}} </b>
+        <b> {{ item.subcategory.valor }} </b>
       </div>
       <div class="salary">
-        <p> 
-          <b> Vigencia:  </b><br>
- {{item.vencimiento |date:"medium" }}
+        <p>
+          <b> Vigencia: </b><br />
+          {{ item.vencimiento | date : "mediumDate" }} <br />
+          ({{ getEndDateFunction(item.vencimiento) }})
         </p>
       </div>
-      
+
       <div class="button-super">
         <nz-space>
-          <button *nzSpaceItem (click)="openViewModal(item)" nz-button class="button-white pd-1"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
-          <button *nzSpaceItem  routerLink="/dashboard/update-offer/{{ item.id }}" nz-button class="button-blue pd-1"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
-          <button *nzSpaceItem (click)="showDeleteModal(item.id)" nz-button class="button-red pd-1"><i nz-icon nzType="delete" nzTheme="outline"></i></button>
+          <button
+            *nzSpaceItem
+            (click)="openViewModal(item)"
+            nz-button
+            class="button-white pd-1"
+            nzTooltipTitle="Ver"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <i nz-icon nzType="eye" nzTheme="outline"></i>
+          </button>
+          <button
+            *nzSpaceItem
+            (click)="shareOffer(item)"
+            nz-button
+            class="button-white pd-1"
+            nzTooltipTitle="Compartir"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <i nz-icon nzType="share-alt" nzTheme="outline"></i>
+          </button>
+          <button
+            *nzSpaceItem
+            routerLink="/dashboard/update-offer/{{ item.id }}"
+            nz-button
+            class="button-blue pd-1"
+            nzTooltipTitle="Editar"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+          </button>
+          <button
+            *nzSpaceItem
+            (click)="showDeleteModal(item.id)"
+            nz-button
+            class="button-red pd-1"
+            nzTooltipTitle="Eliminar"
+            nzTooltipPlacement="bottom"
+            nz-tooltip
+          >
+            <i nz-icon nzType="delete" nzTheme="outline"></i>
+          </button>
         </nz-space>
       </div>
     </div>
 
     <div class="form-inline">
-
-    <nz-empty
-    [hidden]="data.length > 0 && listCompanies.length > 0"
-    nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-    [nzNotFoundContent]="contentTpl"
-    [nzNotFoundFooter]="footerTpl"
-    >
-    <ng-template #contentTpl>
-      <span>
-        {{ listCompanies.length == 0 ? 'Aún no has creado una empresa' : 'Aún no has creado ninguna oferta' }}  
-      </span>
-    </ng-template>
-    <ng-template #footerTpl>
-      <button nz-button nzType="primary" (click)="navigateCreate()" > 
-        {{ listCompanies.length == 0 ? 'Crear empresa' : 'Crear oferta' }}  
-
-         </button>
-    </ng-template>
-   </nz-empty>
-
-   
+      <nz-empty
+        [hidden]="!isLoadingTable && offers.length > 0 && listCompanies.length > 0"
+        nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+        [nzNotFoundContent]="contentTpl"
+        [nzNotFoundFooter]="footerTpl"
+      >
+        <ng-template #contentTpl>
+          <span>
+            {{
+              listCompanies.length == 0
+                ? "Aún no has creado una empresa"
+                : "Aún no has creado ninguna oferta"
+            }}
+          </span>
+        </ng-template>
+        <ng-template #footerTpl>
+          <button nz-button nzType="primary" (click)="navigateCreate()">
+            {{ listCompanies.length == 0 ? "Crear empresa" : "Crear oferta" }}
+          </button>
+        </ng-template>
+      </nz-empty>
+    </div>
   </div>
-
-  
- 
-   
-
-
-  </div>
-
 
 </nz-spin>
 
 <nz-drawer
-       [nzWidth]="500"
-      [nzClosable]="false"
-      [nzVisible]="visibleEditDrawer"
-      nzPlacement="right"
-      nzTitle="Editar oferta"
-      (nzOnClose)="closeEditDrawer()"
-      [nzFooter]="footerTpl"
-    >
-      <ng-container *nzDrawerContent>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </ng-container>
+  [nzWidth]="500"
+  [nzClosable]="false"
+  [nzVisible]="visibleEditDrawer"
+  nzPlacement="right"
+  nzTitle="Editar oferta"
+  (nzOnClose)="closeEditDrawer()"
+  [nzFooter]="footerTpl"
+>
+  <ng-container *nzDrawerContent>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </ng-container>
 
-      <ng-template #footerTpl>
-        <nz-space>
-            <button *nzSpaceItem class="button-red pd-1" nz-button (click)="closeEditDrawer()">Cerrar</button>
-            <button *nzSpaceItem class="button-blue pd-1" nz-button (click)="closeEditDrawer()">Continuar</button>
-        </nz-space>
-    </ng-template>
+  <ng-template #footerTpl>
+    <nz-space>
+      <button
+        *nzSpaceItem
+        class="button-red pd-1"
+        nz-button
+        (click)="closeEditDrawer()"
+      >
+        Cerrar
+      </button>
+      <button
+        *nzSpaceItem
+        class="button-blue pd-1"
+        nz-button
+        (click)="closeEditDrawer()"
+      >
+        Continuar
+      </button>
+    </nz-space>
+  </ng-template>
+</nz-drawer>
 
-    </nz-drawer>
-
-
-<nz-modal 
-[nzStyle]="{ top: '20px' }"
-
-[nzWidth]="1000"
-[(nzVisible)]="visibleModal" nzTitle="Detalle de la oferta" (nzOnCancel)="closeViewModal()">
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [nzWidth]="1000"
+  [(nzVisible)]="visibleModal"
+  nzTitle="Detalle de la oferta"
+  (nzOnCancel)="closeViewModal()"
+>
   <ng-container *nzModalContent>
     <nz-spin [nzSpinning]="isLoadingViewDetail">
       <nz-tabset>
         <nz-tab [nzTitle]="titleTemplate1">
-          
           <ng-template #titleTemplate1>
             <span nz-icon [nzType]="'info-circle'"></span>
-             Información de la ofertas
+            Información de la ofertas
           </ng-template>
-  
-          <nz-descriptions nzTitle="{{offer && offer.title}}" nzBordered>
-            
+
+          <nz-descriptions nzTitle="{{ offer && offer.title }}" nzBordered>
             <nz-descriptions-item nzTitle="Empresa" [nzSpan]="3">
-              {{ offer && offer.company.name}}
+              {{ offer && offer.company.name }}
             </nz-descriptions-item>
-            
+
             <nz-descriptions-item nzTitle="Categoria" [nzSpan]="3">
-              {{ offer && offer.category.valor}} - {{ offer && offer.subcategory.valor}} 
+              {{ offer && offer.category.valor }} -
+              {{ offer && offer.subcategory.valor }}
             </nz-descriptions-item>
-        
+
             <nz-descriptions-item nzTitle="Tipo de trabajo" [nzSpan]="2">
-              {{ offer && getWorkPlace(offer.workPlace)}}
+              {{ offer && getWorkPlace(offer.workPlace) }}
             </nz-descriptions-item>
             <nz-descriptions-item nzTitle="Lugar de trabajo" [nzSpan]="2">
-              {{ offer && offer.typeOfJob.valor}}
+              {{ offer && offer.typeOfJob.valor }}
             </nz-descriptions-item>
             <nz-descriptions-item nzTitle="Urgencia" [nzSpan]="2">
-              <nz-badge nzStatus="processing" nzText="{{offer && getUrgency(offer.urgency)}}"></nz-badge>
+              <nz-badge
+                nzStatus="processing"
+                nzText="{{ offer && getUrgency(offer.urgency) }}"
+              ></nz-badge>
             </nz-descriptions-item>
             <nz-descriptions-item nzTitle="Salario" [nzSpan]="2">
-              {{ offer && offer.rangeAmount.valor}}
+              {{ offer && offer.rangeAmount.valor }}
             </nz-descriptions-item>
             <nz-descriptions-item nzTitle="Mostrar salario" [nzSpan]="2">
-              {{ offer && showValues(offer.showSalary)}}
+              {{ offer && showValues(offer.showSalary) }}
             </nz-descriptions-item>
             <nz-descriptions-item nzTitle="Mostrar empresa" [nzSpan]="2">
-              {{ offer && showValues(offer.showCompany)}}
+              {{ offer && showValues(offer.showCompany) }}
             </nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Descripción"  [nzSpan]="3">
-              {{ offer && offer.description}}
+            <nz-descriptions-item nzTitle="Descripción" [nzSpan]="3">
+              {{ offer && offer.description }}
             </nz-descriptions-item>
-            
-              <nz-descriptions-item nzTitle="Actividades"  [nzSpan]="3">
-                <ul>
-                  <li *ngFor="let e of offer.mainActivities"> {{e}} </li>
-                </ul>
-              </nz-descriptions-item>
-  
-              <nz-descriptions-item nzTitle="Habilidades"  [nzSpan]="3">
-                <ul>
-                    <li *ngFor="let e of offer.skills"> {{e}} </li>
-                </ul>
-              </nz-descriptions-item>
 
-              <nz-descriptions-item nzTitle="Beneficios"  [nzSpan]="3">
-                <ul>
-                    <li *ngFor="let e of offer.benefits"> {{e}}  </li>
-                  
-                </ul>
-              </nz-descriptions-item>
-  
+            <nz-descriptions-item nzTitle="Actividades" [nzSpan]="3">
+              <ul>
+                <li *ngFor="let e of offer.mainActivities">{{ e }}</li>
+              </ul>
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Habilidades" [nzSpan]="3">
+              <ul>
+                <li *ngFor="let e of offer.skills">{{ e }}</li>
+              </ul>
+            </nz-descriptions-item>
+
+            <nz-descriptions-item nzTitle="Beneficios" [nzSpan]="3">
+              <ul>
+                <li *ngFor="let e of offer.benefits">{{ e }}</li>
+              </ul>
+            </nz-descriptions-item>
           </nz-descriptions>
-  
-          </nz-tab>
-  
-          <nz-tab [nzTitle]="titleTemplate2">
-          
-            <ng-template #titleTemplate2>
-              <i nz-icon nzType="book" nzTheme="outline"></i>
+        </nz-tab>
+
+        <nz-tab [nzTitle]="titleTemplate2">
+          <ng-template #titleTemplate2>
+            <i nz-icon nzType="book" nzTheme="outline"></i>
             Postulaciones
-            </ng-template>
-  
-            <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
-              <nz-list-item *ngFor="let item of dataPs">
-                <nz-list-item-meta
-                  nzAvatar="{{sanitazerURL(item.user.profileImageUrl)}}"
-                  nzDescription="{{item.comments}}"
-                >
-                  <nz-list-item-meta-title>
-                    <div class="flex">
-                      <div class="element" (click)="navigateViewJob(item.user)">
-                        <a>{{ item.user.surnames }}</a>
-                      </div>
+          </ng-template>
 
-                      <div class="element">
-                        <nz-space>
-
-                          <div class="space">
-                            <nz-tag *ngIf="item.status == 1" nzColor="success"> Seleccionado </nz-tag>
-                            <nz-tag *ngIf="item.status == 2" nzColor="error"> No seleccionado </nz-tag>
-                          </div>
-                       
-                          <div class="space" *nzSpaceItem>
-                            <nz-select *ngIf="item.status == 0" [(ngModel)]="item.valueSelected">
-                              <nz-option [nzValue]="1" nzLabel="Seleccionar"></nz-option>
-                              <nz-option [nzValue]="2" nzLabel="Rechazar"></nz-option>
-                              <nz-option [nzValue]="0" nzLabel="Pendiente" nzDisabled></nz-option>
-                            </nz-select>
-                          </div>
-
-                          <div *nzSpaceItem  class="space">
-                            <button (click)="changeStatusPostulate(item)" [disabled]="item.valueSelected == 0"  *ngIf="item.status == 0" nz-button class="btn-green" nzType="primary" nzShape="circle">
-                              <span  nz-icon nzType="send" nzTheme="outline"></span>
-                             </button>
-                          </div>
-                          
-                           <div *nzSpaceItem  class="space">
-                            <button *ngIf="item.status == 0" (click)="showModalMessagePostulate(item)" nz-button nzType="primary" nzShape="circle">
-                              <span nz-icon nzType="mail" nzTheme="outline"></span>                          
-                            </button>
-  
-                           </div>
-                          
-                        
-                    
-                        </nz-space>
-                      </div>
-
+          <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
+            <nz-list-item *ngFor="let item of dataPs">
+              <nz-list-item-meta
+                nzAvatar="{{ sanitazerURL(item.user.profileImageUrl) }}"
+                nzDescription="{{ item.comments }}"
+              >
+                <nz-list-item-meta-title>
+                  <div class="flex">
+                    <div class="element" (click)="navigateViewJob(item.user)">
+                      <a>{{ item.user.surnames }}</a>
                     </div>
-                  </nz-list-item-meta-title>
-                  
-                </nz-list-item-meta>
-              </nz-list-item>
-  
-              <div class="form-inline">
-                <div class="pagination-content">
-                  <nz-pagination
-                    [nzPageSize]="pageSizePs"
-                    [nzPageIndex]="currentPs"
-                    [nzTotal]="totalPs"
-                    (nzPageSizeChange)="changePageSizePs($event)"
-                    (nzPageIndexChange)="changeCurrentPagePs($event)"
-                    id="demo"
-                  ></nz-pagination>
-                </div>
-            
-               
+
+                    <div class="element">
+                      <nz-space>
+                        <div class="space">
+                          <nz-tag *ngIf="item.status == 1" nzColor="success">
+                            Seleccionado
+                          </nz-tag>
+                          <nz-tag *ngIf="item.status == 2" nzColor="error">
+                            No seleccionado
+                          </nz-tag>
+                        </div>
+
+                        <div class="space" *nzSpaceItem>
+                          <nz-select
+                            *ngIf="item.status == 0"
+                            [(ngModel)]="item.valueSelected"
+                          >
+                            <nz-option
+                              [nzValue]="1"
+                              nzLabel="Seleccionar"
+                            ></nz-option>
+                            <nz-option
+                              [nzValue]="2"
+                              nzLabel="Rechazar"
+                            ></nz-option>
+                            <nz-option
+                              [nzValue]="0"
+                              nzLabel="Pendiente"
+                              nzDisabled
+                            ></nz-option>
+                          </nz-select>
+                        </div>
+
+                        <div *nzSpaceItem class="space">
+                          <button
+                            (click)="changeStatusPostulate(item)"
+                            [disabled]="item.valueSelected == 0"
+                            *ngIf="item.status == 0"
+                            nz-button
+                            class="btn-green"
+                            nzType="primary"
+                            nzShape="circle"
+                          >
+                            <span
+                              nz-icon
+                              nzType="send"
+                              nzTheme="outline"
+                            ></span>
+                          </button>
+                        </div>
+
+                        <div *nzSpaceItem class="space">
+                          <button
+                            *ngIf="item.status == 0"
+                            (click)="showModalMessagePostulate(item)"
+                            nz-button
+                            nzType="primary"
+                            nzShape="circle"
+                          >
+                            <span
+                              nz-icon
+                              nzType="mail"
+                              nzTheme="outline"
+                            ></span>
+                          </button>
+                        </div>
+                      </nz-space>
+                    </div>
+                  </div>
+                </nz-list-item-meta-title>
+              </nz-list-item-meta>
+            </nz-list-item>
+
+            <div class="form-inline">
+              <div class="pagination-content">
+                <nz-pagination
+                  [nzPageSize]="pageSizePs"
+                  [nzPageIndex]="currentPs"
+                  [nzTotal]="totalPs"
+                  (nzPageSizeChange)="changePageSizePs($event)"
+                  (nzPageIndexChange)="changeCurrentPagePs($event)"
+                  id="demo"
+                ></nz-pagination>
               </div>
+            </div>
 
-              <br>
+            <br />
 
-              <nz-empty
+            <nz-empty
               [hidden]="dataPs.length > 0"
               nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
               [nzNotFoundContent]="contentTpl"
               [nzNotFoundFooter]="footerTpl"
-              >
+            >
               <ng-template #contentTpl>
                 <span>
                   Aún no se ha postulado nadie aún
@@ -447,103 +609,83 @@
               <ng-template #footerTpl>
                 <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
               </ng-template>
-             </nz-empty>
-  
+            </nz-empty>
+          </nz-list>
+        </nz-tab>
 
-            </nz-list>
-    
-            </nz-tab>
-  
-            
-            <nz-tab [nzTitle]="titleTemplate3">
-          
-              <ng-template #titleTemplate3>
-                <i nz-icon nzType="file-protect" nzTheme="outline"></i>
-                Quejas y sugerencias
-              </ng-template>
-      
-            
-              <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
-                <nz-list-item *ngFor="let item of dataC">
-                  <nz-list-item-meta
-                  nzAvatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrbkK5L2pzoJpQgvTgwYZlBQigM0rsd2kC8oW3lk-7tQ&s"
-                    nzDescription="{{item.title}}"
-                  >
-                    <nz-list-item-meta-title>
-                      <div class="flex">
-                        <div class="element">
-                          <a>{{ item.comments }}</a>
-                        </div>
-  
-                        <div class="element">
-                          <!-- <nz-space>
+        <nz-tab [nzTitle]="titleTemplate3">
+          <ng-template #titleTemplate3>
+            <i nz-icon nzType="file-protect" nzTheme="outline"></i>
+            Quejas y sugerencias
+          </ng-template>
+
+          <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
+            <nz-list-item *ngFor="let item of dataC">
+              <nz-list-item-meta
+                nzAvatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrbkK5L2pzoJpQgvTgwYZlBQigM0rsd2kC8oW3lk-7tQ&s"
+                nzDescription="{{ item.title }}"
+              >
+                <nz-list-item-meta-title>
+                  <div class="flex">
+                    <div class="element">
+                      <a>{{ item.comments }}</a>
+                    </div>
+
+                    <div class="element">
+                      <!-- <nz-space>
                          
                             <button *nzSpaceItem nz-button nzType="primary" nzShape="circle">
                               <span nz-icon nzType="comment" nzTheme="outline"></span>
                             </button>
                           </nz-space> -->
-                        </div>
-  
-                      </div>
-                    </nz-list-item-meta-title>
-                    
-                  </nz-list-item-meta>
-                </nz-list-item>
-
-                <div class="form-inline">
-                  <div class="pagination-content">
-                    <nz-pagination
-                      [nzPageSize]="pageSizeC"
-                      [nzPageIndex]="currentC"
-                      [nzTotal]="totalC"
-                      (nzPageSizeChange)="changePageSizeC($event)"
-                      (nzPageIndexChange)="changeCurrentPageC($event)"
-                      id="demo"
-                    ></nz-pagination>
+                    </div>
                   </div>
+                </nz-list-item-meta-title>
+              </nz-list-item-meta>
+            </nz-list-item>
 
-                </div>
-                <br>
+            <div class="form-inline">
+              <div class="pagination-content">
+                <nz-pagination
+                  [nzPageSize]="pageSizeC"
+                  [nzPageIndex]="currentC"
+                  [nzTotal]="totalC"
+                  (nzPageSizeChange)="changePageSizeC($event)"
+                  (nzPageIndexChange)="changeCurrentPageC($event)"
+                  id="demo"
+                ></nz-pagination>
+              </div>
+            </div>
+            <br />
 
-                
-                <nz-empty
-                [hidden]="dataC.length > 0"
-                nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-                [nzNotFoundContent]="contentTpl"
-                [nzNotFoundFooter]="footerTpl"
-                >
-                <ng-template #contentTpl>
-                  <span>
-                    Sin quejas :)
-                    <!-- <a routerLink="/search">¿Deseas comenzar a buscar?</a> -->
-                  </span>
-                </ng-template>
-                <ng-template #footerTpl>
-                  <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
-                </ng-template>
-               </nz-empty>
-    
-              </nz-list>
-      
-            
-            </nz-tab>
-  
-              
+            <nz-empty
+              [hidden]="dataC.length > 0"
+              nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+              [nzNotFoundContent]="contentTpl"
+              [nzNotFoundFooter]="footerTpl"
+            >
+              <ng-template #contentTpl>
+                <span>
+                  Sin quejas :)
+                  <!-- <a routerLink="/search">¿Deseas comenzar a buscar?</a> -->
+                </span>
+              </ng-template>
+              <ng-template #footerTpl>
+                <!-- <button nz-button nzType="primary" routerLink="/search" > Buscar </button> -->
+              </ng-template>
+            </nz-empty>
+          </nz-list>
+        </nz-tab>
       </nz-tabset>
     </nz-spin>
-   
- 
   </ng-container>
 
-
   <div *nzModalFooter>
-    <button  class="button-red" nz-button (click)="closeViewModal()">Cerrar</button>
+    <button class="button-red" nz-button (click)="closeViewModal()">
+      Cerrar
+    </button>
   </div>
-
-
 </nz-modal>
-
-
 
 <nz-modal
   [nzStyle]="{ top: '20px' }"
@@ -567,8 +709,12 @@
           <div nz-row [nzGutter]="8">
             <div nz-col nzSpan="24">
               <nz-form-item>
-                <nz-form-label nzRequired>¿Qué te gustaria decirle?</nz-form-label>
-                <nz-form-control nzErrorTip="Campo requerido - Max: 250 Carácteres">
+                <nz-form-label nzRequired
+                  >¿Qué te gustaria decirle?</nz-form-label
+                >
+                <nz-form-control
+                  nzErrorTip="Campo requerido - Max: 250 Carácteres"
+                >
                   <textarea
                     nz-input
                     formControlName="comments"
@@ -579,17 +725,20 @@
               </nz-form-item>
             </div>
           </div>
-
-    
-          
         </nz-spin>
       </form>
     </div>
   </ng-container>
 
   <ng-template #modalFooter>
-    <button       [nzLoading]="isLoadingResponse"
-    nz-button nzType="default" (click)="closeModalMessagePostulate()">Cerrar</button>
+    <button
+      [nzLoading]="isLoadingResponse"
+      nz-button
+      nzType="default"
+      (click)="closeModalMessagePostulate()"
+    >
+      Cerrar
+    </button>
     <button
       nz-button
       nzType="primary"
