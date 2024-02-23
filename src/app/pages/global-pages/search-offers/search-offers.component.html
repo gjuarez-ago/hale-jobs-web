@@ -270,7 +270,7 @@
         </div>
 
         <nz-empty
-          [hidden]="offers.length > 0"
+          [hidden]="isLoadingTable ||  offers.length > 0"
           nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
           [nzNotFoundContent]="contentTpl"
           [nzNotFoundFooter]="footerTpl"

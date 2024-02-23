@@ -204,6 +204,10 @@ export class RhSearchWorkersComponent implements OnInit {
       return;
     }
 
+    this.data = [];
+    this.total = 0;
+
+
     this.ngxSpinner.show();
     let form = this.validateForm.value;
 
@@ -371,6 +375,10 @@ export class RhSearchWorkersComponent implements OnInit {
     )
   }
 
+
+  public cutDescription(desc : any) {
+    return desc.substring(0, 200) + ".....";
+  }
 
   
   public showModalMessagePostulate(item: any) {

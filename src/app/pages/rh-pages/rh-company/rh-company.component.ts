@@ -88,7 +88,9 @@ export class RhCompanyComponent implements OnInit {
 
   this.ngxSpinner.show();
   let form = this.validateForm.value;
-
+  this.data = [];
+  this.total = 0;
+ 
   this.isLoadingTable = true;
   this.isLoadingGeneral = true;
   this.subscriptions.push(
@@ -104,7 +106,14 @@ export class RhCompanyComponent implements OnInit {
       .subscribe(
         (response: any) => {
 
-          this.data = response.content;
+          this.data = response.content.map((prop: any, key: any) => {
+            return {
+              ...prop,
+              imageBase64: 'data:image/png;base64,' + prop.imageBase64,
+              key: key + 1,
+            };
+          });
+
           this.isLoadingGeneral = false;
           this.total = response.totalElements;
           this.totalElementByPage = response.numberOfElements;
@@ -140,7 +149,13 @@ export class RhCompanyComponent implements OnInit {
         })
         .subscribe(
           (response: any) => {
-            this.data = response.content;
+            this.data = response.content.map((prop: any, key: any) => {
+              return {
+                ...prop,
+                imageBase64: 'data:image/png;base64,' + prop.imageBase64,
+                key: key + 1,
+              };
+            });
             this.total = response.totalElements;
             this.totalElementByPage = response.numberOfElements;
             this.isLoadingTable = false;
@@ -198,6 +213,7 @@ export class RhCompanyComponent implements OnInit {
           (response: any) => {
             this.message.create('success', "Empresa eliminada correctamente");
             this.getListPaginate();
+            this.isLoadingTable = false;
           },
           (errorResponse: HttpErrorResponse) => {
             this.isLoadingTable = false;

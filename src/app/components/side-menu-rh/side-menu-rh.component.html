@@ -138,7 +138,9 @@
   (nzOnClose)="closeModalSettings()"
 >
   <ng-container *nzDrawerContent>
-    <form
+  
+    <nz-spin [nzSpinning]="isLoadingActionUser">
+      <form
       nz-form
       [nzLayout]="'horizontal'"
       [formGroup]="validateForm"
@@ -351,6 +353,9 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+
+
+    </nz-spin>
   </ng-container>
 
   <ng-template #footerTpl1>
@@ -391,114 +396,118 @@
   (nzOnClose)="closeModalAD()"
 >
   <ng-container *nzDrawerContent>
-    <div class="list">
-      <div  class="filters">
-        <div class="search-s">
-          <form
-            nz-form
-            [nzLayout]="'inline'"
-            [formGroup]="searchForm"
-            (ngSubmit)="submitForm()"
-          >
-            <nz-form-item>
-              <nz-form-control>
-                <nz-input-group nzPrefixIcon="one-to-one">
-                  <input
-                    formControlName="title"
-                    nz-input
-                    placeholder="Buscar notificaciones por titulo"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
 
-            <nz-form-item>
-              <nz-form-control>
-                <button nz-button nzShape="round" nzType="primary">
-                  Realizar búsqueda
-                </button>
-              </nz-form-control>
-            </nz-form-item>
-          </form>
-        </div>
-      </div>
-
-      <br>
-      
-
-      <nz-list nzItemLayout="horizontal" [nzLoading]="isLoading">
-        <nz-list-item *ngFor="let item of listNotications">
-          <nz-list-item-meta
-            nzDescription="{{ item.title }} - {{
-              item.regDateCreated | date : 'medium'
-            }}"
-          >
-            <nz-list-item-meta-title>
-              <a (click)="navigateViewOffer(item.offerId)">{{
-                item.content
-              }}</a>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
-
-          <ul nz-list-item-actions>
-            <nz-list-item-action>
-              <nz-space>
-                <button
-                  (click)="navigateViewJob(item.userId)"
-                  *nzSpaceItem
-                  nz-button
-                  nzType="primary"
-                  nzShape="circle"
-                >
-                  <i nz-icon nzType="eye" nzTheme="outline"></i>
-                </button>
-
-                <button
-                  (click)="deleteNotification(item.id)"
-                  *nzSpaceItem
-                  nz-button
-                  nzType="primary"
-                  nzDanger
-                  nzShape="circle"
-                >
-                  <i nz-icon nzType="delete" nzTheme="outline"></i>
-                </button>
-              </nz-space>
-            </nz-list-item-action>
-          </ul>
-        </nz-list-item>
-
-        <div *ngIf="listNotications.length > 0"  class="form-inline-not">
-          <div class="pagination-content">
-            <nz-pagination
-              [nzPageSize]="pageSize"
-              [nzPageIndex]="current"
-              [nzTotal]="total"
-              (nzPageSizeChange)="changePageSize($event)"
-              (nzPageIndexChange)="changeCurrentPage($event)"
-              id="demo"
-            ></nz-pagination>
+    <nz-spin [nzSpinning]="isLoadingAds">
+      <div class="list">
+        <div  class="filters">
+          <div class="search-s">
+            <form
+              nz-form
+              [nzLayout]="'inline'"
+              [formGroup]="searchForm"
+              (ngSubmit)="submitForm()"
+            >
+              <nz-form-item>
+                <nz-form-control>
+                  <nz-input-group nzPrefixIcon="one-to-one">
+                    <input
+                      formControlName="title"
+                      nz-input
+                      placeholder="Buscar notificaciones por titulo"
+                    />
+                  </nz-input-group>
+                </nz-form-control>
+              </nz-form-item>
+  
+              <nz-form-item>
+                <nz-form-control>
+                  <button nz-button nzShape="round" nzType="primary">
+                    Realizar búsqueda
+                  </button>
+                </nz-form-control>
+              </nz-form-item>
+            </form>
           </div>
         </div>
-
-        <nz-empty
-          [hidden]="listNotications.length > 0"
-          nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-          [nzNotFoundContent]="contentTpl"
-          [nzNotFoundFooter]="footerTpl"
-        >
-          <ng-template #contentTpl>
-            <span class="span-blo">
-              No hemos encontrado ninguna notificación en este momento.
-              <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
-            </span>
-          </ng-template>
-          <ng-template #footerTpl>
-            <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
-          </ng-template>
-        </nz-empty>
-      </nz-list>
-    </div>
+  
+        <br>
+        
+  
+        <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingAds">
+          <nz-list-item *ngFor="let item of listNotications">
+            <nz-list-item-meta
+              nzDescription="{{ item.title }} - {{
+                item.regDateCreated | date : 'medium'
+              }}"
+            >
+              <nz-list-item-meta-title>
+                <a (click)="navigateViewOffer(item.offerId)">{{
+                  item.content
+                }}</a>
+              </nz-list-item-meta-title>
+            </nz-list-item-meta>
+  
+            <ul nz-list-item-actions>
+              <nz-list-item-action>
+                <nz-space>
+                  <button
+                    (click)="navigateViewJob(item.userId)"
+                    *nzSpaceItem
+                    nz-button
+                    nzType="primary"
+                    nzShape="circle"
+                  >
+                    <i nz-icon nzType="eye" nzTheme="outline"></i>
+                  </button>
+  
+                  <button
+                    (click)="deleteNotification(item.id)"
+                    *nzSpaceItem
+                    nz-button
+                    nzType="primary"
+                    nzDanger
+                    nzShape="circle"
+                  >
+                    <i nz-icon nzType="delete" nzTheme="outline"></i>
+                  </button>
+                </nz-space>
+              </nz-list-item-action>
+            </ul>
+          </nz-list-item>
+  
+          <div *ngIf="listNotications.length > 0"  class="form-inline-not">
+            <div class="pagination-content">
+              <nz-pagination
+                [nzPageSize]="pageSize"
+                [nzPageIndex]="current"
+                [nzTotal]="total"
+                (nzPageSizeChange)="changePageSize($event)"
+                (nzPageIndexChange)="changeCurrentPage($event)"
+                id="demo"
+              ></nz-pagination>
+            </div>
+          </div>
+  
+          <nz-empty
+            [hidden]="listNotications.length > 0"
+            nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+            [nzNotFoundContent]="contentTpl"
+            [nzNotFoundFooter]="footerTpl"
+          >
+            <ng-template #contentTpl>
+              <span class="span-blo">
+                No hemos encontrado ninguna notificación en este momento.
+                <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+              </span>
+            </ng-template>
+            <ng-template #footerTpl>
+              <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+            </ng-template>
+          </nz-empty>
+        </nz-list>
+      </div>
+    </nz-spin>
+ 
   </ng-container>
 
   <ng-template #footerTpl>
@@ -525,13 +534,13 @@
     <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingPostulates">
       <nz-list-item *ngFor="let item of listHistory">
         <nz-list-item-meta
-          nzAvatar="{{ sanitazerURL(item.profileImageUrl) }}"
+          nzAvatar="https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg"
           nzDescription="{{ item.surnames }}"
         >
           <nz-list-item-meta-title>
             <div class="flex">
-              <div class="element" (click)="navigateViewJob(item.user)">
-                <a>{{ item.jobTitle }}</a>
+              <div class="element" (click)="navigateViewJob(item)">
+                <a>{{ item.jobTitle }} (Ver perfil)</a>
               </div>
 
               <div class="element">
@@ -591,7 +600,7 @@
 <nz-modal
   [nzStyle]="{ top: '20px' }"
   [(nzVisible)]="visiblePsStatusOffer"
-  nzTitle="Envia un mensaje a tu prospecto 1"
+  nzTitle="Envia un mensaje a tu prospecto"
   (nzOnCancel)="closeModalMessagePostulate()"
   [nzFooter]="modalFooter"
 >

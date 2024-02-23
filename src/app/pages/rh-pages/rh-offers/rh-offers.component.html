@@ -356,7 +356,7 @@
 
     <div class="form-inline">
       <nz-empty
-        [hidden]="!isLoadingTable && offers.length > 0 && listCompanies.length > 0"
+        [hidden]="isLoadingTable || (offers.length > 0 && listCompanies.length > 0)"
         nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
         [nzNotFoundContent]="contentTpl"
         [nzNotFoundFooter]="footerTpl"
@@ -531,6 +531,7 @@
                               [nzValue]="2"
                               nzLabel="Rechazar"
                             ></nz-option>
+
                             <nz-option
                               [nzValue]="0"
                               nzLabel="Pendiente"

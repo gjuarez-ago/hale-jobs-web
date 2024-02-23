@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   public isSpinning = false;
   public user: User | undefined;
   public role: string = '';
+  public offerId!: any;
 
   constructor(
     private authenticationService: AuthService,
@@ -69,6 +70,9 @@ export class LoginComponent implements OnInit {
     this.isSpinning = true;
     let user = this.validateForm.value;
 
+    const localOffer = sessionStorage.getItem('idOffertaActual');
+    this.offerId = localOffer ? JSON.parse(localOffer) : null;
+
     this.subcriptions.push(
       this.authenticationService.login(user).subscribe(
         (response: any) => {
@@ -78,7 +82,12 @@ export class LoginComponent implements OnInit {
           this.isSpinning = false;
           // this.authenticationService.setUserActive(response.body);
           this.ngxSpinner.hide();
-          this.redirect(response.body);
+
+          if (this.offerId !== null) {
+            this.router.navigateByUrl(`/view-job/${this.offerId}`);
+          } else {
+            this.redirect(response.body);
+          }
         },
         (errorResponse: HttpErrorResponse) => {
           this.ngxSpinner.hide();

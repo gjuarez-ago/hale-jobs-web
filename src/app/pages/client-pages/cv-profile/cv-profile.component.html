@@ -16,7 +16,7 @@
       </nz-space>
   
       <nz-space>
-        <button
+        <!-- <button
           class="btn-green"
           (click)="printPDF()"
           nzShape="round"
@@ -25,11 +25,11 @@
         >
           <span nz-icon nzType="upload" nzTheme="outline"></span>
           Subir CV
-        </button>
+        </button> -->
       </nz-space>
   
       <nz-space>
-        <button
+        <!-- <button
           class="btn-yellow"
           (click)="downLoadCV()"
           nzShape="round"
@@ -37,7 +37,7 @@
           nz-button
         >
           <span nz-icon nzType="download" nzTheme="outline"></span>
-        </button>
+        </button> -->
       </nz-space>
     </nz-page-header-extra>
     <nz-page-header-content>
@@ -298,11 +298,11 @@
                   </p>
                 </div>
                 <div class="title-date">
-                  <span>
+                  <!-- <span>
                     <a href="{{ certificate.url }}" target="_blank">
                       Ver certificado
                     </a>
-                  </span>
+                  </span> -->
                 </div>
                 <div class="we">
                   <p class="descripcion">
@@ -617,7 +617,7 @@
               <nz-form-label
                 >Cuéntanos acerca de tus actividades diarias</nz-form-label
               >
-              <nz-textarea-count [nzMaxCharacterCount]="200">
+              <nz-textarea-count [nzMaxCharacterCount]="500">
                 <textarea
                   rows="7"
                   nz-input
@@ -626,7 +626,7 @@
                   formControlName="description"
                   [(ngModel)]="workExperienceEdit && workExperienceEdit.description"
                   [minlength]="30"
-                  [maxlength]="200"
+                  [maxlength]="500"
                 ></textarea>
               </nz-textarea-count>
             </nz-form-control>
@@ -790,12 +790,14 @@
               <nz-form-label
                 >Cuéntanos acerca de tus actividades diarias</nz-form-label
               >
-              <nz-textarea-count [nzMaxCharacterCount]="200">
+              <nz-textarea-count [nzMaxCharacterCount]="500">
                 <textarea
                   rows="7"
                   nz-input
                   placeholder="¿Cúales fuerón tus actividades diarias y principales logros en este trabajo?"
                   id="description"
+                  [minlength]="30"
+                  [maxlength]="500"
                   formControlName="description"
                 ></textarea>
               </nz-textarea-count>

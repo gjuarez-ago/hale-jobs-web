@@ -16,6 +16,7 @@ import { HistoryService } from 'src/app/services/history.service';
 import { OfferService } from 'src/app/services/offer.service';
 
 import { getEndDate } from 'src/app/utils/end-date-resume';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-offer',
@@ -29,6 +30,7 @@ export class ViewOfferComponent implements OnInit {
   public subscriptions: Subscription[] = [];
   public currentElement: any = null;
   offerId: any;
+  private readonly url: string = `${environment.appUrl}`;
 
   public complaintForm!: FormGroup;
   public postulateForm!: FormGroup;
@@ -41,6 +43,7 @@ export class ViewOfferComponent implements OnInit {
   public isOfferExpired: boolean = false;
   public offerStatusMessage: string = '';
   isLoadingGetCurrentElement: boolean = false;
+  companyImage: string = "";
 
   constructor(
     private readonly meta: Meta,
@@ -54,7 +57,8 @@ export class ViewOfferComponent implements OnInit {
     private ngxSpinner: NgxSpinnerService,
     private offerService: OfferService,
     private notification: NzNotificationService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private notificationService: NzNotificationService
   ) {
     this.complaintForm = this.fb.group({
       comments: ['', [Validators.required]],
@@ -93,6 +97,8 @@ export class ViewOfferComponent implements OnInit {
         );
         this.comparteUserOffers(this.userApplications, this.currentElement);
         this.isLoadingGeneral = false;
+
+        this.companyImage = 'data:image/png;base64,' + response.company.imageBase64;
 
         let currentDateTime = new Date().getTime();
         this.isOfferExpired = currentDateTime > response.vencimiento;
@@ -154,12 +160,13 @@ export class ViewOfferComponent implements OnInit {
     this.isVisibleAdd = false;
   }
 
-  public goToLogin() {
+  public goToLogin(offer: PostulatesOffer) {
+    sessionStorage.setItem('idOffertaActual', JSON.stringify(offer.id));
+
     this.router.navigateByUrl('/auth/login');
   }
 
   public getDays(fecha: any) {
-    let r = 1;
     var fechaIni: any = new Date(fecha);
     // Crear objeto de fecha final (actual)
     var fechaFin: any = new Date();
@@ -318,5 +325,19 @@ export class ViewOfferComponent implements OnInit {
     let userApplications: Offer[] = JSON.parse(userApplicationsString);
     userApplications.push(newAplication);
     localStorage.setItem('userApplications', JSON.stringify(userApplications));
+  }
+
+  shareOffer(item: any) {
+    const areaTmp = document.createElement('textarea');
+    areaTmp.value = `${this.url}/view-job/${item.id}`;
+    document.body.appendChild(areaTmp);
+    areaTmp.select();
+    document.execCommand('copy');
+    document.body.removeChild(areaTmp);
+    this.notificationService.blank(
+      'Compartir',
+      'Se ha copiado el link en el portapapeles.',
+      { nzPlacement: 'topLeft' }
+    );
   }
 }

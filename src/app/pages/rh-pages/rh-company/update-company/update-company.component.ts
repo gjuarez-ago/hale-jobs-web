@@ -290,6 +290,7 @@ export class UpdateCompanyComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
+
       this.user = this.authenticationService.getUserFromLocalCache();
       this.userId = this.user.id;
       this.idCompany = this.actRoute.snapshot.params.id;
@@ -345,8 +346,11 @@ export class UpdateCompanyComponent implements OnInit {
     formData.append("emailContact", form.emailContact);
     formData.append("updateImagen", this.updateImagen);
 
+    console.log(this.updateImagen);
+    
+
     this.isLoadingGeneral = true;
-    this.ngxSpinner.show();
+    // this.ngxSpinner.show();
 
     this.companyService.updateCompany(this.currentElement.id,this.userId, formData).subscribe(
       (response: any) => {
@@ -374,7 +378,7 @@ export class UpdateCompanyComponent implements OnInit {
       (response: any) => {
         this.currentElement = response;
         this.imgLoad = undefined;
-        this.previewImage = response.imageURL;
+        this.previewImage = 'data:image/png;base64,' + response.imageBase64;
         this.isLoadingGeneral=false;
         this.ngxSpinner.hide();
       },

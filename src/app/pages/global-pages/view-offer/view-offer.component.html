@@ -144,7 +144,7 @@
       <div class="card-postulate">
         <nz-card
           [nzCover]="coverTemplate"
-          [nzActions]="[actionSetting, actionEllipsis]"
+          [nzActions]="[actionSetting, shareSetting, actionEllipsis]"
         >
           <nz-card-meta
             *ngIf="currentElement.showCompany"
@@ -193,6 +193,25 @@
               nz-tooltip
             >
               <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
+            </button>
+          </ng-template>
+
+          <ng-template #shareSetting>
+            <button
+              [disabled]="
+                role == 'ROLE_HR' ||
+                currentElement.isPostulated ||
+                isOfferExpired
+              "
+              (click)="shareOffer(currentElement)"
+              nz-button
+              nzType="default"
+              class="button-blue btn-wi"
+              nzTooltipTitle="Compartir"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+            >
+              <i nz-icon nzType="share-alt" nzTheme="outline"></i>
             </button>
           </ng-template>
 
@@ -372,7 +391,12 @@
     <button nz-button nzType="default" (click)="isVisibleLoginRequired = false">
       Cerrar
     </button>
-    <button nz-button nzType="primary" nz-button (click)="goToLogin()">
+    <button
+      nz-button
+      nzType="primary"
+      nz-button
+      (click)="goToLogin(currentElement)"
+    >
       Iniciar sesión
     </button>
   </ng-template>

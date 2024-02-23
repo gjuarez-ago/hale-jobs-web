@@ -137,6 +137,11 @@ export class MyNotificationsComponent implements OnInit {
     let form = this.searchForm.value;
 
     this.isLoadingGeneral = true;
+
+    this.data = [];
+    this.totalElementByPage = 0;
+    this.total = 0;
+
     this.cvService
       .getNotificationsByUser({
         email: this.user?.username,

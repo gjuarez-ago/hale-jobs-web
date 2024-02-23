@@ -51,6 +51,8 @@ export class SideMenuRh implements OnInit {
   listOffers: any[] = [];
   listADNR: any = 0;
   initials: string = '';
+  isLoadingActionUser: boolean = false;
+  isLoadingAds: boolean = false;
 
   constructor(
     private authenticationService: AuthService,
@@ -238,7 +240,7 @@ export class SideMenuRh implements OnInit {
   }
 
   getNotifications() {
-    this.isLoadingGeneral = true;
+    this.isLoadingAds = true;
     this.cvService
       .getNotificationsByUser({
         email: this.user?.username,
@@ -259,14 +261,14 @@ export class SideMenuRh implements OnInit {
           this.listADNR = this.listNotications.filter(
             (e: any) => e.status == 0
           ).length;
-          this.isLoadingGeneral = false;
+          this.isLoadingAds = false;
         },
         (errorResponse: HttpErrorResponse) => {
           this.message.create(
             'error',
-            'Ha ocurrido un error al recuperar los estados'
+            'Ha ocurrido un error al recuperar las notificaciones'
           );
-          this.isLoadingGeneral = false;
+          this.isLoadingAds = false;
         }
       );
   }
@@ -276,9 +278,11 @@ export class SideMenuRh implements OnInit {
     this.getNotifications();
   }
 
-  public navigateViewJob(id: any) {
+  public navigateViewJob(element: any) {
+
+      
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([`/dashboard/view-worker/${id}`])
+      this.router.createUrlTree([`/dashboard/view-worker/${element.id}`])
     );
     window.open('#' + url, '_blank');
   }
@@ -298,7 +302,7 @@ export class SideMenuRh implements OnInit {
   submitForm(): void {
     let form = this.searchForm.value;
 
-    this.isLoadingGeneral = true;
+    this.isLoadingAds = true;
     this.cvService
       .getNotificationsByUser({
         email: this.user?.username,
@@ -316,14 +320,14 @@ export class SideMenuRh implements OnInit {
 
           console.log(this.listNotications);
 
-          this.isLoadingGeneral = false;
+          this.isLoadingAds = false;
         },
         (errorResponse: HttpErrorResponse) => {
           this.message.create(
             'error',
             'Ha ocurrido un error al realizar la búsqueda'
           );
-          this.isLoadingGeneral = false;
+          this.isLoadingAds = false;
         }
       );
   }
@@ -422,15 +426,15 @@ export class SideMenuRh implements OnInit {
   }
 
   public getUserEdit() {
-    this.isLoadingGeneral = true;
+    this.isLoadingActionUser = true;
     this.subscriptions.push(
       this.authenticationService.getCurrentUser(this.user?.username).subscribe(
         (response: any) => {
           this.userEdit = response;
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
         },
         (errorResponse: HttpErrorResponse) => {
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
           this.message.create('error', errorResponse.error.message);
         }
       )
@@ -438,15 +442,15 @@ export class SideMenuRh implements OnInit {
   }
 
   public getPreferencesRH() {
-    this.isLoadingGeneral = true;
+    this.isLoadingActionUser = true;
     this.subscriptions.push(
       this.cvService.getPreferencesRH(this.user?.id).subscribe(
         (response: any) => {
           this.prefRH = response;
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
         },
         (errorResponse: HttpErrorResponse) => {
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
           this.message.create('error', errorResponse.error.message);
         }
       )
@@ -454,6 +458,7 @@ export class SideMenuRh implements OnInit {
   }
 
   public saveSettings() {
+
     if (!this.validateForm.valid) {
       for (const i in this.validateForm.controls) {
         if (this.validateForm.controls.hasOwnProperty(i)) {
@@ -467,9 +472,7 @@ export class SideMenuRh implements OnInit {
 
     let form = this.validateForm.value;
 
-    console.log(form);
-
-    this.isLoadingGeneral = true;
+    this.isLoadingActionUser = true;
     this.cvService
       .updatePreferencesRH({ ...form, id: this.user?.id })
       .subscribe(
@@ -479,10 +482,10 @@ export class SideMenuRh implements OnInit {
             '¡Preferencias actualizada correctamente!'
           );
           this.closeModalSettings();
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
         },
         (errorResponse: HttpErrorResponse) => {
-          this.isLoadingGeneral = false;
+          this.isLoadingActionUser = false;
           this.message.create(
             'error',
             'Ha ocurrido un error al recuperar los municipios'

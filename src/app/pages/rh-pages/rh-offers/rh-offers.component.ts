@@ -180,7 +180,7 @@ export class RhOffersComponent implements OnInit {
 
   public navigateViewJob(element: any) {
     const url = this.router.serializeUrl(
-      this.router.createUrlTree([`/dashboard/view-worker/${element.username}`])
+      this.router.createUrlTree([`/dashboard/view-worker/${element.id}`])
     );
     window.open('#' + url, '_blank');
   }
@@ -308,6 +308,7 @@ export class RhOffersComponent implements OnInit {
 
   public getCompaniesByUser(ele: any) {
     this.isLoadingGeneral = true;
+    this.isLoadingTable = true;
     this.ngxSpinner.show();
     this.subscriptions.push(
       this.companyService.getCompaniesByOwnerWP(ele).subscribe(
@@ -319,6 +320,7 @@ export class RhOffersComponent implements OnInit {
         (errorResponse: HttpErrorResponse) => {
           this.isLoadingGeneral = false;
           this.message.create('error', errorResponse.error.message);
+          this.isLoadingTable = true;
         }
       )
     );

@@ -69,7 +69,7 @@
           <div class="card card-user-edit box">
               <div class="content">
                 <div class="content-img">
-                    <img src="{{item.imageURL}}" alt="" />            
+                    <img src="{{item.imageBase64}}" alt="" />            
                 </div>
                 <strong>{{item.name}}</strong>        
                 <p><nz-rate [nzDisabled]="true"	 [ngModel]="item.qualification"></nz-rate> </p>
@@ -82,7 +82,7 @@
 
 
           <nz-empty
-          [hidden]="!isLoadingTable && companies.length > 0"
+          [hidden]="!isLoadingTable || companies.length > 0"
           nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
           [nzNotFoundContent]="contentTpl"
           [nzNotFoundFooter]="footerTpl"

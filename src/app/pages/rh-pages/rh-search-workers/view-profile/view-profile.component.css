@@ -152,6 +152,10 @@
   color: white !important;
 }
 
+.user-info-d {
+  text-align: center;
+}
+
 
 
 .btn-green {
@@ -971,7 +975,8 @@ width: 100%;
 margin:0px 0px;
 padding: 0px 40px 0px 0px;
 font-size: 1.0em;
-overflow-wrap: break-word;
+overflow-wrap: break-word !important;
+white-space-collapse: preserve-breaks;
 }
 
 .span-small {

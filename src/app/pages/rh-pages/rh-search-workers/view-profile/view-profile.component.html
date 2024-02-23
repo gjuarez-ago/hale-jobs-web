@@ -1,11 +1,19 @@
 <div class="content-profile">
   <div class="body-content">
+    
     <div class="content-profile">
       <div class="img-user-content">
         <div class="card card-user-edit box">
+
+
+
           <div class="cover-bg"></div>
           <br />
-          <div class="content">
+          <nz-skeleton *ngIf="isLoadingcurrentUser && userInformation == null" ></nz-skeleton>
+          <nz-skeleton *ngIf="isLoadingcurrentUser && userInformation == null" ></nz-skeleton>
+          <nz-skeleton *ngIf="isLoadingcurrentUser && userInformation == null" ></nz-skeleton>
+
+          <div class="content" *ngIf="!isLoadingcurrentUser && userInformation">
             <label for="file">
               <div class="content-img">
                 <img [src]="previewImage" alt="" />
@@ -13,19 +21,25 @@
             </label>
           </div>
 
-          <strong>{{userInformation && userInformation.surnames}}</strong>
-          <p>{{userInformation && userInformation.username}}</p>
+          <div class="user-info-d" *ngIf="!isLoadingcurrentUser && userInformation">
+            <strong>{{ userInformation && userInformation.surnames }}</strong>
+          <p>{{ userInformation && userInformation.username }}</p>
           <p class="p-w">
             <i nz-icon nzType="aim"></i>
-            <span>  {{userInformation && userInformation.city.valor}},  {{userInformation && userInformation.state.valor}} </span>
+            <span>
+              {{ userInformation && userInformation.city.valor }},
+              {{ userInformation && userInformation.state.valor }}
+            </span>
           </p>
           <p class="p-w">
             <i nz-icon nzType="phone"></i>
-            <span> {{userInformation && userInformation.numberPhone}} </span>
+            <span> {{ userInformation && userInformation.numberPhone }} </span>
           </p>
           <p class="p-w">
             <i nz-icon nzType="build"></i>
-              <span> {{userInformation && userInformation.modalidadTrabajo.valor}} </span>
+            <span>
+              {{ userInformation && userInformation.modalidadTrabajo.valor }}
+            </span>
           </p>
 
           <!-- <div class="btn">
@@ -34,96 +48,45 @@
               </div> -->
 
           <div class="user-bio">
-          
-
-
             <div class="tags">
-              <nz-space>
-             
-          </nz-space>
-        </div>
-
-              
+              <nz-space> </nz-space>
+            </div>
           </div>
+
+          </div>
+
         </div>
       </div>
 
       <div class="content-information">
-        <!-- <div class="content-information-header card">
-              <div class="buttons-content">
       
-      
-                <div class="button-element">
-      
-      
-                  <button class="button-22" role="button" routerLink="/profile/cv">
-                    <nz-space>
-                      <i nz-icon nzType="idcard" nzTheme="outline" *nzSpaceItem></i>
-                      <div class="" *nzSpaceItem> CV </div>
-                    </nz-space>
-                  </button>
-                </div>
-      
-      
-                <div class="button-element">
-                  <button class="button-22" role="button" routerLink="/profile/my-postulations">
-                    <nz-space>
-                      <i nz-icon nzType="audit" nzTheme="outline" *nzSpaceItem></i>
-                      <div class="" *nzSpaceItem>Postulaciones </div>
-                    </nz-space>
-      
-                  </button>
-                </div>
-      
-      
-                <div class="button-element">
-                  <button class="button-22" role="button" routerLink="/profile/my-history">
-                    <nz-space>
-                      <i nz-icon nzType="apartment" nzTheme="outline" *nzSpaceItem></i>
-                      <div class="" *nzSpaceItem>Historial </div>
-                    </nz-space>
-                  </button>
-      
-      
-                </div>
-      
-      
-      
-                <div class="button-element">
-                  <button class="button-23" role="button" routerLink="/search">
-                    <nz-space>
-                      <i nz-icon nzType="search" nzTheme="outline" *nzSpaceItem></i>
-                    </nz-space>
-                  </button>
-                </div>
-      
-      
-              </div>   
-            </div> -->
-
         <div class="content-information-body card">
           <nz-page-header [nzGhost]="false">
             <nz-page-header-title> 📑 Curriculum </nz-page-header-title>
             <nz-page-header-extra>
               <nz-space>
                 <!-- <app-print-cv></app-print-cv> -->
-                <button class="btn-blue" (click)="printPDF()" *nzSpaceItem nz-button>
+                <button
+                  class="btn-blue"
+                  (click)="printPDF()"
+                  *nzSpaceItem
+                  nz-button
+                >
                   <span nz-icon nzType="file-done" nzTheme="outline"></span>
                   Descargar CV (PDF)
                 </button>
 
                 <button class="btn-green" *nzSpaceItem nz-button>
-                
-           
-
-                    <a href="https://api.whatsapp.com/send?phone={{userInformation.numberPhone}}&text=Hola%21%20{{userInformation.names}}"
-                    class="float" target="_blank">
+                  <a
+                    href="https://api.whatsapp.com/send?phone={{
+                      userInformation.numberPhone
+                    }}&text=Hola%21%20{{ userInformation.names }}"
+                    class="float"
+                    target="_blank"
+                  >
                     <span nz-icon nzType="whats-app" nzTheme="outline"></span>
                     Mensaje
                   </a>
-                
-
-
                 </button>
               </nz-space>
             </nz-page-header-extra>
@@ -134,7 +97,11 @@
               </div>
 
               <div class="f">
-                <div class="">
+
+                <nz-skeleton *ngIf="isLoadingcurrentUser && userInformation == null" ></nz-skeleton>
+                <nz-skeleton *ngIf="isLoadingcurrentUser && userInformation == null" ></nz-skeleton>
+                
+                <div class="" *ngIf="!isLoadingcurrentUser && userInformation">
                   <div class="flex-principal">
                     <p class="p-s">
                       <strong> Puesto: </strong>
@@ -148,6 +115,7 @@
                   <div class="we">
                     <p class="p-s">
                       <strong> Acerca de mi: </strong>
+                      <br>
                       {{ userInformation && userInformation.aboutMe }}
                     </p>
                   </div>
@@ -159,14 +127,14 @@
                   <div class="title">Experiencia profesional</div>
                 </div>
 
-                <div *ngIf="loadingListWorkExperiences">
+                <div *ngIf="loadingListWorkExperiences && listWorkExperiences.length == 0">
                   <nz-skeleton></nz-skeleton>
                   <nz-skeleton></nz-skeleton>
                   <nz-skeleton></nz-skeleton>
                   <nz-skeleton></nz-skeleton>
                 </div>
 
-                <div *ngIf="listWorkExperiences.length > 0">
+                <div *ngIf="!loadingListWorkExperiences && listWorkExperiences.length > 0">
                   <div
                     *ngFor="let experience of listWorkExperiences; index as i"
                   >
@@ -205,7 +173,7 @@
                   </div>
                 </div>
 
-                <div class="card-edus" *ngIf="listWorkExperiences.length == 0">
+                <div class="card-edus" *ngIf="!loadingListWorkExperiences && listWorkExperiences.length == 0">
                   <nz-empty></nz-empty>
                 </div>
               </div>
@@ -225,12 +193,18 @@
                   </p>
                 </div>
 
+                  
+                
+                <div *ngIf="listSkills.length == 0 && isLoadingGetSkills">
+                  <nz-skeleton></nz-skeleton>
+                </div>
+
                 <div class="skill-list">
                   <div class="skill-element" *ngFor="let skill of listSkills">
                     {{ skill }}
                   </div>
 
-                  <div class="card-eduss" *ngIf="listSkills.length == 0">
+                  <div class="card-eduss" *ngIf="!isLoadingGetSkills && listSkills.length == 0">
                     <nz-empty></nz-empty>
                   </div>
                 </div>
@@ -241,7 +215,18 @@
                   <div class="title">Educación</div>
                 </div>
 
-                <div *ngIf="listSchools.length > 0">
+
+                <div *ngIf="listSchools.length == 0 && isLoadingGetSchool">
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+
+                </div>
+          
+
+
+
+                <div *ngIf="!isLoadingGetSchool && listSchools.length > 0">
                   <div
                     class="education-content"
                     *ngFor="let education of listSchools; index as i"
@@ -271,7 +256,7 @@
                   </div>
                 </div>
 
-                <div class="card-edus" *ngIf="listSchools.length == 0">
+                <div class="card-edus" *ngIf="!isLoadingGetSchool && listSchools.length == 0">
                   <nz-empty></nz-empty>
                 </div>
               </div>
@@ -281,7 +266,13 @@
                   <div class="title">Certificaciones</div>
                 </div>
 
-                <div *ngIf="listCertifications.length > 0">
+                <div *ngIf="listCertifications.length == 0 && isLoadingGetCertifications">
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                </div>
+
+                <div *ngIf="!isLoadingGetCertifications && listCertifications.length > 0">
                   <div
                     class="education-content"
                     *ngFor="let certificate of listCertifications; index as i"
@@ -310,21 +301,26 @@
                   </div>
                 </div>
 
-                <div class="card-edus" *ngIf="listCertifications.length == 0">
+                <div class="card-edus" *ngIf="!isLoadingGetCertifications && listCertifications.length == 0">
                   <nz-empty></nz-empty>
                 </div>
               </div>
 
               <div class="education">
                 <div class="header-exp">
-                  <div class="title">
-                    Habilidades lingüísticas
-                  </div>
-          
-                 
+                  <div class="title">Habilidades lingüísticas</div>
                 </div>
-          
-                <div *ngIf="listLanguajes.length > 0">
+
+
+
+                
+                <div *ngIf="listLanguajes.length == 0 && isLoadingLanguaje">
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                  <nz-skeleton></nz-skeleton>
+                </div>
+
+                <div *ngIf="!isLoadingLanguaje && listLanguajes.length > 0">
                   <div
                     class="education-content"
                     *ngFor="let education of listLanguajes; index as i"
@@ -342,7 +338,7 @@
                           {{ education.level }}
                         </div>
                       </div>
-          
+
                       <div class="icon-edit">
                         <i
                           nz-icon
@@ -354,8 +350,8 @@
                     </div>
                   </div>
                 </div>
-          
-                <div class="card-edus" *ngIf="listLanguajes.length == 0">
+
+                <div class="card-edus" *ngIf="!isLoadingLanguaje && listLanguajes.length == 0">
                   <nz-empty></nz-empty>
                 </div>
               </div>
@@ -364,10 +360,10 @@
             </nz-page-header-content>
           </nz-page-header>
         </div>
-
-  
       </div>
     </div>
+
+
   </div>
 </div>
 
@@ -384,22 +380,23 @@
         </div>
 
         <div id="name">
+          <h1 class="quickFade delayTwo">¡Hola!</h1>
           <h1 class="quickFade delayTwo">
-            {{ userInformation && userInformation.surnames }}
+            Soy {{ userInformation && userInformation.surnames }}
           </h1>
-          <h4 class="quickFade delayThree">
-            <i nz-icon nzType="trophy" nzTheme="outline"></i>
-            {{ userInformation && userInformation.jobTitle }} -
-            <i nz-icon nzType="phone" nzTheme="outline"></i>
-            {{ userInformation && userInformation.numberPhone }} -
-            <i nz-icon nzType="mail" nzTheme="outline"></i>
-            {{ userInformation && userInformation.username }}
-          </h4>
+          <br />
           <h4 class="quickFade delayThree">
             <i nz-icon nzType="home" nzTheme="outline"></i>
             {{ userInformation && userInformation.city.valor }},
-            {{ userInformation && userInformation.state.valor }} -
-            {{ userInformation && userInformation.modalidadTrabajo.valor }}
+            {{ userInformation && userInformation.state.valor }}
+          </h4>
+          <h4 class="quickFade delayThree">
+            <i nz-icon nzType="phone" nzTheme="outline"></i>
+            {{ userInformation && userInformation.numberPhone }}
+          </h4>
+          <h4 class="quickFade delayThree">
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+            {{ userInformation && userInformation.username }}
           </h4>
         </div>
 
@@ -417,22 +414,13 @@
       </div>
 
       <div id="mainArea" class="quickFade delayFive">
-        
         <section>
           <article>
-            <div class="sectionTitle">
-              <h1>Pretenciones ecónomicas</h1>
-            </div>
-
-            <div class="sectionContent">
-              <p class="p-s">
-                {{ userInformation && userInformation.salary.valor }}
-              </p>
-            </div>
+            <h1 class="quickFade delayTwo">Habilidades</h1>
           </article>
           <div class="clear"></div>
         </section>
-        
+
         <section>
           <article>
             <div class="sectionTitle">
@@ -473,6 +461,8 @@
                 </p>
               </article>
             </div>
+
+
           </article>
           <div class="clear"></div>
         </section>
@@ -509,8 +499,6 @@
                     : (education.ends | date : "MMM,y")
                 }}
               </p>
-
-             
             </article>
           </div>
           <div class="clear"></div>
@@ -524,27 +512,21 @@
           <div class="sectionContent">
             <article *ngFor="let certificate of listCertifications; index as i">
               <h2>
-                {{certificate.name}}
+                {{ certificate.name }}
               </h2>
               <a href="{{ certificate.url }}" target="_blank">
-              <p class="subDetails">
-                  Ver certificado
-              </p>
+                <p class="subDetails">Ver certificado</p>
               </a>
-              <p class="p-s">{{
-                certificate.description}}
-              </p>
+              <p class="p-s">{{ certificate.description }}</p>
             </article>
           </div>
           <div class="clear"></div>
         </section>
-
       </div>
     </div>
 
     <!-- <div class="logo">
       <a href="">  <img src="assets/images/logo-b.png" alt="" > </a>
     </div> -->
-
   </div>
 </div>

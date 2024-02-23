@@ -101,10 +101,17 @@ export class SearchCompaniesComponent implements OnInit  {
         }
       ).subscribe(
         (response: any) => {
-          this.temp = response.content;
-          this.companies = response.content;
-          this.total = response.totalElements;
-          this.totalElementByPage = response.numberOfElements;
+
+            this.companies = response.content.map((prop: any, key: any) => {
+              return {
+                ...prop,
+                imageBase64: 'data:image/png;base64,' + prop.imageBase64,
+                key: key + 1,
+              };
+            });
+
+            this.temp = response.content;
+            this.totalElementByPage = response.numberOfElements;
           this.isLoadingTable = false;
           this.ngxSpinner.hide();
         },
@@ -134,10 +141,16 @@ export class SearchCompaniesComponent implements OnInit  {
         }
       ).subscribe(
         (response: any) => {
-
                     
           this.temp = response.content;
-          this.companies = response.content;
+          this.companies = response.content.map((prop: any, key: any) => {
+            return {
+              ...prop,
+              imageBase64: 'data:image/png;base64,' + prop.imageBase64,
+              key: key + 1,
+            };
+          });
+
           this.total = response.totalElements;
           this.totalElementByPage = response.numberOfElements;
           this.isLoadingTable = false;

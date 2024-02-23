@@ -81,6 +81,7 @@ export class AuthService {
     localStorage.removeItem('token_hale');
     localStorage.removeItem('userApplications');
     localStorage.removeItem('_grecaptcha');
+    sessionStorage.removeItem('idOffertaActual');
   }
 
   public saveToken(token: string): void {

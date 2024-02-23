@@ -67,6 +67,8 @@
 
     <!-- <div style="margin-bottom: 8px;"><button nz-button (click)="change()">Switch Data</button></div> -->
      
+    <nz-skeleton *ngIf="isLoadingGeneral && data.length == 0" ></nz-skeleton>
+
 
     <div class="list">
       <nz-list nzItemLayout="horizontal" [nzLoading]="isLoadingGeneral">
@@ -111,24 +113,27 @@
         </div>
 
 
-        <nz-empty
-        [hidden]="data.length > 0"
-        nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-        [nzNotFoundContent]="contentTpl"
-        [nzNotFoundFooter]="footerTpl"
-        >
-        <ng-template #contentTpl>
-          <span>
-            No existe ninguna notificación en este momento
-            <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
-          </span>
-        </ng-template>
-        <ng-template #footerTpl>
-          <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
-        </ng-template>
-       </nz-empty>
 
-      </nz-list>      
+      </nz-list>   
+      
+      <nz-empty
+      [hidden]="isLoadingGeneral || data.length > 0"
+      nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+      >
+      <ng-template #contentTpl>
+        <span>
+          No existe ninguna notificación en este momento
+          <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+        </span>
+      </ng-template>
+      <ng-template #footerTpl>
+        <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
+      </ng-template>
+     </nz-empty>
+
+
     </div>
 
 

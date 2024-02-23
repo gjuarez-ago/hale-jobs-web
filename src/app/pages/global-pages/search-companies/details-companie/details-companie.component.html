@@ -1,14 +1,26 @@
 <div nz-row class="p-3 container-principal" [nzGutter]="16">
+ 
+ 
+ 
+ 
+ 
   <div nz-col nzSpan="8">
+
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+  
+
     <nz-card class="companie">
       <div >
         <div class="content-img">
-          <img src="{{currentElement && currentElement.imageURL}}" alt="" />            
+          <img src="{{currentElement && previewImage}}" alt="" />            
         </div>
 
-        <div >
+        <div class="content-dsl">
           <h1>{{currentElement && currentElement.name}}</h1>
-          <p>
+          <p class="p-s">
             {{currentElement && currentElement.description}}
           </p>
         </div>
@@ -40,11 +52,15 @@
     </nz-card>
   </div>
 
-
-  
   <div nz-col nzSpan="16">
+
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingCompanyAction && !currentElement" ></nz-skeleton>
+
     <nz-card>
-      <nz-tabset nzType="card">
+      <nz-tabset nzType="card"  *ngIf="currentElement">
         
         <nz-tab [nzTitle]="tab1">
         
@@ -53,13 +69,19 @@
             Empleos
           </ng-template>
 
+          
+    <nz-skeleton *ngIf="isLoadingTableO && offers.length == 0" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingTableO && offers.length == 0" ></nz-skeleton>
+    <nz-skeleton *ngIf="isLoadingTableO && offers.length == 0" ></nz-skeleton>
+  
+
           <div class="offer-content" *ngFor="let item of offers">
             <a routerLink="/view-job/{{item.id}}" target="_blank">
            
             <h3> <i nz-icon nzType="deployment-unit" nzTheme="outline"></i> {{item.title}} </h3>
             <h4> <i nz-icon nzType="flag" nzTheme="outline"></i> {{item.city.valor}}, {{item.state.valor}} ({{item.typeOfJob.valor}}) -  <i nz-icon nzType="dollar-circle" nzTheme="outline"></i> {{item.rangeAmount.valor}}  </h4>
   
-            <p>
+            <p class="p-s">
               {{item.description}}
             </p>
 
@@ -78,24 +100,22 @@
             </a>
           </div>
 
+          <div class="" *ngIf="!isLoadingTableO && offers.length == 0">
+            <nz-empty
+            nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+            [nzNotFoundContent]="contentTpl"
+            >
+            <ng-template #contentTpl>
+              <span>
+                No existe ninguna vacante en este momento
+                <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+              </span>
+            </ng-template>
+           </nz-empty>
+  
+          </div>
           
-          <nz-empty
-          [hidden]="offers.length > 0"
-          nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-          [nzNotFoundContent]="contentTpl"
-          [nzNotFoundFooter]="footerTpl"
-          >
-          <ng-template #contentTpl>
-            <span>
-              No existe ninguna vacante en este momento
-              <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
-            </span>
-          </ng-template>
-          <ng-template #footerTpl>
-            <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
-          </ng-template>
-         </nz-empty>
-
+         
           <div class="form-inline">
             <div class="pagination-content">
               <nz-pagination
@@ -108,19 +128,7 @@
               ></nz-pagination>
             </div>
           </div>
-
-          
-        
-
-          
-       
-
-
         </nz-tab>
-
-
-        
-
 
         <nz-tab [nzTitle]="tab2">
         
@@ -129,7 +137,13 @@
             Comentarios
           </ng-template>
 
-          <nz-list [nzNoResult]="contentTplp" [nzDataSource]="opinions" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
+          <div class="" *ngIf="isLoadingTableOp && opinions.length == 0" >
+            <nz-skeleton  ></nz-skeleton>
+            <nz-skeleton  ></nz-skeleton>
+            <nz-skeleton  ></nz-skeleton>
+          </div>
+        
+          <nz-list *ngIf="isLoadingTableOp && opinions.length > 0" [nzDataSource]="opinions" [nzRenderItem]="item" [nzItemLayout]="'horizontal'">
             <ng-template #item let-item>
               <nz-comment [nzAuthor]="item.title">
                 <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item"></nz-avatar>
@@ -165,6 +179,22 @@
             </ng-template>
           </nz-list>
 
+          <div class="" *ngIf="!isLoadingTableOp && opinions.length == 0">
+            <nz-empty
+            nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
+            [nzNotFoundContent]="contentTpl"
+            >
+            <ng-template #contentTpl>
+              <span>
+                No existe ninguna vacante en este momento
+                <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
+              </span>
+            </ng-template>
+           </nz-empty>
+  
+          </div>
+          
+
           <div class="form-inline">
             <div class="pagination-content">
               <nz-pagination
@@ -180,6 +210,7 @@
 
       
         </nz-tab>
+
         <nz-tab [nzTitle]="tab3">
         
           <ng-template #tab3>
@@ -189,7 +220,7 @@
 
           <div class="content-resume">
                <h2> Resumen </h2>
-               <p>
+               <p class="p-s">
                 {{currentElement && currentElement.description}}  
               </p>
 
@@ -210,8 +241,10 @@
 
           </div>
         </nz-tab>
+
       </nz-tabset>
     </nz-card>
+
   </div>
 </div>
 
@@ -327,22 +360,17 @@
   </ng-template>
 </nz-modal>
 
-
 <ng-template #contentTplp>
   <nz-empty
-  [hidden]="offers.length > 0"
+  [hidden]="opinions.length > 0"
   nzNotFoundImage="https://cdn-icons-png.flaticon.com/512/1437/1437185.png"
-  [nzNotFoundContent]="contentTpl"
-  [nzNotFoundFooter]="footerTpl"
+  [nzNotFoundContent]="contentTpl1"
   >
   <ng-template #contentTpl1>
     <span>
       No existe ningún comentario hasta el momento
       <!-- <a  (click)="navigate()">¿Deseas seguir buscando?</a> -->
     </span>
-  </ng-template>
-  <ng-template #footerTpl1>
-    <!-- <button nz-button nzType="primary" (click)="navigate()"> Buscar </button> -->
   </ng-template>
  </nz-empty>
   
